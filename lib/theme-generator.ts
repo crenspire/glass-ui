@@ -59,15 +59,15 @@ export function generateThemeCSS(colors: ThemeColors, darkColors?: Partial<Theme
   --input: ${colors.input};
   --ring: ${colors.ring};
   
-  /* Glass effect variables - Enhanced with gradient tint and border glow */
-  --glass-bg: ${colors.glassBg || "linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.25) 50%, rgba(240, 248, 255, 0.3) 100%)"};
-  --glass-border: ${colors.glassBorder || "rgba(255, 255, 255, 0.3)"};
-  --glass-shadow: ${colors.glassShadow || "0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.1) inset, 0 0 20px rgba(255, 255, 255, 0.05)"};
-  --glass-shadow-lg: ${colors.glassShadowLg || "0 12px 48px rgba(0, 0, 0, 0.18), 0 4px 16px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 0 30px rgba(255, 255, 255, 0.08)"};
-  --glass-shadow-sm: ${colors.glassShadowSm || "0 4px 16px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(255, 255, 255, 0.08) inset, 0 0 10px rgba(255, 255, 255, 0.03)"};
-  --blur: ${colors.blur || "30px"};
-  --blur-sm: ${colors.blurSm || "15px"};
-  --blur-lg: ${colors.blurLg || "50px"};
+  /* Liquid Glass variables */
+  --glass-bg: ${colors.glassBg || "linear-gradient(180deg, rgba(255, 255, 255, 0.56) 0%, rgba(255, 255, 255, 0.36) 100%)"};
+  --glass-border: ${colors.glassBorder || "rgba(255, 255, 255, 0.45)"};
+  --glass-shadow: ${colors.glassShadow || "0 0.5px 0 0 rgba(255, 255, 255, 0.7) inset, 0 -0.5px 0 0 rgba(0, 0, 0, 0.04) inset, 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04)"};
+  --glass-shadow-lg: ${colors.glassShadowLg || "0 0.5px 0 0 rgba(255, 255, 255, 0.8) inset, 0 -0.5px 0 0 rgba(0, 0, 0, 0.05) inset, 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08), 0 16px 48px rgba(0, 0, 0, 0.04)"};
+  --glass-shadow-sm: ${colors.glassShadowSm || "0 0.5px 0 0 rgba(255, 255, 255, 0.6) inset, 0 1px 2px rgba(0, 0, 0, 0.04)"};
+  --blur: ${colors.blur || "40px"};
+  --blur-sm: ${colors.blurSm || "24px"};
+  --blur-lg: ${colors.blurLg || "60px"};
 }`
 
   const darkTheme = darkColors
@@ -93,12 +93,12 @@ export function generateThemeCSS(colors: ThemeColors, darkColors?: Partial<Theme
   --input: ${darkColors.input || colors.input};
   --ring: ${darkColors.ring || colors.ring};
   
-  /* Glass effect variables - Dark mode (Enhanced with gradient tint and border glow) */
-  --glass-bg: ${colors.darkGlassBg || darkColors.darkGlassBg || "linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 50%, rgba(240, 248, 255, 0.1) 100%)"};
-  --glass-border: ${colors.darkGlassBorder || darkColors.darkGlassBorder || "rgba(255, 255, 255, 0.25)"};
-  --glass-shadow: ${colors.darkGlassShadow || darkColors.darkGlassShadow || "0 8px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 0 20px rgba(255, 255, 255, 0.08)"};
-  --glass-shadow-lg: ${colors.darkGlassShadowLg || darkColors.darkGlassShadowLg || "0 12px 48px rgba(0, 0, 0, 0.6), 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2) inset, 0 0 30px rgba(255, 255, 255, 0.1)"};
-  --glass-shadow-sm: ${colors.darkGlassShadowSm || darkColors.darkGlassShadowSm || "0 4px 16px rgba(0, 0, 0, 0.4), 0 1px 4px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.1) inset, 0 0 10px rgba(255, 255, 255, 0.05)"};
+  /* Liquid Glass variables - Dark mode */
+  --glass-bg: ${colors.darkGlassBg || darkColors.darkGlassBg || "linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.06) 100%)"};
+  --glass-border: ${colors.darkGlassBorder || darkColors.darkGlassBorder || "rgba(255, 255, 255, 0.18)"};
+  --glass-shadow: ${colors.darkGlassShadow || darkColors.darkGlassShadow || "0 0.5px 0 0 rgba(255, 255, 255, 0.25) inset, 0 -0.5px 0 0 rgba(0, 0, 0, 0.15) inset, 0 1px 3px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15)"};
+  --glass-shadow-lg: ${colors.darkGlassShadowLg || darkColors.darkGlassShadowLg || "0 0.5px 0 0 rgba(255, 255, 255, 0.3) inset, 0 -0.5px 0 0 rgba(0, 0, 0, 0.2) inset, 0 2px 8px rgba(0, 0, 0, 0.2), 0 8px 24px rgba(0, 0, 0, 0.25), 0 16px 48px rgba(0, 0, 0, 0.15)"};
+  --glass-shadow-sm: ${colors.darkGlassShadowSm || darkColors.darkGlassShadowSm || "0 0.5px 0 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.15)"};
 }`
     : ""
 
@@ -126,20 +126,20 @@ export const defaultTheme: ThemeColors = {
   input: "oklch(0.5 0.2 260)",
   ring: "oklch(0.5 0.2 260)",
   radius: "0rem",
-  // Glass effect defaults - Enhanced with gradient tint and border glow
-  glassBg: "linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.25) 50%, rgba(240, 248, 255, 0.3) 100%)",
-  glassBorder: "rgba(255, 255, 255, 0.3)",
-  glassShadow: "0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.1) inset, 0 0 20px rgba(255, 255, 255, 0.05)",
-  glassShadowLg: "0 12px 48px rgba(0, 0, 0, 0.18), 0 4px 16px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 0 30px rgba(255, 255, 255, 0.08)",
-  glassShadowSm: "0 4px 16px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(255, 255, 255, 0.08) inset, 0 0 10px rgba(255, 255, 255, 0.03)",
-  blur: "30px",
-  blurSm: "15px",
-  blurLg: "50px",
-  // Dark mode glass defaults - Enhanced with gradient tint and border glow
-  darkGlassBg: "linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 50%, rgba(240, 248, 255, 0.1) 100%)",
-  darkGlassBorder: "rgba(255, 255, 255, 0.25)",
-  darkGlassShadow: "0 8px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 0 20px rgba(255, 255, 255, 0.08)",
-  darkGlassShadowLg: "0 12px 48px rgba(0, 0, 0, 0.6), 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2) inset, 0 0 30px rgba(255, 255, 255, 0.1)",
-  darkGlassShadowSm: "0 4px 16px rgba(0, 0, 0, 0.4), 0 1px 4px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.1) inset, 0 0 10px rgba(255, 255, 255, 0.05)",
+  // Liquid Glass defaults
+  glassBg: "linear-gradient(180deg, rgba(255, 255, 255, 0.56) 0%, rgba(255, 255, 255, 0.36) 100%)",
+  glassBorder: "rgba(255, 255, 255, 0.45)",
+  glassShadow: "0 0.5px 0 0 rgba(255, 255, 255, 0.7) inset, 0 -0.5px 0 0 rgba(0, 0, 0, 0.04) inset, 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04)",
+  glassShadowLg: "0 0.5px 0 0 rgba(255, 255, 255, 0.8) inset, 0 -0.5px 0 0 rgba(0, 0, 0, 0.05) inset, 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08), 0 16px 48px rgba(0, 0, 0, 0.04)",
+  glassShadowSm: "0 0.5px 0 0 rgba(255, 255, 255, 0.6) inset, 0 1px 2px rgba(0, 0, 0, 0.04)",
+  blur: "40px",
+  blurSm: "24px",
+  blurLg: "60px",
+  // Liquid Glass dark mode defaults
+  darkGlassBg: "linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.06) 100%)",
+  darkGlassBorder: "rgba(255, 255, 255, 0.18)",
+  darkGlassShadow: "0 0.5px 0 0 rgba(255, 255, 255, 0.25) inset, 0 -0.5px 0 0 rgba(0, 0, 0, 0.15) inset, 0 1px 3px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15)",
+  darkGlassShadowLg: "0 0.5px 0 0 rgba(255, 255, 255, 0.3) inset, 0 -0.5px 0 0 rgba(0, 0, 0, 0.2) inset, 0 2px 8px rgba(0, 0, 0, 0.2), 0 8px 24px rgba(0, 0, 0, 0.25), 0 16px 48px rgba(0, 0, 0, 0.15)",
+  darkGlassShadowSm: "0 0.5px 0 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.15)",
 }
 

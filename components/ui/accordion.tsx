@@ -28,7 +28,7 @@ const AccordionTrigger = React.forwardRef<
 >(({ className, variant = "glass", children, ...props }, ref) => {
   const variants = {
     default: "hover:bg-accent",
-    glass: "hover:glass-bg hover:opacity-50",
+    glass: "hover:glass-bg hover:text-foreground hover:opacity-50",
   }
   
   return (

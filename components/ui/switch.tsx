@@ -13,7 +13,7 @@ const Switch = React.forwardRef<
 >(({ className, variant = "glass", ...props }, ref) => {
   const variants = {
     default: "bg-primary",
-    glass: "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)]",
+    glass: "glass-bg text-foreground",
   }
   
   return (
@@ -29,7 +29,7 @@ const Switch = React.forwardRef<
       <SwitchPrimitives.Thumb
         className={cn(
           "pointer-events-none block h-4 w-4 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0",
-          variant === "glass" && "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)]"
+          variant === "glass" && "glass-bg"
         )}
       />
     </SwitchPrimitives.Root>

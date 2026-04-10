@@ -20,7 +20,7 @@ function Calendar({
 }: CalendarProps) {
   const variants = {
     default: "",
-    glass: "glass-bg rounded-lg p-4 w-fit",
+    glass: "glass-bg text-foreground rounded-lg p-4 w-fit",
   }
   
   return (

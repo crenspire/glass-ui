@@ -42,7 +42,7 @@ const DrawerContent = React.forwardRef<
 >(({ className, children, variant = "glass", ...props }, ref) => {
   const variants = {
     default: "bg-background border-t",
-    glass: "glass-bg backdrop-blur-[var(--blur-lg)] border-t border-[var(--glass-border)] text-foreground shadow-[var(--glass-shadow-lg)]",
+    glass: "glass-bg text-foreground",
   }
   
   return (

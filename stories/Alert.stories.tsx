@@ -16,7 +16,7 @@ const meta = {
     },
     hover: {
       control: 'select',
-      options: ['none', 'glow', 'shimmer', 'ripple', 'lift', 'scale'],
+      options: ['none', 'glow', 'ripple', 'lift', 'scale'],
       description: 'Hover animation effect',
     },
   },
@@ -115,16 +115,16 @@ export const WithGlowHover: Story = {
   },
 };
 
-export const WithShimmerHover: Story = {
+export const WithRippleHover: Story = {
   args: {
     variant: 'frosted',
-    hover: 'shimmer',
+    hover: 'ripple',
     children: (
       <>
         <AlertCircle className="h-4 w-4" />
-        <AlertTitle>Shimmer Effect</AlertTitle>
+        <AlertTitle>Ripple Effect</AlertTitle>
         <AlertDescription>
-          Hover to see a beautiful shimmer animation sweep across.
+          Hover to see a beautiful ripple animation.
         </AlertDescription>
       </>
     ),

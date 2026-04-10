@@ -19,7 +19,7 @@ const meta = {
     },
     effect: {
       control: 'select',
-      options: ['none', 'glow', 'shimmer', 'ripple', 'lift', 'scale'],
+      options: ['none', 'glow', 'ripple', 'lift', 'scale'],
       description: 'Hover animation effect',
     },
   },
@@ -60,19 +60,19 @@ export const Crystal: Story = {
   },
 };
 
-export const WithShimmer: Story = {
-  args: {
-    children: 'Shimmer Effect',
-    variant: 'glass',
-    effect: 'shimmer',
-  },
-};
-
 export const WithRipple: Story = {
   args: {
     children: 'Ripple Effect',
     variant: 'glass',
     effect: 'ripple',
+  },
+};
+
+export const WithLift: Story = {
+  args: {
+    children: 'Lift Effect',
+    variant: 'glass',
+    effect: 'lift',
   },
 };
 

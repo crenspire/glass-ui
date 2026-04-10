@@ -4,7 +4,7 @@ import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/sonner";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { CanvasBackgroundWrapper } from "@/components/canvas-background-wrapper";
+import { GridBackground } from "@/components/grid-background";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -18,8 +18,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Glass UI - Component Library",
-  description: "A modern, glassmorphic component library inspired by Apple's design language",
+  title: "Liquid Glass UI - Component Library",
+  description: "A modern component library inspired by Apple's Liquid Glass design language",
 };
 
 export default function RootLayout({
@@ -34,16 +34,14 @@ export default function RootLayout({
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
-          <CanvasBackgroundWrapper />
-          {/* <div className="flex min-h-screen flex-col"> */}
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          {/* </div> */}
+          <GridBackground />
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
           <Toaster />
         </ThemeProvider>
       </body>

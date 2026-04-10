@@ -2,9 +2,7 @@
 
 import { use } from "react"
 import { notFound } from "next/navigation"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Copy, Check, BookOpen } from "lucide-react"
 import * as React from "react"
@@ -25,13 +23,11 @@ function CodeBlock({ code }: { code: string }) {
 
   return (
     <div className="relative">
-      <pre className="bg-muted/50 backdrop-blur-sm border border-border rounded-lg p-3 sm:p-4 overflow-x-auto text-xs sm:text-sm">
-        <code className="text-foreground font-mono whitespace-pre break-words">{code}</code>
+      <pre className="glass-bg p-4 overflow-x-auto text-sm">
+        <code className="text-foreground/70 font-mono whitespace-pre break-words">{code}</code>
       </pre>
-      <Button
-        variant="ghost"
-        size="icon"
-        className="absolute top-2 right-2 h-8 w-8 text-muted-foreground hover:text-foreground"
+      <button
+        className="absolute top-3 right-3 p-1.5 rounded-md text-foreground/30 hover:text-foreground/70 transition-colors"
         onClick={copyToClipboard}
       >
         {copied ? (
@@ -39,7 +35,7 @@ function CodeBlock({ code }: { code: string }) {
         ) : (
           <Copy className="h-4 w-4" />
         )}
-      </Button>
+      </button>
     </div>
   )
 }
@@ -59,60 +55,53 @@ export default function ComponentPage({
   const exampleCode = getComponentExampleCode(component.name)
 
   return (
-    <div className="text-foreground">
-      <div className="mb-6 md:mb-8">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">{component.title || component.name}</h1>
-            <Badge variant="glass" className="w-fit">Component</Badge>
-          </div>
-          <Button
-            variant="glass"
-            size="sm"
-            asChild
-          >
-            <a
-              href={getStorybookUrl(component.name)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 w-fit"
-            >
-              <BookOpen className="h-4 w-4" />
-              View in Storybook
-            </a>
-          </Button>
-        </div>
-        <p className="text-base sm:text-lg text-muted-foreground">{component.description || "No description available"}</p>
+    <div>
+      <div className="mb-10">
+        <h1 className="text-3xl sm:text-4xl font-semibold text-foreground tracking-tight mb-2">
+          {component.title || component.name}
+        </h1>
+        <p className="text-base sm:text-lg text-foreground/50 mb-3">
+          {component.description || "No description available"}
+        </p>
+        <a
+          href={getStorybookUrl(component.name)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 text-sm text-foreground/40 hover:text-foreground/70 transition-colors"
+        >
+          <BookOpen className="h-3.5 w-3.5" />
+          View in Storybook
+        </a>
       </div>
 
       <div className="space-y-8">
-        <Card variant="glass" className="text-foreground">
+        <Card variant="glass">
           <CardHeader>
-            <CardTitle className="text-foreground">Installation</CardTitle>
-            <CardDescription className="text-muted-foreground">
-              Install this component using the shadcn CLI with your preferred package manager
-            </CardDescription>
+            <CardTitle className="text-foreground text-lg font-medium">Installation</CardTitle>
+            <p className="text-sm text-foreground/40">
+              Install using the shadcn CLI with your preferred package manager
+            </p>
           </CardHeader>
           <CardContent>
             <InstallationInstructions componentName={component.name} />
           </CardContent>
         </Card>
 
-        <Card variant="glass" className="text-foreground">
+        <Card variant="glass">
           <CardHeader>
-            <CardTitle className="text-foreground">Usage</CardTitle>
-            <CardDescription className="text-muted-foreground">
+            <CardTitle className="text-foreground text-lg font-medium">Usage</CardTitle>
+            <p className="text-sm text-foreground/40">
               Example code for using this component
-            </CardDescription>
+            </p>
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="example" className="w-full">
               <TabsList variant="glass" className="mb-4">
-                <TabsTrigger value="example">Example</TabsTrigger>
+                <TabsTrigger value="example">Preview</TabsTrigger>
                 <TabsTrigger value="code">Code</TabsTrigger>
               </TabsList>
               <TabsContent value="example" className="space-y-4">
-                <div className="p-4 border border-border rounded-lg bg-muted/20">
+                <div className="glass-bg p-6">
                   <ComponentPreview componentName={component.name} />
                 </div>
               </TabsContent>
@@ -123,24 +112,24 @@ export default function ComponentPage({
           </CardContent>
         </Card>
 
-        <Card variant="glass" className="text-foreground">
+        <Card variant="glass">
           <CardHeader>
-            <CardTitle className="text-foreground">Props</CardTitle>
-            <CardDescription className="text-muted-foreground">
+            <CardTitle className="text-foreground text-lg font-medium">Props</CardTitle>
+            <p className="text-sm text-foreground/40">
               Component props and variants
-            </CardDescription>
+            </p>
           </CardHeader>
           <CardContent>
-            <div className="space-y-2 text-sm text-muted-foreground">
+            <div className="space-y-3 text-sm text-foreground/60">
               <p>This component supports the following variants:</p>
-              <ul className="list-disc list-inside space-y-1 ml-4">
-                <li>default - Standard styling</li>
-                <li>glass - Glassmorphism effect (default)</li>
+              <ul className="list-disc list-inside space-y-1.5 ml-2">
+                <li><span className="text-foreground/80">default</span> — Standard styling</li>
+                <li><span className="text-foreground/80">glass</span> — Glassmorphism effect</li>
                 {component.name === "button" && (
                   <>
-                    <li>glassSolid - Solid glass variant</li>
-                    <li>outline - Outline variant</li>
-                    <li>ghost - Ghost variant</li>
+                    <li><span className="text-foreground/80">glassSolid</span> — Solid glass variant</li>
+                    <li><span className="text-foreground/80">outline</span> — Outline variant</li>
+                    <li><span className="text-foreground/80">ghost</span> — Ghost variant</li>
                   </>
                 )}
               </ul>
@@ -151,4 +140,3 @@ export default function ComponentPage({
     </div>
   )
 }
-
