@@ -98,70 +98,63 @@
 
   /* =============================================
      Apple Liquid Glass — Light Mode
-     Visible frosted material with depth, specular
-     highlight, and inner glow for physical thickness.
      ============================================= */
 
-  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-bg: rgba(255, 255, 255, 0.5);
   --glass-border-top: rgba(255, 255, 255, 0.7);
   --glass-border-bottom: rgba(0, 0, 0, 0.06);
   --glass-shadow:
-    0 0.5px 0 0 rgba(255, 255, 255, 0.9) inset,
-    0 -0.5px 0 0 rgba(0, 0, 0, 0.04) inset,
-    0 0 16px rgba(255, 255, 255, 0.15) inset,
-    0 1px 3px rgba(0, 0, 0, 0.06),
-    0 4px 16px rgba(0, 0, 0, 0.04);
+    0 0.5px 0 0 rgba(255, 255, 255, 0.85) inset,
+    0 1px 2px rgba(0, 0, 0, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.06),
+    0 12px 32px rgba(0, 0, 0, 0.04);
   --glass-shadow-lg:
-    0 0.5px 0 0 rgba(255, 255, 255, 0.95) inset,
-    0 -0.5px 0 0 rgba(0, 0, 0, 0.05) inset,
-    0 0 24px rgba(255, 255, 255, 0.18) inset,
-    0 2px 8px rgba(0, 0, 0, 0.06),
-    0 8px 32px rgba(0, 0, 0, 0.06);
+    0 0.5px 0 0 rgba(255, 255, 255, 0.9) inset,
+    0 2px 4px rgba(0, 0, 0, 0.08),
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    0 20px 48px rgba(0, 0, 0, 0.05);
   --glass-shadow-sm:
-    0 0.5px 0 0 rgba(255, 255, 255, 0.8) inset,
-    0 0 8px rgba(255, 255, 255, 0.1) inset,
-    0 1px 2px rgba(0, 0, 0, 0.04);
+    0 0.5px 0 0 rgba(255, 255, 255, 0.75) inset,
+    0 1px 2px rgba(0, 0, 0, 0.06),
+    0 4px 8px rgba(0, 0, 0, 0.03);
   --gradient: linear-gradient(135deg, oklch(0.7 0.15 250) 0%, oklch(0.6 0.18 280) 100%);
 
   --blur: 5px;
   --blur-sm: 0.5px;
   --blur-lg: 0.5px;
 
-  /* Frosted — light mode (denser material) */
-  --glass-frosted-bg: rgba(255, 255, 255, 0.35);
+  /* Frosted — light mode */
+  --glass-frosted-bg: rgba(255, 255, 255, 0.6);
   --glass-frosted-shadow:
-    0 0.5px 0 0 rgba(255, 255, 255, 0.95) inset,
-    0 -0.5px 0 0 rgba(0, 0, 0, 0.04) inset,
-    0 0 20px rgba(255, 255, 255, 0.2) inset,
-    0 2px 8px rgba(0, 0, 0, 0.06),
-    0 8px 32px rgba(0, 0, 0, 0.06);
+    0 0.5px 0 0 rgba(255, 255, 255, 0.9) inset,
+    0 2px 4px rgba(0, 0, 0, 0.08),
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    0 20px 48px rgba(0, 0, 0, 0.05);
   --blur-frosted: 8px;
 
   /* Fluted — light mode */
   --glass-fluted-pattern: repeating-linear-gradient(
     90deg,
-    rgba(255, 255, 255, 0.15) 0px,
-    rgba(255, 255, 255, 0.35) 3px,
-    rgba(255, 255, 255, 0.15) 6px,
-    rgba(255, 255, 255, 0.05) 8px,
-    rgba(255, 255, 255, 0.15) 10px
+    rgba(255, 255, 255, 0.2) 0px,
+    rgba(255, 255, 255, 0.45) 3px,
+    rgba(255, 255, 255, 0.2) 6px,
+    rgba(255, 255, 255, 0.08) 8px,
+    rgba(255, 255, 255, 0.2) 10px
   );
 
   /* Crystal — light mode */
-  --glass-crystal-bg: rgba(255, 255, 255, 0.15);
+  --glass-crystal-bg: rgba(255, 255, 255, 0.35);
   --glass-crystal-shadow:
-    0 0.5px 0 0 rgba(255, 255, 255, 0.9) inset,
-    0 0 12px rgba(255, 255, 255, 0.12) inset,
-    0 4px 16px rgba(0, 0, 0, 0.05),
-    0 1px 3px rgba(0, 0, 0, 0.04);
+    0 0.5px 0 0 rgba(255, 255, 255, 0.85) inset,
+    0 1px 2px rgba(0, 0, 0, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.06);
   --glass-crystal-shadow-hover:
-    0 0.5px 0 0 rgba(255, 255, 255, 0.95) inset,
-    0 0 16px rgba(255, 255, 255, 0.15) inset,
-    0 8px 32px rgba(0, 0, 0, 0.07),
-    0 2px 6px rgba(0, 0, 0, 0.05);
+    0 0.5px 0 0 rgba(255, 255, 255, 0.9) inset,
+    0 2px 4px rgba(0, 0, 0, 0.08),
+    0 8px 24px rgba(0, 0, 0, 0.08);
   --blur-crystal: 3px;
 
-  /* Focus ring — glass-appropriate */
+  /* Focus ring */
   --glass-focus-ring: 0 0 0 3px rgba(100, 140, 255, 0.25);
 }
 
@@ -298,63 +291,37 @@
      - Outer shadow for elevation
   */
   .glass-bg {
-    position: relative;
     background: var(--glass-bg);
     -webkit-backdrop-filter: blur(var(--blur)) saturate(150%);
     backdrop-filter: blur(var(--blur)) saturate(150%);
-    border-top: 0.5px solid var(--glass-border-top);
-    border-left: 0.5px solid var(--glass-border-top);
-    border-right: 0.5px solid var(--glass-border-bottom);
-    border-bottom: 0.5px solid var(--glass-border-bottom);
     border-radius: var(--radius);
     box-shadow: var(--glass-shadow);
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
   }
 
   /* Frosted — denser, more opaque glass material */
   .glass-frosted {
-    position: relative;
     background: var(--glass-frosted-bg);
     -webkit-backdrop-filter: blur(var(--blur-frosted)) saturate(170%);
     backdrop-filter: blur(var(--blur-frosted)) saturate(170%);
-    border-top: 0.5px solid var(--glass-border-top);
-    border-left: 0.5px solid var(--glass-border-top);
-    border-right: 0.5px solid var(--glass-border-bottom);
-    border-bottom: 0.5px solid var(--glass-border-bottom);
     border-radius: var(--radius);
     box-shadow: var(--glass-frosted-shadow);
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
   }
 
   /* Fluted — ribbed texture over glass material */
   .glass-fluted {
-    position: relative;
     background: var(--glass-bg);
     background-image: var(--glass-fluted-pattern);
     -webkit-backdrop-filter: blur(var(--blur)) saturate(150%);
     backdrop-filter: blur(var(--blur)) saturate(150%);
-    border-top: 0.5px solid var(--glass-border-top);
-    border-left: 0.5px solid var(--glass-border-top);
-    border-right: 0.5px solid var(--glass-border-bottom);
-    border-bottom: 0.5px solid var(--glass-border-bottom);
     border-radius: var(--radius);
     box-shadow: var(--glass-shadow);
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
   }
 
   /* Crystal — clear glass, minimal fill */
   .glass-crystal {
-    position: relative;
     background: var(--glass-crystal-bg);
     -webkit-backdrop-filter: blur(var(--blur-crystal)) saturate(150%);
     backdrop-filter: blur(var(--blur-crystal)) saturate(150%);
-    border-top: 0.5px solid var(--glass-border-top);
-    border-left: 0.5px solid var(--glass-border-top);
-    border-right: 0.5px solid var(--glass-border-bottom);
-    border-bottom: 0.5px solid var(--glass-border-bottom);
     border-radius: var(--radius);
     box-shadow: var(--glass-crystal-shadow);
     transition: box-shadow 0.3s ease;
