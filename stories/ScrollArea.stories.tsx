@@ -75,7 +75,7 @@ export const WithContent: Story = {
         <ul className="list-disc list-inside space-y-2 text-muted-foreground">
           <li>Apple-inspired glassmorphism design</li>
           <li>Built-in light/dark mode support</li>
-          <li>Enhanced effects (glow, shimmer, ripple)</li>
+          <li>Enhanced effects (glow, ripple, lift, scale)</li>
           <li>Fully customizable per-component</li>
           <li>TypeScript support</li>
           <li>Accessible (Radix UI primitives)</li>

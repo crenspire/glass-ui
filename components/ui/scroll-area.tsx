@@ -13,7 +13,7 @@ const ScrollArea = React.forwardRef<
 >(({ className, variant = "glass", children, ...props }, ref) => {
   const variants = {
     default: "relative overflow-hidden",
-    glass: "relative overflow-hidden glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] rounded-lg shadow-[var(--glass-shadow-sm)]",
+    glass: "relative overflow-hidden glass-bg text-foreground rounded-lg",
   }
   
   return (

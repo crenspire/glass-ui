@@ -3,10 +3,8 @@
 import * as React from "react"
 import { use } from "react"
 import { notFound } from "next/navigation"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Copy, Check, ArrowLeft } from "lucide-react"
+import { Copy, Check } from "lucide-react"
 import Link from "next/link"
 import { DashboardBlock } from "@/components/blocks/dashboard"
 import { AuthenticationBlock } from "@/components/blocks/authentication"
@@ -103,7 +101,7 @@ function CodeBlock({ code }: { code: string }) {
         ) : (
           <Copy className="h-4 w-4" />
         )}
-      </Button>
+      </button>
     </div>
   )
 }
@@ -142,31 +140,21 @@ export default function BlockPage({
             <TabsTrigger value="preview">Preview</TabsTrigger>
             <TabsTrigger value="code">Code</TabsTrigger>
           </TabsList>
-          <TabsContent value="preview" className="space-y-4">
-            <Card variant="glass" className="text-foreground">
-              <CardContent className="p-0">
-                <div className="bg-background/50 backdrop-blur-sm rounded-lg">
-                  <Component />
-                </div>
-              </CardContent>
-            </Card>
+
+          <TabsContent value="preview">
+            <div className="glass-bg p-0 overflow-hidden">
+              <Component />
+            </div>
           </TabsContent>
-          <TabsContent value="code">
-            <Card variant="glass" className="text-foreground">
-              <CardHeader>
-                <CardTitle className="text-foreground">Implementation</CardTitle>
-                <CardDescription className="text-muted-foreground">
-                  Copy this code to use the block in your project
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <CodeBlock code={block.code} />
-              </CardContent>
-            </Card>
+
+          <TabsContent value="code" className="space-y-4">
+            <div>
+              <h3 className="text-sm font-medium text-foreground/50 mb-3">Implementation</h3>
+              <CodeBlock code={block.code} />
+            </div>
           </TabsContent>
         </Tabs>
       </div>
     </div>
   )
 }
-

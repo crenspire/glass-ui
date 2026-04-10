@@ -14,7 +14,7 @@ const InputOTP = React.forwardRef<
 >(({ className, variant = "glass", render, ...props }, ref) => {
   const variants = {
     default: "",
-    glass: "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] shadow-[var(--glass-shadow-sm)]",
+    glass: "glass-bg text-foreground",
   }
   
   const defaultRender = ({ slots }: { slots: SlotProps[] }) => (
@@ -61,7 +61,7 @@ const InputOTPSlot = React.forwardRef<
 >(({ variant = "glass", className, char, isActive, hasFakeCaret, placeholderChar = "○", ...props }, ref) => {
   const variants = {
     default: "relative flex h-12 w-12 items-center justify-center border-y border-r border-input text-foreground text-lg font-semibold transition-all first:rounded-l-md first:border-l last:rounded-r-md",
-    glass: "relative flex h-12 w-12 items-center justify-center border-y border-r border-[var(--glass-border)] glass-bg backdrop-blur-[var(--blur-sm)] text-foreground text-lg font-semibold transition-all first:rounded-l-md first:border-l last:rounded-r-md",
+    glass: "relative flex h-12 w-12 items-center justify-center glass-bg text-foreground text-lg font-semibold transition-all first:rounded-l-md last:rounded-r-md",
   }
 
   return (

@@ -28,7 +28,7 @@ const RadioGroupItem = React.forwardRef<
 >(({ className, variant = "glass", ...props }, ref) => {
   const variants = {
     default: "border-primary",
-    glass: "border border-[var(--glass-border)] glass-bg opacity-30 backdrop-blur-[var(--blur-sm)] shadow-[var(--glass-shadow-sm)]",
+    glass: "glass-bg text-foreground opacity-30",
   }
   
   return (

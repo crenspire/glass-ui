@@ -22,7 +22,7 @@ const meta = {
     },
     effect: {
       control: 'select',
-      options: ['none', 'glow', 'shimmer', 'ripple', 'lift', 'scale'],
+      options: ['none', 'glow', 'ripple', 'lift', 'scale'],
     },
   },
 } satisfies Meta<typeof Carousel>;

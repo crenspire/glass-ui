@@ -17,11 +17,11 @@ const TabsList = React.forwardRef<
     if (variant === "default") return "bg-muted"
     
     const variants = {
-      glass: "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] shadow-[var(--glass-shadow-sm)]",
-      glassSubtle: "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] shadow-[var(--glass-shadow-sm)] opacity-50",
-      frosted: "glass-frosted backdrop-blur-[var(--blur-frosted)] border border-[var(--glass-frosted-border)] shadow-[var(--glass-frosted-shadow)]",
-      fluted: "glass-fluted backdrop-blur-[var(--blur)] border border-[var(--glass-border)] shadow-[var(--glass-shadow-sm)]",
-      crystal: "glass-crystal backdrop-blur-[var(--blur-crystal)] border border-[var(--glass-crystal-border)] shadow-[var(--glass-crystal-shadow)]",
+      glass: "glass-bg text-foreground",
+      glassSubtle: "glass-bg text-foreground opacity-60",
+      frosted: "glass-frosted text-foreground",
+      fluted: "glass-fluted text-foreground",
+      crystal: "glass-crystal text-foreground",
     }
     return variants[variant] || variants.glass
   }
@@ -53,10 +53,10 @@ const TabsTrigger = React.forwardRef<
       // Active state - lighter, more opaque background with shadow
       // Light mode: white/opaque background
       "data-[state=active]:bg-white/80 data-[state=active]:text-foreground",
-      "data-[state=active]:shadow-[0_1px_3px_rgba(0,0,0,0.1),inset_0_1px_1px_rgba(255,255,255,0.5)]",
+      "data-[state=active]:shadow-[0_0.5px_0_0_rgba(255,255,255,0.7)_inset,0_1px_2px_rgba(0,0,0,0.06)]",
       // Dark mode: lighter background with better contrast
       "dark:data-[state=active]:bg-white/20 dark:data-[state=active]:text-foreground",
-      "dark:data-[state=active]:shadow-[0_2px_6px_rgba(0,0,0,0.4),inset_0_1px_2px_rgba(255,255,255,0.15),inset_0_0_8px_rgba(255,255,255,0.1)]",
+      "dark:data-[state=active]:shadow-[0_0.5px_0_0_rgba(255,255,255,0.25)_inset,0_1px_3px_rgba(0,0,0,0.2)]",
       className
     )}
     {...props}

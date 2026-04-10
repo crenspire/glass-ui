@@ -18,8 +18,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Glass UI - Component Library",
-  description: "A modern, glassmorphic component library inspired by Apple's design language",
+  title: "Liquid Glass UI - Component Library",
+  description: "A modern component library inspired by Apple's Liquid Glass design language",
 };
 
 export default function RootLayout({

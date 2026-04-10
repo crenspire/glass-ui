@@ -37,11 +37,11 @@ const AlertDialogContent = React.forwardRef<
     if (variant === "default") return "bg-background border"
     
     const variants = {
-      glass: "glass-bg backdrop-blur-[var(--blur-lg)] border border-[var(--glass-border)] text-foreground shadow-[var(--glass-shadow-lg)]",
-      glassSubtle: "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] text-foreground shadow-[var(--glass-shadow-lg)] opacity-50",
-      frosted: "glass-frosted backdrop-blur-[var(--blur-frosted)] border border-[var(--glass-frosted-border)] text-foreground shadow-[var(--glass-frosted-shadow)]",
-      fluted: "glass-fluted backdrop-blur-[var(--blur)] border border-[var(--glass-border)] text-foreground shadow-[var(--glass-shadow-lg)]",
-      crystal: "glass-crystal backdrop-blur-[var(--blur-crystal)] border border-[var(--glass-crystal-border)] text-foreground shadow-[var(--glass-crystal-shadow)]",
+      glass: "glass-bg text-foreground",
+      glassSubtle: "glass-bg text-foreground opacity-60",
+      frosted: "glass-frosted text-foreground",
+      fluted: "glass-fluted text-foreground",
+      crystal: "glass-crystal text-foreground",
     }
     return variants[variant] || variants.glass
   }

@@ -374,7 +374,7 @@ export const MultipleToasts: Story = {
       
       <Button
         variant="glass"
-        effect="shimmer"
+        effect="glow"
         onClick={() => {
           toast.success('First notification');
           setTimeout(() => toast.info('Second notification'), 200);

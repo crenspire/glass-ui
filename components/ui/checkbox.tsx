@@ -14,7 +14,7 @@ const Checkbox = React.forwardRef<
 >(({ className, variant = "glass", ...props }, ref) => {
   const variants = {
     default: "border-primary",
-    glass: "border border-[var(--glass-border)] glass-bg backdrop-blur-[var(--blur-sm)] shadow-[var(--glass-shadow-sm)]",
+    glass: "glass-bg text-foreground",
   }
   
   return (
@@ -23,7 +23,7 @@ const Checkbox = React.forwardRef<
       className={cn(
         "peer h-4 w-4 shrink-0 rounded-sm border shadow focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground",
         variants[variant],
-        variant === "glass" && "data-[state=checked]:glass-bg data-[state=checked]:border-[var(--glass-border)]",
+        variant === "glass" && "data-[state=checked]:glass-bg",
         className
       )}
       {...props}

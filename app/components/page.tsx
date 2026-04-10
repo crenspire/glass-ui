@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/glass/input"
 import { Badge } from "@/components/ui/badge"
 import { Search } from "lucide-react"
@@ -39,7 +38,7 @@ export default function ComponentsPage() {
           <p className="text-lg text-muted-foreground mb-8">
             Browse our collection of {components.length} beautiful, glassy UI components.
           </p>
-          <div className="relative max-w-md">
+          <div className="relative max-w-sm">
             <Input
               type="text"
               placeholder="Search components..."
@@ -52,7 +51,7 @@ export default function ComponentsPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {filteredComponents.map((component) => (
             <Link
               key={component.name}
@@ -94,4 +93,3 @@ export default function ComponentsPage() {
     </div>
   )
 }
-

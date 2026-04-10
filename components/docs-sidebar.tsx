@@ -6,12 +6,10 @@ import { usePathname } from "next/navigation"
 import { ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { getComponents } from "@/lib/registry"
-import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
 const components = getComponents()
 
-// New components that should show NEW badge
 const newComponents = new Set([
   'spinner',
   'button-group',
@@ -90,4 +88,3 @@ export function DocsSidebar({ onLinkClick }: { onLinkClick?: () => void }) {
     </aside>
   )
 }
-

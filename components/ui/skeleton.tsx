@@ -9,7 +9,7 @@ function Skeleton({
 }) {
   const variants = {
     default: "bg-muted animate-pulse",
-    glass: "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] animate-pulse shadow-[var(--glass-shadow-sm)]",
+    glass: "glass-bg text-foreground animate-pulse",
   }
   
   return (

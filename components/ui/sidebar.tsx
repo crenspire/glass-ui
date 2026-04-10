@@ -11,7 +11,7 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
   ({ className, variant = "glass", ...props }, ref) => {
     const variants = {
       default: "bg-sidebar text-sidebar-foreground border-r",
-      glass: "glass-bg backdrop-blur-[var(--blur)] border-r border-[var(--glass-border)] text-foreground shadow-[var(--glass-shadow)]",
+      glass: "glass-bg text-foreground",
     }
     
     return (

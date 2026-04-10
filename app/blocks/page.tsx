@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Search } from "lucide-react"
@@ -64,14 +63,14 @@ export default function BlocksPage() {
             Pre-built page layouts and component compositions.
           </p>
           <div className="relative max-w-md">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-foreground/40" />
             <Input
               type="text"
               placeholder="Search blocks..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               variant="glass"
-              className="pl-10 text-foreground placeholder:text-muted-foreground"
+              className="pl-10 text-foreground placeholder:text-foreground/40"
             />
           </div>
         </div>
@@ -108,4 +107,3 @@ export default function BlocksPage() {
     </div>
   )
 }
-

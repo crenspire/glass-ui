@@ -35,6 +35,22 @@ import {
   Layers,
 } from "lucide-react"
 
+function CopyButton({ text }: { text: string }) {
+  const [copied, setCopied] = React.useState(false)
+  return (
+    <button
+      onClick={() => {
+        navigator.clipboard.writeText(text)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+      }}
+      className="text-foreground/40 hover:text-foreground/80 transition-colors"
+    >
+      {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+    </button>
+  )
+}
+
 export default function Home() {
   const [copied, setCopied] = React.useState(false)
 
@@ -45,7 +61,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen transition-colors duration-300 relative">
+    <div className="min-h-screen relative">
       <Toaster />
       <div className="relative z-10">
 
@@ -77,7 +93,7 @@ export default function Home() {
               </Button>
               <Button asChild size="lg" variant="outline" effect="lift">
                 <Link href="/components">
-                  Browse Components
+                  Components
                 </Link>
               </Button>
             </div>
@@ -362,6 +378,7 @@ export default function Home() {
               Click to experience liquid glass in action.
             </p>
           </div>
+        </section>
 
           <div className="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
             <Dialog>
@@ -438,6 +455,7 @@ export default function Home() {
               Everything you need to ship polished interfaces.
             </p>
           </div>
+        </section>
 
           <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
