@@ -15,7 +15,7 @@ const toggleVariants = cva(
         outline:
           "border border-input bg-transparent hover:bg-accent hover:text-accent-foreground",
         glass:
-          "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] hover:opacity-90 shadow-[var(--glass-shadow-sm)]",
+          "glass-bg text-foreground hover:opacity-90",
       },
       size: {
         default: "h-10 px-3",

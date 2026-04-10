@@ -14,17 +14,12 @@ export default function DocsLayout({
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
 
   return (
-    <div 
-      className="min-h-screen transition-colors duration-300 relative"
-    >
-      <div className="container mx-auto px-4 pt-4 pb-8 relative z-10">
-        <div className="flex flex-col md:flex-row gap-4 md:gap-8">
-          {/* Desktop Sidebar */}
+    <div className="min-h-screen relative">
+      <div className="container mx-auto px-4 pt-6 pb-16 relative z-10">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-8">
           <aside className="hidden md:block">
             <DocsSidebar />
           </aside>
-
-          {/* Mobile Sidebar Toggle */}
           <div className="md:hidden">
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
@@ -33,18 +28,15 @@ export default function DocsLayout({
                   Menu
                 </Button>
               </SheetTrigger>
-              <SheetContent variant="glass" side="left" className="w-[300px] sm:w-[400px] p-0">
-                <div className="h-full overflow-y-auto">
+              <SheetContent variant="glass" side="left" className="w-[280px] p-0">
+                <div className="h-full overflow-y-auto pt-8">
                   <DocsSidebar onLinkClick={() => setMobileMenuOpen(false)} />
                 </div>
               </SheetContent>
             </Sheet>
           </div>
-
-          <main className="flex-1 max-w-4xl min-w-0 w-full">
-            <div className="prose prose-invert max-w-none prose-sm sm:prose-base prose-headings:text-foreground prose-p:text-foreground prose-a:text-foreground prose-strong:text-foreground prose-code:text-foreground prose-pre:overflow-x-auto">
-              {children}
-            </div>
+          <main className="flex-1 max-w-3xl min-w-0 w-full">
+            {children}
           </main>
         </div>
       </div>

@@ -36,7 +36,7 @@ export function Cropper({
   return (
     <div className={cn(
       "relative w-full h-[400px]",
-      variant === "glass" && "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] rounded-lg overflow-hidden shadow-[var(--glass-shadow)]"
+      variant === "glass" && "glass-bg text-foreground rounded-lg overflow-hidden"
     )}>
       <CropperLib
         image={image}

@@ -20,7 +20,7 @@ const MenuBar = React.forwardRef<HTMLDivElement, MenuBarProps>(
       
       const variants = {
         glass: "glass-bg text-foreground",
-        glassSubtle: "glass-bg text-foreground opacity-50",
+        glassSubtle: "glass-bg text-foreground opacity-60",
         frosted: "glass-frosted text-foreground",
         fluted: "glass-fluted text-foreground",
         crystal: "glass-crystal text-foreground",

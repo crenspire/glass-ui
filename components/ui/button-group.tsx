@@ -18,7 +18,7 @@ const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
       
       const variants = {
         glass: "glass-bg",
-        glassSubtle: "glass-bg opacity-50",
+        glassSubtle: "glass-bg opacity-60",
         frosted: "glass-frosted",
         fluted: "glass-fluted",
         crystal: "glass-crystal",

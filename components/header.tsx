@@ -5,8 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { useTheme } from "next-themes"
-import { Github, Menu } from "lucide-react"
-import { ModeToggle } from "@/components/ui/mode-toggle"
+import { Github, Menu, Moon, Sun } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
@@ -21,7 +20,7 @@ const navigation = [
 
 export function Header() {
   const pathname = usePathname()
-  const { resolvedTheme } = useTheme()
+  const { resolvedTheme, setTheme } = useTheme()
   const [starCount, setStarCount] = React.useState<number | null>(null)
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
   const [mounted, setMounted] = React.useState(false)
@@ -47,12 +46,8 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full bg-transparent">
       <div className="container mx-auto px-4 pt-4">
-        <div 
-          className="flex h-16 items-center justify-between px-4 md:px-6 rounded-xl border border-[var(--glass-border)] backdrop-blur-[var(--blur)] shadow-[var(--glass-shadow)]"
-          style={{
-            backgroundColor: "transparent",
-            boxShadow: "var(--glass-shadow)",
-          }}
+        <div
+          className="glass-bg flex h-16 items-center justify-between px-4 md:px-6"
         >
           <div className="flex items-center gap-4 md:gap-8">
             <Link href="/" className="flex items-center gap-2">
@@ -102,7 +97,21 @@ export function Header() {
                 </Badge>
               </Link>
             )}
-            <ModeToggle variant="glass" />
+            {mounted && (
+              <Button
+                variant="glass"
+                size="icon"
+                className="h-9 w-9"
+                onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+                aria-label="Toggle theme"
+              >
+                {resolvedTheme === "dark" ? (
+                  <Sun className="h-4 w-4" />
+                ) : (
+                  <Moon className="h-4 w-4" />
+                )}
+              </Button>
+            )}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
                 <Button

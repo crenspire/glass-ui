@@ -20,7 +20,7 @@ const BreadcrumbList = React.forwardRef<
 >(({ className, variant = "glass", ...props }, ref) => {
   const variants = {
     default: "",
-    glass: "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] rounded-lg px-4 py-2 shadow-[var(--glass-shadow-sm)]",
+    glass: "glass-bg text-foreground rounded-lg px-4 py-2",
   }
   
   return (

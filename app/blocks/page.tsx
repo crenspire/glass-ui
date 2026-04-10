@@ -2,9 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Search } from "lucide-react"
 
@@ -57,58 +55,51 @@ export default function BlocksPage() {
   )
 
   return (
-    <div 
-      className="min-h-screen transition-colors duration-300 relative"
-    >
+    <div className="min-h-screen relative">
       <div className="container mx-auto px-4 pt-4 pb-16 relative z-10">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-foreground mb-4">Blocks</h1>
-          <p className="text-lg text-muted-foreground mb-6">
+        <div className="mb-12">
+          <h1 className="text-4xl font-bold text-foreground mb-3">Blocks</h1>
+          <p className="text-lg text-foreground/50 mb-8">
             Pre-built page layouts and component compositions
           </p>
           <div className="relative max-w-md">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-foreground/40" />
             <Input
               type="text"
               placeholder="Search blocks..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               variant="glass"
-              className="pl-10 text-foreground placeholder:text-muted-foreground"
+              className="pl-10 text-foreground placeholder:text-foreground/40"
             />
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredBlocks.map((block) => (
-            <Card key={block.name} variant="glass" className="h-full transition-all hover:scale-105 hover:shadow-lg text-foreground">
-              <CardHeader>
-                <div className="flex items-center justify-between mb-2">
-                  <CardTitle className="text-foreground">{block.title}</CardTitle>
+            <Link key={block.name} href={`/blocks/${block.name}`} className="group">
+              <div className="glass-bg h-full p-6 transition-opacity hover:opacity-90">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-lg font-semibold text-foreground">{block.title}</h3>
                   <Badge variant="glass">{block.category}</Badge>
                 </div>
-                <CardDescription className="text-muted-foreground">
+                <p className="text-sm text-foreground/50 mb-6">
                   {block.description}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button variant="outline" size="sm" className="w-full" asChild>
-                  <Link href={`/blocks/${block.name}`}>
-                    View Block
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
+                </p>
+                <span className="text-sm text-foreground/40 group-hover:text-foreground/70 transition-colors">
+                  View →
+                </span>
+              </div>
+            </Link>
           ))}
         </div>
 
         {filteredBlocks.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-muted-foreground text-lg">No blocks found matching your search.</p>
+            <p className="text-foreground/50 text-lg">No blocks found matching your search.</p>
           </div>
         )}
       </div>
     </div>
   )
 }
-

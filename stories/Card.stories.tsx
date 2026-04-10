@@ -15,7 +15,7 @@ const meta = {
     },
     hover: {
       control: 'select',
-      options: ['none', 'glow', 'shimmer', 'ripple', 'lift', 'scale'],
+      options: ['none', 'glow', 'ripple', 'lift', 'scale'],
       description: 'Hover animation effect',
     },
   },
@@ -113,18 +113,18 @@ export const WithGlowHover: Story = {
   },
 };
 
-export const WithShimmerHover: Story = {
+export const WithRippleHover: Story = {
   args: {
     variant: 'glass',
-    hover: 'shimmer',
+    hover: 'ripple',
     children: (
       <>
         <CardHeader>
-          <CardTitle>Shimmer Hover Effect</CardTitle>
-          <CardDescription>Hover to see the shimmer effect</CardDescription>
+          <CardTitle>Ripple Hover Effect</CardTitle>
+          <CardDescription>Hover to see the ripple effect</CardDescription>
         </CardHeader>
         <CardContent>
-          <p>This card has a shimmer animation on hover.</p>
+          <p>This card has a ripple animation on hover.</p>
         </CardContent>
       </>
     ),

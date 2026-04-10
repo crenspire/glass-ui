@@ -19,12 +19,11 @@ function Card({
   
   const getVariantClass = () => {
     if (variant === "default") return "bg-card text-card-foreground border shadow-sm"
-    if (hasCustomGlass) return "glass-bg text-foreground" // Use base glass class when customizing
-    
-    // Use variant-specific classes only when no custom glass props
+    if (hasCustomGlass) return "glass-bg text-foreground"
+
     const variants = {
       glass: "glass-bg text-foreground",
-      glassSubtle: "glass-bg text-foreground opacity-50 backdrop-blur-[var(--blur-sm)]",
+      glassSubtle: "glass-bg text-foreground opacity-60",
       frosted: "glass-frosted text-foreground",
       fluted: "glass-fluted text-foreground",
       crystal: "glass-crystal text-foreground",
@@ -40,7 +39,7 @@ function Card({
     <div
       data-slot="card"
       className={cn(
-        "flex flex-col gap-6 rounded-xl py-6",
+        "flex flex-col gap-6 py-6",
         getVariantClass(),
         className
       )}
