@@ -43,8 +43,8 @@ describe("selectShapes", () => {
     expect(new Set(r.keys())).toEqual(new Set([1, 2]))
   })
 
-  it("treats a child of an unlisted (hidden) parent as top level", () => {
-    const r = selectShapes([{ id: 2, parent: 9, area: 1 }], 32)
-    expect([...r]).toEqual([[2, 0]])
+  it("skips a child whose parent is not a candidate (clipped or hidden glass still paints its CSS over the canvas)", () => {
+    const r = selectShapes([{ id: 2, parent: 9, area: 1 }, { id: 3, parent: null, area: 1 }], 32)
+    expect([...r]).toEqual([[3, 0]])
   })
 })

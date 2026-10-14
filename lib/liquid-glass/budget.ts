@@ -6,9 +6,14 @@ export interface ShapeCandidate { id: number; parent: number | null; area: numbe
 
 export function selectShapes(cands: ShapeCandidate[], max: number): Map<number, 0 | 1> {
   const byId = new Map(cands.map(c => [c.id, c]))
+  // Depth below the nearest drawn root. A glass ancestor that is not a candidate (clipped,
+  // hidden, blocked) keeps its CSS glass and paints over the canvas, so its subtree is out.
   const depth = (c: ShapeCandidate) => {
     let d = 0
-    for (let p = c.parent; p !== null && byId.has(p); p = byId.get(p)!.parent) d++
+    for (let p = c.parent; p !== null; p = byId.get(p)!.parent) {
+      if (!byId.has(p)) return Infinity
+      d++
+    }
     return d
   }
   const ordered = cands

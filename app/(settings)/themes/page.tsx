@@ -6,7 +6,10 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Copy, Check, Palette } from "lucide-react"
+import { Copy, Check, Moon, Sun } from "lucide-react"
+import { useTheme } from "next-themes"
+import { useWallpaper } from "@/components/wallpaper"
+import { cn } from "@/lib/utils"
 import { generateThemeCSS, defaultTheme, type ThemeColors } from "@/lib/theme-generator"
 
 const presetThemes = [
@@ -36,6 +39,10 @@ const presetThemes = [
 
 export default function ThemesPage() {
   const [selectedTheme, setSelectedTheme] = React.useState(presetThemes[0])
+  const { resolvedTheme, setTheme } = useTheme()
+  const { preset, presets, setPreset } = useWallpaper()
+  const [mounted, setMounted] = React.useState(false)
+  React.useEffect(() => setMounted(true), [])
   const [customColors, setCustomColors] = React.useState<ThemeColors>(defaultTheme)
   const [copied, setCopied] = React.useState(false)
   const [activeTab, setActiveTab] = React.useState<"presets" | "custom">("presets")
@@ -58,18 +65,32 @@ export default function ThemesPage() {
   }
 
   return (
-    <div className="min-h-screen relative">
-      <div className="container mx-auto px-4 pt-8 pb-20 relative z-10">
-        <div className="mb-10">
-          <div className="flex items-center gap-3 mb-3">
-            <Palette className="h-7 w-7 text-foreground" />
-            <h1 className="text-4xl font-bold text-foreground">Themes</h1>
-          </div>
-          <p className="text-lg text-muted-foreground">
-            Hand-picked themes that you can copy and paste into your apps.
-          </p>
+    <>
+      <Card className="gap-4 p-6">
+        <div className="space-y-1">
+          <h1 className="text-2xl font-semibold">Appearance</h1>
+          <p className="text-muted-foreground">Light or dark, and the wallpaper the glass refracts.</p>
         </div>
+        <div className="flex gap-2">
+          <Button material={mounted && resolvedTheme === "light" ? "tinted" : "regular"} onClick={() => setTheme("light")}><Sun className="size-4" />Light</Button>
+          <Button material={mounted && resolvedTheme === "dark" ? "tinted" : "regular"} onClick={() => setTheme("dark")}><Moon className="size-4" />Dark</Button>
+        </div>
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+          {presets.map(p => (
+            <button key={p.id} type="button" onClick={() => setPreset(p.id)} aria-pressed={p.id === preset.id}
+              className={cn("flex flex-col gap-2 rounded-2xl p-1.5 text-left text-sm font-medium outline-none focus-visible:ring-2 focus-visible:ring-ring", p.id === preset.id && "ring-2 ring-primary")}>
+              <span className="h-20 rounded-xl" style={{ background: `linear-gradient(135deg, ${p.dark.base[0]}, ${p.dark.shapes[0]} 45%, ${p.dark.shapes[2]})` }} />
+              {p.name}
+            </button>
+          ))}
+        </div>
+      </Card>
 
+      <Card className="gap-4 p-6">
+        <div className="space-y-1">
+          <h2 className="text-xl font-semibold">Colour themes</h2>
+          <p className="text-muted-foreground">Hand-picked themes that you can copy and paste into your apps.</p>
+        </div>
         <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as "presets" | "custom")} className="space-y-8">
           <TabsList className="mb-8">
             <TabsTrigger value="presets">Presets</TabsTrigger>
@@ -223,16 +244,16 @@ export default function ThemesPage() {
               </div>
             </CardHeader>
             <CardContent>
-              <pre className="lg lg-regular lg-surface p-4 rounded-lg font-mono text-sm overflow-x-auto">
-                <code className="text-foreground whitespace-pre">
+              <pre className="overflow-x-auto rounded-2xl bg-black/40 p-4 font-mono text-sm text-white/90">
+                <code className="whitespace-pre">
                   {currentCSS}
                 </code>
               </pre>
             </CardContent>
           </Card>
         </Tabs>
-      </div>
-    </div>
+      </Card>
+    </>
   )
 }
 
