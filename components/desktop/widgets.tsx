@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { Wifi, Bluetooth, Moon, Sun, Volume2, SkipBack, SkipForward, Play, Pause, CloudSun, Send, Github } from "lucide-react"
+import { Wifi, Bluetooth, Moon, Sun, Volume2, SkipBack, SkipForward, Play, Pause, CloudSun, Send, Github, Heart } from "lucide-react"
 import { Button, Card, Switch, Slider, Calendar, Input, Tabs, TabsList, TabsTrigger, Badge } from "@/components/ui/glass"
 import { cn } from "@/lib/utils"
 import { useDesktopMaterial } from "./material-context"
@@ -137,8 +137,13 @@ export function About() {
       <div className="flex flex-wrap gap-2">
         <Badge>shadcn registry</Badge><Badge>Radix</Badge><Badge>Tailwind v4</Badge>
       </div>
-      <div className="flex gap-2">
+      <p className="text-xs opacity-75">
+        Built by <a href="https://github.com/akshaypjoshi" target="_blank" rel="noreferrer" className="font-semibold underline-offset-4 hover:underline">Akshay Joshi</a>
+        {" "}at <a href="https://crenspire.com" target="_blank" rel="noreferrer" className="font-semibold underline-offset-4 hover:underline">Crenspire Technologies</a>
+      </p>
+      <div className="flex flex-wrap gap-2">
         <Button asChild size="sm" material="clear"><a href="https://github.com/crenspire/glass-ui" target="_blank" rel="noreferrer"><Github className="size-4" />GitHub</a></Button>
+        <Button asChild size="sm" material="clear"><a href="https://github.com/sponsors/akshaypjoshi" target="_blank" rel="noreferrer" aria-label="Sponsor akshaypjoshi"><Heart className="size-4 fill-current" />Sponsor</a></Button>
         <Button asChild size="sm" material="clear"><Link href="/docs/getting-started">Docs</Link></Button>
       </div>
     </Widget>

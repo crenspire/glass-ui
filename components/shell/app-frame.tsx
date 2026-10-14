@@ -5,7 +5,6 @@ import { useDesktopFrame } from "./use-desktop-frame"
 import { MenuBar } from "./menu-bar"
 import { Dock } from "./dock"
 import { CommandMenu } from "./command-menu"
-import { SiteFooter } from "./site-footer"
 
 /**
  * Desktop-size screens: a non-scrolling frame (menu bar, content, dock); content scrolls inside
@@ -19,19 +18,15 @@ export function AppFrame({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-dvh flex-col desktop:h-dvh desktop:overflow-hidden">
       <header className="sticky top-0 z-40 px-3 pt-3 desktop:static">
-        <div className="mx-auto w-full max-w-6xl">
+        <div className="mx-auto w-full max-w-[1440px]">
           <MenuBar webgl={desktop} onCommand={() => setCommand(true)} />
         </div>
       </header>
       <main className="min-h-0 flex-1 px-3 py-3 pb-28 desktop:overflow-hidden desktop:pb-3">
         <div className="desktop:h-full desktop:overflow-y-auto">{children}</div>
-        {/* Phones: credits end the scrolling page, above the fixed dock. */}
-        <SiteFooter webgl={false} className="mt-8 desktop:hidden" />
       </main>
-      <div className="fixed inset-x-0 bottom-0 z-40 flex flex-col items-center gap-2 px-3 pb-3 desktop:static">
+      <div className="fixed inset-x-0 bottom-0 z-40 flex justify-center pb-3 desktop:static">
         <Dock webgl={desktop} />
-        {/* Desktop: credits stay visible under the dock. */}
-        <SiteFooter webgl={desktop} className="hidden desktop:flex" />
       </div>
       <CommandMenu open={command} onOpenChange={setCommand} />
     </div>

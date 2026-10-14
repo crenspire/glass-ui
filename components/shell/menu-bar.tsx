@@ -27,7 +27,7 @@ export function MenuBar({ webgl, onCommand }: { webgl: boolean; onCommand: () =>
   }, [])
 
   return (
-    <div {...liquidProps({ role: "bar", webgl }, { className: "flex h-12 items-center gap-2 px-3 text-sm" })}>
+    <div {...liquidProps({ role: "bar", webgl }, { className: "flex h-14 items-center gap-2 px-4 text-sm" })}>
       <Link href="/" className="flex items-center gap-2 pr-2 font-semibold">
         {mounted && <Image src={resolvedTheme === "dark" ? "/logo-dark.png" : "/logo-light.png"} alt="" width={80} height={20} className="h-5 w-auto" priority />}
         <span>Glass UI</span>
