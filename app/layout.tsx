@@ -4,7 +4,7 @@ import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/sonner";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { GridBackground } from "@/components/grid-background";
+import { Wallpaper, WallpaperProvider } from "@/components/wallpaper";
 import { LiquidGlassProvider } from "@/components/ui/liquid/liquid-glass-provider";
 import "./globals.css";
 
@@ -39,11 +39,13 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <LiquidGlassProvider>
-            <GridBackground />
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-            <Toaster />
+            <WallpaperProvider>
+              <Wallpaper />
+              <Header />
+              <main className="flex-1">{children}</main>
+              <Footer />
+              <Toaster />
+            </WallpaperProvider>
           </LiquidGlassProvider>
         </ThemeProvider>
       </body>
