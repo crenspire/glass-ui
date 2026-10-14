@@ -18,7 +18,7 @@ export interface PopoverContentProps extends React.ComponentProps<typeof BasePop
 export const PopoverContent = React.forwardRef<
   React.ElementRef<typeof BasePopoverContent>,
   PopoverContentProps
->(({ className, variant = "glass", glow = false, ...props }, ref) => {
+>(({ className, variant, glow = false, ...props }, ref) => {
   return (
     <BasePopoverContent
       ref={ref}

@@ -19,7 +19,7 @@ export interface TooltipContentProps extends React.ComponentProps<typeof BaseToo
 export const TooltipContent = React.forwardRef<
   React.ElementRef<typeof BaseTooltipContent>,
   TooltipContentProps
->(({ className, variant = "glass", glow = false, ...props }, ref) => {
+>(({ className, variant, glow = false, ...props }, ref) => {
   return (
     <BaseTooltipContent
       ref={ref}

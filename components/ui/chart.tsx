@@ -126,8 +126,8 @@ type TooltipProps = React.ComponentProps<typeof RechartsPrimitive.Tooltip> & {
 const ChartTooltipContent = React.forwardRef<
   HTMLDivElement,
   TooltipProps &
-    React.ComponentProps<"div"> & {
-      variant?: "default" | "glass"
+    React.ComponentProps<"div"> & LiquidProps & {
+      variant?: "liquid" | "default" | LegacyGlassVariant
       indicator?: "dot" | "line" | "dashed"
     }
 >(
@@ -137,17 +137,20 @@ const ChartTooltipContent = React.forwardRef<
       payload,
       className,
       indicator = "dot",
-      variant = "glass",
+      variant,
+      material,
+      tint,
+      glass,
+      webgl,
+      style,
       ...props
     },
     ref
   ) => {
     const { config } = useChart()
 
-    const variants = {
-      default: "bg-popover text-popover-foreground border",
-      glass: "glass-bg backdrop-blur-[var(--blur)] border border-[var(--glass-border)] text-foreground shadow-[var(--glass-shadow)]",
-    }
+    const v = resolveVariant<"liquid" | "default">(variant, material)
+    const lg = v.variant === "liquid" ? liquidProps({ role: "overlay", material: v.material, tint, glass, webgl }) : null
 
     if (!active || !payload?.length) {
       return null
@@ -156,9 +159,11 @@ const ChartTooltipContent = React.forwardRef<
     return (
       <div
         ref={ref}
+        {...lg}
+        style={{ ...lg?.style, ...style }}
         className={cn(
-          "grid min-w-[8rem] items-start gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs shadow-md",
-          variants[variant],
+          "grid min-w-[8rem] items-start gap-1.5 px-2.5 py-1.5 text-xs",
+          lg ? cn(lg.className, "rounded-2xl") : "bg-popover text-popover-foreground border rounded-lg shadow-md",
           className
         )}
         {...props}

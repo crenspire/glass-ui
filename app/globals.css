@@ -466,14 +466,24 @@ body {
   }
 }
 
-/* Sonner Toast Notifications - Glass Effect Overrides */
-[data-sonner-toast] {
-  background: var(--glass-bg) !important;
-  backdrop-filter: blur(var(--blur)) !important;
-  -webkit-backdrop-filter: blur(var(--blur)) !important;
-  border: 1px solid var(--glass-border) !important;
-  box-shadow: var(--glass-shadow-lg) !important;
+/* Sonner toasts. Sonner injects unlayered CSS that beats the .lg layer, so the liquid material
+   is re-applied here from the .lg variables (the toast and its buttons carry lg classes). */
+[data-sonner-toast],
+[data-sonner-toast] [data-button],
+[data-sonner-toast] [data-cancel],
+[data-sonner-toast] [data-close-button] {
+  background:
+    linear-gradient(var(--lg-wash), var(--lg-wash)) padding-box,
+    linear-gradient(135deg, var(--lg-rim-hi), var(--lg-rim-lo) 35%, var(--lg-rim-lo) 65%, var(--lg-rim-hi)) border-box !important;
+  border: 1px solid transparent !important;
+  backdrop-filter: blur(var(--lg-blur)) saturate(var(--lg-sat)) !important;
+  -webkit-backdrop-filter: blur(var(--lg-blur)) saturate(var(--lg-sat)) !important;
   color: var(--foreground) !important;
+}
+
+[data-sonner-toast] {
+  border-radius: 20px !important;
+  box-shadow: inset 0 1px 0 var(--lg-highlight), 0 1px 2px var(--lg-drop), 0 12px 32px -14px var(--lg-drop) !important;
 }
 
 [data-sonner-toast][data-type="success"] {
@@ -497,42 +507,18 @@ body {
   color: var(--muted-foreground) !important;
 }
 
-/* Toast action buttons - Glass styled */
-[data-sonner-toast] [data-button] {
-  background: var(--glass-bg) !important;
-  backdrop-filter: blur(var(--blur-sm)) !important;
-  -webkit-backdrop-filter: blur(var(--blur-sm)) !important;
-  border: 1px solid var(--glass-border) !important;
-  color: var(--foreground) !important;
+[data-sonner-toast] [data-button],
+[data-sonner-toast] [data-cancel] {
+  border-radius: 9999px !important;
   transition: opacity 0.2s ease !important;
 }
 
-[data-sonner-toast] [data-button]:hover {
-  opacity: 0.9 !important;
-}
-
-/* Toast cancel button */
 [data-sonner-toast] [data-cancel] {
-  background: var(--glass-bg) !important;
-  backdrop-filter: blur(var(--blur-sm)) !important;
-  -webkit-backdrop-filter: blur(var(--blur-sm)) !important;
-  border: 1px solid var(--glass-border) !important;
   color: var(--muted-foreground) !important;
 }
 
-[data-sonner-toast] [data-cancel]:hover {
-  opacity: 0.9 !important;
-}
-
-/* Toast close button */
-[data-sonner-toast] [data-close-button] {
-  background: var(--glass-bg) !important;
-  backdrop-filter: blur(var(--blur-sm)) !important;
-  -webkit-backdrop-filter: blur(var(--blur-sm)) !important;
-  border: 1px solid var(--glass-border) !important;
-  color: var(--foreground) !important;
-}
-
+[data-sonner-toast] [data-button]:hover,
+[data-sonner-toast] [data-cancel]:hover,
 [data-sonner-toast] [data-close-button]:hover {
   opacity: 0.9 !important;
 }

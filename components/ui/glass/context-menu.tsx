@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import type { LegacyGlassVariant } from "@/lib/liquid-glass/material"
 import {
   ContextMenu as BaseContextMenu,
   ContextMenuTrigger as BaseContextMenuTrigger,
@@ -29,9 +30,9 @@ export const ContextMenuTrigger = BaseContextMenuTrigger
 export const ContextMenuContent = React.forwardRef<
   React.ElementRef<typeof BaseContextMenuContent>,
   React.ComponentProps<typeof BaseContextMenuContent> & {
-    variant?: "default" | "glass" | "glassSubtle" | "frosted" | "fluted" | "crystal"
+    variant?: "liquid" | "default" | LegacyGlassVariant
   }
->(({ className, variant = "glass", ...props }, ref) => {
+>(({ className, variant, ...props }, ref) => {
   return (
     <BaseContextMenuContent
       ref={ref}
