@@ -5,6 +5,8 @@
 @source not "../docs/superpowers";
 
 @custom-variant dark (&:is(.dark *));
+/* The non-scrolling desktop frame (same query as useDesktopFrame). */
+@custom-variant desktop (@media (min-width: 1024px) and (min-height: 640px));
 
 @theme inline {
   --color-background: var(--background);

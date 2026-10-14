@@ -75,10 +75,15 @@ export function Weather() {
 }
 
 export function CalendarWidget() {
-  const [day, setDay] = React.useState<Date | undefined>(new Date())
+  // The page is prerendered at build time, so "today" is only known on the client.
+  const [day, setDay] = React.useState<Date | undefined>()
+  const [mounted, setMounted] = React.useState(false)
+  React.useEffect(() => { setDay(new Date()); setMounted(true) }, [])
   return (
     <Widget title="Calendar" className="items-center">
-      <Calendar mode="single" selected={day} onSelect={setDay} variant="default" className="p-0" />
+      {mounted
+        ? <Calendar mode="single" selected={day} onSelect={setDay} variant="default" className="p-0" />
+        : <div aria-hidden className="h-[296px] w-[252px]" />}
     </Widget>
   )
 }

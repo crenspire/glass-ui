@@ -9,7 +9,7 @@ export interface DemoProps { material?: Material }
 export interface DemoModule { default: React.ComponentType<DemoProps>; code: string }
 export interface DemoEntry { name: string; title: string; category: DemoCategory; keywords: string[]; load: () => Promise<DemoModule> }
 
-const CATEGORY: Record<string, DemoCategory> = {
+export const CATEGORY: Record<string, DemoCategory> = {
   button: "Inputs", "button-group": "Inputs", checkbox: "Inputs", "date-picker-input": "Inputs", input: "Inputs",
   "input-group": "Inputs", "input-otp": "Inputs", label: "Inputs", "radio-group": "Inputs", select: "Inputs",
   slider: "Inputs", switch: "Inputs", textarea: "Inputs", toggle: "Inputs", "toggle-group": "Inputs", cropper: "Inputs",
@@ -24,7 +24,7 @@ const CATEGORY: Record<string, DemoCategory> = {
 }
 
 // Static import map so the bundler can split each demo into its own chunk.
-const LOADERS: Record<string, () => Promise<DemoModule>> = {
+export const LOADERS: Record<string, () => Promise<DemoModule>> = {
   accordion: () => import("./accordion"), alert: () => import("./alert"), "alert-dialog": () => import("./alert-dialog"),
   avatar: () => import("./avatar"), badge: () => import("./badge"), breadcrumb: () => import("./breadcrumb"),
   button: () => import("./button"), "button-group": () => import("./button-group"), calendar: () => import("./calendar"),
@@ -50,7 +50,7 @@ export const DEMOS: DemoEntry[] = registry.items
   .map(i => ({
     name: i.name,
     title: i.title ?? i.name,
-    category: CATEGORY[i.name] ?? "Layout",
+    category: CATEGORY[i.name],
     keywords: [i.name, ...(i.description ?? "").toLowerCase().split(/\W+/).filter(w => w.length > 3)],
     load: LOADERS[i.name],
   }))
