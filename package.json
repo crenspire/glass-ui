@@ -12,7 +12,8 @@
     "registry:build": "shadcn build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o storybook-static",
-    "export-storybook": "node scripts/export-storybook.js"
+    "export-storybook": "node scripts/export-storybook.js",
+    "test": "vitest run"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
@@ -76,7 +77,8 @@
     "eslint-plugin-storybook": "^10.0.7",
     "storybook": "^10.0.7",
     "tailwindcss": "^4.1.11",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "vitest": "3.2.4"
   },
   "pnpm": {
     "overrides": {
