@@ -3,12 +3,10 @@
 import * as React from "react"
 import { MenuBar as BaseMenuBar, MenuBarItem as BaseMenuBarItem } from "@/components/ui/menu-bar"
 import { cn } from "@/lib/utils"
-import type { GlassCustomization } from "@/lib/glass-utils"
 import { hoverEffects, type HoverEffect } from "@/lib/hover-effects"
 
 export interface MenuBarProps extends React.ComponentProps<typeof BaseMenuBar> {
   effect?: HoverEffect
-  glass?: GlassCustomization
 }
 
 /**
@@ -16,12 +14,10 @@ export interface MenuBarProps extends React.ComponentProps<typeof BaseMenuBar> {
  * Built on top of the base MenuBar component with enhanced visual styling
  */
 export const MenuBar = React.forwardRef<HTMLDivElement, MenuBarProps>(
-  ({ className, variant = "glass", effect = "none", glass, ...props }, ref) => {
+  ({ className, effect = "none", ...props }, ref) => {
     return (
       <BaseMenuBar
         ref={ref}
-        variant={variant}
-        glass={glass}
         className={cn(
           hoverEffects({ hover: effect }),
           className

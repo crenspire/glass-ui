@@ -6,6 +6,7 @@ import { cva } from "class-variance-authority"
 import { ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { liquidProps, resolveVariant, type LegacyGlassVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
 const NavigationMenu = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Root>,
@@ -27,19 +28,19 @@ NavigationMenu.displayName = NavigationMenuPrimitive.Root.displayName
 
 const NavigationMenuList = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.List>,
-  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.List> & {
-    variant?: "default" | "glass"
+  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.List> & LiquidProps & {
+    variant?: "liquid" | "default" | LegacyGlassVariant
   }
->(({ className, variant = "glass", ...props }, ref) => {
-  const variants = {
-    default: "group flex flex-1 list-none items-center justify-center space-x-1",
-    glass: "group flex flex-1 list-none items-center justify-center space-x-1 glass-bg rounded-lg px-2 py-1",
-  }
+>(({ className, variant, material, tint, glass, webgl, style, ...props }, ref) => {
+  const v = resolveVariant<"liquid" | "default">(variant, material)
+  const lg = v.variant === "liquid" ? liquidProps({ role: "bar", material: v.material, tint, glass, webgl }, { className: "px-2 py-1" }) : null
   
   return (
     <NavigationMenuPrimitive.List
       ref={ref}
-      className={cn(variants[variant], className)}
+      {...lg}
+      style={{ ...lg?.style, ...style }}
+      className={cn(lg ? lg.className : "", className)}
       {...props}
     />
   )

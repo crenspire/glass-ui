@@ -2,6 +2,7 @@ import * as React from "react"
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { liquidProps, resolveVariant, type LegacyGlassVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 import { buttonVariants } from "@/components/ui/button"
 
 const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
@@ -16,19 +17,19 @@ Pagination.displayName = "Pagination"
 
 const PaginationContent = React.forwardRef<
   HTMLUListElement,
-  React.ComponentProps<"ul"> & {
-    variant?: "default" | "glass"
+  React.ComponentProps<"ul"> & LiquidProps & {
+    variant?: "liquid" | "default" | LegacyGlassVariant
   }
->(({ className, variant = "glass", ...props }, ref) => {
-  const variants = {
-    default: "",
-    glass: "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] rounded-lg px-2 py-1 shadow-[var(--glass-shadow-sm)]",
-  }
+>(({ className, variant, material, tint, glass, webgl, style, ...props }, ref) => {
+  const v = resolveVariant<"liquid" | "default">(variant, material)
+  const lg = v.variant === "liquid" ? liquidProps({ role: "bar", material: v.material, tint, glass, webgl }, { className: "px-2 py-1" }) : null
   
   return (
     <ul
       ref={ref}
-      className={cn("flex flex-row items-center gap-1", variants[variant], className)}
+      {...lg}
+      style={{ ...lg?.style, ...style }}
+      className={cn("flex flex-row items-center gap-1", lg ? lg.className : "", className)}
       {...props}
     />
   )
