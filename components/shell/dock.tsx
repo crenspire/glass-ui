@@ -2,14 +2,13 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { liquidProps } from "@/lib/liquid-glass/material"
 import { cn } from "@/lib/utils"
 import { NAV } from "./nav"
 
-const ITEMS = [...NAV.filter(n => n.title !== "Docs"), { title: "Liquid demo", href: "/liquid", icon: Sparkles }]
+const ITEMS = NAV.filter(n => n.title !== "Docs")
 
 /** macOS-style dock. Neighbours of the hovered icon grow a little; the active page gets a dot. */
 export function Dock({ webgl }: { webgl: boolean }) {

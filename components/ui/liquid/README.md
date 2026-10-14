@@ -1,6 +1,6 @@
 # Liquid Glass (WebGL)
 
-Real refractive glass, close to Apple's Liquid Glass. One full-screen canvas sits behind the app; a WebGL shader draws refracting, frosted glass under Glass UI components that rest on the backdrop. Live demo: `/liquid`.
+Real refractive glass, close to Apple's Liquid Glass. One full-screen canvas sits behind the app; a WebGL shader draws refracting, frosted glass under Glass UI components that rest on the backdrop. The whole Glass UI site runs on it.
 
 ```
 lib/liquid-glass/engine.ts                       WebGL engine

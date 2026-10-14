@@ -19,4 +19,13 @@ describe("AppFrame", () => {
     desktop = true
     expect(markup()).toEqual(phone)
   })
+
+  it("shows the footer credits and no Liquid demo entry", () => {
+    const html = markup()
+    expect(html).toContain("Akshay Joshi")
+    expect(html).toContain('href="https://github.com/akshaypjoshi"')
+    expect(html).toContain('href="https://github.com/crenspire/glass-ui"')
+    expect(html).toContain('href="https://github.com/sponsors/akshaypjoshi"')
+    expect(html).not.toContain('href="/liquid"')
+  })
 })
