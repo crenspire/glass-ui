@@ -1,144 +1,30 @@
 "use client"
 
-import * as React from "react"
 import { use } from "react"
-import { notFound } from "next/navigation"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Copy, Check, ArrowLeft } from "lucide-react"
 import Link from "next/link"
-import { DashboardBlock } from "@/components/blocks/dashboard"
-import { AuthenticationBlock } from "@/components/blocks/authentication"
-import { SignupBlock } from "@/components/blocks/signup"
-import { ForgotPasswordBlock } from "@/components/blocks/forgot-password"
-import { CalendarBlock } from "@/components/blocks/calendar"
-import { ChartBlock } from "@/components/blocks/chart"
+import { notFound } from "next/navigation"
+import { ArrowLeft } from "lucide-react"
+import { Button, Card } from "@/components/ui/glass"
 import { CodeBlock } from "@/components/code-block"
+import { getBlock } from "@/lib/blocks"
+import { BLOCK_COMPONENTS } from "../block-components"
 
-const blocks = {
-  dashboard: {
-    title: "Dashboard",
-    description: "Complete dashboard layout with stats, charts, and navigation",
-    component: DashboardBlock,
-    code: `import { DashboardBlock } from "@/components/blocks/dashboard"
-
-export default function Page() {
-  return <DashboardBlock />
-}`,
-  },
-  authentication: {
-    title: "Authentication",
-    description: "Login form with glassmorphism effects",
-    component: AuthenticationBlock,
-    code: `import { AuthenticationBlock } from "@/components/blocks/authentication"
-
-export default function Page() {
-  return <AuthenticationBlock />
-}`,
-  },
-  signup: {
-    title: "Sign Up",
-    description: "Registration form with validation",
-    component: SignupBlock,
-    code: `import { SignupBlock } from "@/components/blocks/signup"
-
-export default function Page() {
-  return <SignupBlock />
-}`,
-  },
-  "forgot-password": {
-    title: "Forgot Password",
-    description: "Password reset form",
-    component: ForgotPasswordBlock,
-    code: `import { ForgotPasswordBlock } from "@/components/blocks/forgot-password"
-
-export default function Page() {
-  return <ForgotPasswordBlock />
-}`,
-  },
-  calendar: {
-    title: "Calendar",
-    description: "Calendar view with events and scheduling",
-    component: CalendarBlock,
-    code: `import { CalendarBlock } from "@/components/blocks/calendar"
-
-export default function Page() {
-  return <CalendarBlock />
-}`,
-  },
-  chart: {
-    title: "Chart",
-    description: "Beautiful charts with bar, line, and area visualizations",
-    component: ChartBlock,
-    code: `import { ChartBlock } from "@/components/blocks/chart"
-
-export default function Page() {
-  return <ChartBlock />
-}`,
-  },
-}
-
-
-export default function BlockPage({
-  params,
-}: {
-  params: Promise<{ block: string }>
-}) {
-  const { block: blockName } = use(params)
-  const block = blocks[blockName as keyof typeof blocks]
-
-  if (!block) {
-    notFound()
-  }
-
-  const Component = block.component
-
+export default function BlockPage({ params }: { params: Promise<{ block: string }> }) {
+  const { block: name } = use(params)
+  const block = getBlock(name)
+  const Block = BLOCK_COMPONENTS[name]
+  if (!block || !Block) notFound()
   return (
-    <div className="min-h-screen relative">
-      <div className="container mx-auto px-4 pt-8 pb-20 relative z-10">
-        <div className="mb-8">
-          <Link
-            href="/blocks"
-            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Blocks
-          </Link>
-          <h1 className="text-4xl font-bold text-foreground mb-3">{block.title}</h1>
-          <p className="text-lg text-muted-foreground">{block.description}</p>
-        </div>
-
-        <Tabs defaultValue="preview" className="space-y-6">
-          <TabsList>
-            <TabsTrigger value="preview">Preview</TabsTrigger>
-            <TabsTrigger value="code">Code</TabsTrigger>
-          </TabsList>
-          <TabsContent value="preview" className="space-y-4">
-            <Card className="text-foreground">
-              <CardContent className="p-0">
-                <div className="bg-background/50 backdrop-blur-sm rounded-lg">
-                  <Component />
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-          <TabsContent value="code">
-            <Card className="text-foreground">
-              <CardHeader>
-                <CardTitle className="text-foreground">Implementation</CardTitle>
-                <CardDescription className="text-muted-foreground">
-                  Copy this code to use the block in your project
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <CodeBlock code={block.code} />
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
+    <div className="mx-auto grid h-full max-w-[1600px] gap-4 lg:grid-cols-[1fr_380px]">
+      <div className="min-h-0 overflow-y-auto">
+        <Button asChild size="sm" material="clear" className="mb-4"><Link href="/blocks"><ArrowLeft className="size-4" />All blocks</Link></Button>
+        {/* The block rests on the wallpaper: its glass is layer 0. */}
+        <Block />
       </div>
+      <Card className="min-h-0 gap-4 overflow-y-auto p-6">
+        <div><h1 className="text-xl font-semibold">{block.title}</h1><p className="text-sm text-muted-foreground">{block.description}</p></div>
+        <CodeBlock code={block.code} />
+      </Card>
     </div>
   )
 }
-
