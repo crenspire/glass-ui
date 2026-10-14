@@ -1,5 +1,5 @@
 import { selectShapes, type ShapeCandidate } from "./budget"
-import { effectiveOpacity, paintsOverBackdrop } from "./occlusion"
+import { clipsContent, effectiveOpacity, insideClips, paintsOverBackdrop } from "./occlusion"
 
 /* WebGL liquid-glass renderer. A canvas sits behind the UI; every [data-glass] element gets
    refracting glass drawn beneath it (live position/size/radius/opacity). [data-glass-solid]
@@ -46,12 +46,14 @@ interface GlassItem extends GlassShape {
   parent: GlassItem | null
   /** A non-glass ancestor paints over the canvas, so shader glass would be hidden. */
   blocked: boolean
+  /** Ancestors whose overflow clips this element (scroll containers). */
+  clips: Element[]
   live: boolean
 }
 
 interface Solid {
   el: HTMLElement; layer: number; opacity: string; live: boolean
-  parent: GlassItem | null; blocked: boolean
+  parent: GlassItem | null; blocked: boolean; clips: Element[]
 }
 
 type Source = HTMLImageElement | HTMLVideoElement | HTMLCanvasElement
@@ -273,13 +275,16 @@ export class LiquidGlass {
       change with state and theme, so the frame loop calls this periodically too. */
   refreshOcclusion() {
     const byEl = new Map(this.items.map(i => [i.el as Element, i]))
-    const link = (x: { el: HTMLElement; parent: GlassItem | null; blocked: boolean }) => {
+    const link = (x: { el: HTMLElement; parent: GlassItem | null; blocked: boolean; clips: Element[] }) => {
       x.parent = null
       x.blocked = false
+      x.clips = []
       for (let p = x.el.parentElement; p && p !== document.body; p = p.parentElement) {
+        const cs = getComputedStyle(p)
+        if (clipsContent(cs)) x.clips.push(p)
         const g = byEl.get(p)
         if (g) { x.parent ??= g; continue }
-        if (paintsOverBackdrop(getComputedStyle(p))) { x.blocked = true; break }
+        if (paintsOverBackdrop(cs)) { x.blocked = true; break }
       }
     }
     this.items.forEach(link)
@@ -295,7 +300,7 @@ export class LiquidGlass {
     const it = {
       ...pre, ...ov, ...opts,
       el, sx: 1, sy: 1, vx: 0, vy: 0, v: { x: 0, y: 0 }, last: null, pressed: false, held: false, scs: "", t: 0,
-      id: this.nextId++, parent: null, blocked: false, live: false,
+      id: this.nextId++, parent: null, blocked: false, clips: [], live: false,
       down: () => { it.pressed = true },
     } as GlassItem
     it.t = it.tint
@@ -306,7 +311,7 @@ export class LiquidGlass {
 
   addSolid(el: HTMLElement) {
     if (this.solids.some(s => s.el === el)) return
-    this.solids.push({ el, layer: parseFloat(el.dataset.layer || "0"), opacity: el.style.opacity, live: false, parent: null, blocked: false })
+    this.solids.push({ el, layer: parseFloat(el.dataset.layer || "0"), opacity: el.style.opacity, live: false, parent: null, blocked: false, clips: [] })
   }
 
   press(el: HTMLElement, on: boolean) {
@@ -410,6 +415,8 @@ export class LiquidGlass {
       const r = el.getBoundingClientRect()
       if (r.width < 1 || r.height < 1) continue
       if (r.bottom < cr.top - 40 || r.top > cr.bottom + 40 || r.right < cr.left - 40 || r.left > cr.right + 40) continue
+      // Partly scrolled out of its container: the DOM clips its CSS glass, the shader would not.
+      if (it.clips.length && !insideClips(r, it.clips.map(c => c.getBoundingClientRect()))) continue
       const cs = getComputedStyle(el)
       if (cs.visibility === "hidden") continue
       vis.set(it.id, { it, r, cs })
@@ -453,6 +460,7 @@ export class LiquidGlass {
       const r = el.isConnected ? el.getBoundingClientRect() : null
       // Only paint a solid into the scene where the canvas is visible, as for glass.
       const draw = m < MAXS && !s.blocked && (!s.parent || s.parent.live) && !!r && r.width >= 1 && r.height >= 1
+        && (!s.clips.length || insideClips(r, s.clips.map(c => c.getBoundingClientRect())))
       if (draw !== s.live) { s.live = draw; el.style.opacity = draw ? "0" : s.opacity }
       if (!draw) continue
       const cs = getComputedStyle(el), hx = r!.width / 2 * k, hy = r!.height / 2 * k, ow = el.offsetWidth || r!.width

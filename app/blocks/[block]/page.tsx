@@ -14,6 +14,7 @@ import { SignupBlock } from "@/components/blocks/signup"
 import { ForgotPasswordBlock } from "@/components/blocks/forgot-password"
 import { CalendarBlock } from "@/components/blocks/calendar"
 import { ChartBlock } from "@/components/blocks/chart"
+import { CodeBlock } from "@/components/code-block"
 
 const blocks = {
   dashboard: {
@@ -78,35 +79,6 @@ export default function Page() {
   },
 }
 
-function CodeBlock({ code }: { code: string }) {
-  const [copied, setCopied] = React.useState(false)
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(code)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
-
-  return (
-    <div className="relative">
-      <pre className="lg lg-regular lg-surface p-4 rounded-lg font-mono text-sm overflow-x-auto">
-        <code className="text-foreground whitespace-pre">{code}</code>
-      </pre>
-      <Button
-        variant="ghost"
-        size="icon"
-        className="absolute top-2 right-2 h-8 w-8 text-muted-foreground hover:text-foreground"
-        onClick={copyToClipboard}
-      >
-        {copied ? (
-          <Check className="h-4 w-4" />
-        ) : (
-          <Copy className="h-4 w-4" />
-        )}
-      </Button>
-    </div>
-  )
-}
 
 export default function BlockPage({
   params,

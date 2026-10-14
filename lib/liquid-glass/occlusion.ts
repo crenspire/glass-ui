@@ -30,3 +30,16 @@ export function effectiveOpacity(el: Element) {
   }
   return o
 }
+
+type Box = Pick<DOMRect, "left" | "top" | "right" | "bottom">
+
+/** True when an element's overflow cuts off its descendants (a scroll container or overflow-hidden box). */
+export function clipsContent(s: Pick<CSSStyleDeclaration, "overflowX" | "overflowY">) {
+  return (s.overflowX !== "" && s.overflowX !== "visible") || (s.overflowY !== "" && s.overflowY !== "visible")
+}
+
+/** Shader glass ignores DOM clipping, so only draw an element that is wholly inside every clip. */
+export function insideClips(r: Box, clips: Box[], tolerance = 1) {
+  return clips.every(c =>
+    r.left >= c.left - tolerance && r.top >= c.top - tolerance && r.right <= c.right + tolerance && r.bottom <= c.bottom + tolerance)
+}

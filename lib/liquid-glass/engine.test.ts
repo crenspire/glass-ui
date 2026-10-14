@@ -4,7 +4,7 @@ import { LiquidGlass } from "./engine"
 
 /* happy-dom has no WebGL, so the engine starts in its failed state; scan() still tracks elements,
    which is all these tests need. Drawn state is simulated through the internal item list. */
-type Internals = { items: { el: HTMLElement; live: boolean; blocked: boolean }[]; solids: { el: HTMLElement; live: boolean }[] }
+type Internals = { items: { el: HTMLElement; live: boolean; blocked: boolean; clips: Element[] }[]; solids: { el: HTMLElement; live: boolean }[] }
 
 describe("LiquidGlass.scan", () => {
   it("stops drawing an element that loses data-glass", () => {
@@ -50,5 +50,12 @@ describe("LiquidGlass.scan", () => {
     lg.refreshOcclusion()
 
     expect(inner.items[0].blocked).toBe(true)
+  })
+
+  it("records the scroll containers that clip an element", () => {
+    document.body.innerHTML = `<div id="s" style="overflow-y: auto"><div><div data-glass="card"></div></div></div>`
+    const lg = new LiquidGlass(document.createElement("canvas"))
+    lg.scan(document.body)
+    expect((lg as unknown as Internals).items[0].clips).toEqual([document.getElementById("s")])
   })
 })

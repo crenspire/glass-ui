@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Copy, Check } from "lucide-react"
 import { InstallationInstructions } from "@/components/installation-instructions"
+import { CodeBlock } from "@/components/code-block"
 
 const mcpCode = `{
   "mcpServers": {
@@ -21,35 +22,6 @@ const mcpCode = `{
   }
 }`
 
-function CodeBlock({ code }: { code: string }) {
-  const [copied, setCopied] = React.useState(false)
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(code)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
-
-  return (
-    <div className="relative">
-      <pre className="lg lg-regular lg-surface p-4 rounded-lg font-mono text-sm overflow-x-auto">
-        <code className="text-foreground break-words">{code}</code>
-      </pre>
-      <Button
-        variant="ghost"
-        size="icon"
-        className="absolute top-2 right-2 h-8 w-8 text-muted-foreground hover:text-foreground"
-        onClick={copyToClipboard}
-      >
-        {copied ? (
-          <Check className="h-4 w-4" />
-        ) : (
-          <Copy className="h-4 w-4" />
-        )}
-      </Button>
-    </div>
-  )
-}
 
 export default function GettingStartedPage() {
   return (

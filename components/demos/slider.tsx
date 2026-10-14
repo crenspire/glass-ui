@@ -17,7 +17,7 @@ export function Example() {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function Demo({ material }: DemoProps) {
   return (
-        <div className="space-y-4">
+        <div className="w-full max-w-sm space-y-4">
           <Slider material={material} defaultValue={[50]} max={100} step={1} />
         </div>
       )

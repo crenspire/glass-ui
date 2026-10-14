@@ -26,3 +26,23 @@ describe("paintsOverBackdrop", () => {
     expect(paintsOverBackdrop(style({ backgroundColor: "oklab(0.99 0 0 / 0.03)" }))).toBe(false)
   })
 })
+
+describe("insideClips", () => {
+  const r = (left: number, top: number, right: number, bottom: number) => ({ left, top, right, bottom })
+  it("is true with no clipping ancestors", async () => {
+    const { insideClips } = await import("./occlusion")
+    expect(insideClips(r(0, 0, 10, 10), [])).toBe(true)
+  })
+  it("is true when fully inside every clip", async () => {
+    const { insideClips } = await import("./occlusion")
+    expect(insideClips(r(10, 10, 20, 20), [r(0, 0, 100, 100), r(5, 5, 50, 50)])).toBe(true)
+  })
+  it("is false when scrolled partly out of a clip", async () => {
+    const { insideClips } = await import("./occlusion")
+    expect(insideClips(r(10, -5, 20, 20), [r(0, 0, 100, 100)])).toBe(false)
+  })
+  it("tolerates subpixel overlap", async () => {
+    const { insideClips } = await import("./occlusion")
+    expect(insideClips(r(0, -0.5, 10, 10), [r(0, 0, 100, 100)])).toBe(true)
+  })
+})
