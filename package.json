@@ -1,13 +1,13 @@
 {
   "name": "@crenspire/glass-ui",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "description": "Glass UI - A modern, glassmorphic component library built with shadcn-ui registry",
   "author": "Crenspire Technologies",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start",
+    "start": "pnpm dlx serve@14.2.4 out",
     "lint": "next lint",
     "registry:build": "shadcn build",
     "storybook": "storybook dev -p 6006",

@@ -2,7 +2,7 @@
 
 /**
  * Export Storybook static files to public/storybook/
- * Cross-platform alternative to rsync for Vercel deployment
+ * Cross-platform copy, run before `pnpm build` so Storybook ships at /storybook on GitHub Pages
  */
 
 const fs = require('fs');

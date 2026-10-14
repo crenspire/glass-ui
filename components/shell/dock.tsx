@@ -12,7 +12,7 @@ const ITEMS = NAV.filter(n => n.title !== "Docs")
 
 /** macOS-style dock. Neighbours of the hovered icon grow a little; the active page gets a dot. */
 export function Dock({ webgl }: { webgl: boolean }) {
-  const pathname = usePathname()
+  const pathname = (usePathname() ?? "").replace(/(.)\/$/, "$1")
   const active = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href) || (href === "/components" && pathname.startsWith("/docs")))
   return (
     <TooltipProvider delayDuration={150}>

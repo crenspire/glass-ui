@@ -16,7 +16,8 @@ const GUIDES = [
 ]
 
 export function SettingsSidebar({ onNavigate }: { onNavigate?: () => void }) {
-  const pathname = usePathname()
+  // The static export adds a trailing slash to every route; compare without it.
+  const pathname = (usePathname() ?? "").replace(/(.)\/$/, "$1")
   const [q, setQ] = React.useState("")
   const match = (t: string) => t.toLowerCase().includes(q.trim().toLowerCase())
   const link = (title: string, href: string) => (

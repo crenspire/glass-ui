@@ -6,8 +6,8 @@ Thank you for your interest in contributing to Glass UI! This document provides 
 
 ### Prerequisites
 
-- Node.js 18 or higher
-- pnpm, yarn, npm, or bun
+- Node.js 20 or higher
+- pnpm 10
 - Git
 
 ### Setup Development Environment
@@ -41,7 +41,7 @@ Thank you for your interest in contributing to Glass UI! This document provides 
 1. **Create the base component** (if it doesn't exist)
    - Location: `components/ui/[component-name].tsx`
    - Follow the existing component patterns
-   - Include glass variant support
+   - Apply the material with `liquidProps({ role, material, tint, glass, webgl })` from `lib/liquid-glass/material.ts`; keep `variant="liquid"` as the default
 
 2. **Create the Glass UI component**
    - Location: `components/ui/glass/[component-name].tsx`
@@ -53,13 +53,13 @@ Thank you for your interest in contributing to Glass UI! This document provides 
    - Add entry to `registry.json`
    - Update path to point to `components/ui/glass/[component-name].tsx`
 
-4. **Add component example**
-   - Update `lib/component-examples.ts`
-   - Add preview to `components/component-preview.tsx`
+4. **Add a demo**
+   - Create `components/demos/[component-name].tsx` exporting `code` (the snippet shown in the docs) and a default `Demo({ material })`
+   - Add it to `LOADERS` and `CATEGORY` in `components/demos/registry.ts` (the registry test fails until every component has a demo and a category)
 
 5. **Test your component**
    - Verify it works in light and dark mode
-   - Test all variants
+   - Try every material (regular, clear, tinted) with the switcher on its docs page
    - Check accessibility
 
 ### Code Style Guidelines
@@ -122,10 +122,10 @@ Component.displayName = "Component"
 
 ### Component Requirements
 
-1. **Glass Variant Support**
-   - All components should support `variant="glass"`
-   - Use CSS variables for glass effects
-   - Support `glass` prop for customization
+1. **Liquid Material Support**
+   - Accept `material`, `tint`, `glass` and `webgl` (`LiquidProps`) and pass them to `liquidProps`
+   - Pick the role that matches the element: surface, sheet, bar, control, knob, inline or overlay
+   - Never put `bg-*`, `shadow-*`, `rounded-*` or border-colour utilities on the liquid branch: they override the material
 
 2. **Accessibility**
    - Use Radix UI primitives when available
@@ -149,10 +149,11 @@ Before submitting a PR, ensure:
 
 - [ ] Component works in light mode
 - [ ] Component works in dark mode
-- [ ] All variants are functional
-- [ ] No TypeScript errors
+- [ ] All materials are functional
+- [ ] Tests pass (`pnpm test`)
+- [ ] No TypeScript errors (`npx tsc --noEmit`)
 - [ ] No linting errors (`pnpm lint`)
-- [ ] Build succeeds (`pnpm build`)
+- [ ] Static build succeeds (`pnpm build`, writes `out/`)
 - [ ] Component is accessible
 - [ ] Documentation is updated
 
@@ -232,19 +233,18 @@ For feature requests:
 When adding new components or features:
 
 1. **Update README.md** if needed
-2. **Add component examples** in `lib/component-examples.ts`
-3. **Update component preview** in `components/component-preview.tsx`
-4. **Add JSDoc comments** to components
-5. **Update registry.json** with component metadata
+2. **Add a demo** in `components/demos/[component-name].tsx` (live preview + code snippet)
+3. **Add JSDoc comments** to components
+4. **Update registry.json** with component metadata, then `pnpm registry:build`
+5. **Add a CHANGELOG.md entry**
 
 ## 🎨 Design Guidelines
 
 ### Glass Effects
 
-- **Light Mode**: 25% opacity, 30px blur
-- **Dark Mode**: 10% opacity, 30px blur
-- **Borders**: Subtle white borders with low opacity
-- **Shadows**: Multi-layer shadows for depth
+- Use the liquid material (`.lg` classes from `liquidProps`), not hand-written blur or glass backgrounds
+- Tune the look through the `--lg-*` variables in `app/globals.css` (see `components/ui/glass/GLASS_CUSTOMIZATION.md`)
+- Glass that floats over other content should pass `webgl={false}`; the shader can only refract the backdrop
 
 ### Colors
 
@@ -273,7 +273,7 @@ All PRs require review before merging. Reviewers will check:
 
 ## 📞 Getting Help
 
-- **Documentation**: [glass-ui.crenspire.com](https://glass-ui.crenspire.com)
+- **Documentation**: [glass-ui.crenspire.com](https://glass-ui.crenspire.com) (GitHub Pages)
 - **Issues**: [GitHub Issues](https://github.com/crenspire/glass-ui/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/crenspire/glass-ui/discussions)
 
