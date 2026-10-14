@@ -727,7 +727,7 @@ const chartConfig = {
 
 export function Example() {
   return (
-    <ChartContainer config={chartConfig} variant="glass" className="h-[300px]">
+    <ChartContainer config={chartConfig} className="h-[300px]">
       <BarChart data={chartData}>
         <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
         <XAxis
@@ -754,7 +754,6 @@ export function Example() {
   return (
     <div className="flex flex-col gap-3">
       <Button
-        variant="glass"
         onClick={() => toast.success('Success!', {
           description: 'Your action was completed successfully'
         })}
@@ -763,7 +762,6 @@ export function Example() {
       </Button>
       
       <Button
-        variant="glass"
         onClick={() => toast.error('Error!', {
           description: 'Something went wrong'
         })}
@@ -772,7 +770,6 @@ export function Example() {
       </Button>
       
       <Button
-        variant="glass"
         onClick={() => toast('Event Created', {
           description: 'Your event has been scheduled',
           action: {
@@ -824,7 +821,7 @@ import { Button } from "@/components/ui/glass/button"
 
 export function Example() {
   return (
-    <ButtonGroup variant="glass" orientation="horizontal">
+    <ButtonGroup orientation="horizontal">
       <Button variant="ghost">One</Button>
       <Button variant="ghost">Two</Button>
       <Button variant="ghost">Three</Button>
@@ -840,7 +837,7 @@ import { Search } from "lucide-react"
 
 export function Example() {
   return (
-    <InputGroup variant="glass">
+    <InputGroup>
       <Input placeholder="Search..." className="border-0 rounded-r-none" />
       <Button variant="ghost" size="icon" className="rounded-l-none">
         <Search className="h-4 w-4" />
@@ -854,14 +851,14 @@ export function Example() {
 
 export function Example() {
   return (
-    <InputOTP variant="glass" maxLength={6}>
-      <InputOTPGroup variant="glass">
-        <InputOTPSlot index={0} variant="glass" />
-        <InputOTPSlot index={1} variant="glass" />
-        <InputOTPSlot index={2} variant="glass" />
-        <InputOTPSlot index={3} variant="glass" />
-        <InputOTPSlot index={4} variant="glass" />
-        <InputOTPSlot index={5} variant="glass" />
+    <InputOTP maxLength={6}>
+      <InputOTPGroup>
+        <InputOTPSlot index={0} />
+        <InputOTPSlot index={1} />
+        <InputOTPSlot index={2} />
+        <InputOTPSlot index={3} />
+        <InputOTPSlot index={4} />
+        <InputOTPSlot index={5} />
       </InputOTPGroup>
     </InputOTP>
   )
@@ -874,7 +871,7 @@ import { Inbox } from "lucide-react"
 
 export function Example() {
   return (
-    <EmptyState variant="glass">
+    <EmptyState>
       <EmptyStateIcon>
         <Inbox className="h-12 w-12" />
       </EmptyStateIcon>
@@ -882,7 +879,7 @@ export function Example() {
       <EmptyStateDescription>
         Get started by creating a new item.
       </EmptyStateDescription>
-      <Button variant="glass" className="mt-4">
+      <Button className="mt-4">
         Create Item
       </Button>
     </EmptyState>
@@ -894,7 +891,7 @@ export function Example() {
 
 export function Example() {
   return (
-    <MenuBar variant="glass">
+    <MenuBar>
       <MenuBarItem active>File</MenuBarItem>
       <MenuBarItem>Edit</MenuBarItem>
       <MenuBarItem>View</MenuBarItem>
@@ -912,7 +909,6 @@ export function Example() {
   
   return (
     <DatePickerInput
-      variant="glass"
       value={date}
       onChange={setDate}
       placeholder="Pick a date"
@@ -935,11 +931,11 @@ export function Example() {
   return (
     <ContextMenu>
       <ContextMenuTrigger>
-        <Card variant="glass" className="p-8 cursor-pointer">
+        <Card className="p-8 cursor-pointer">
           <CardContent>Right click me</CardContent>
         </Card>
       </ContextMenuTrigger>
-      <ContextMenuContent variant="glass">
+      <ContextMenuContent>
         <ContextMenuLabel>My Account</ContextMenuLabel>
         <ContextMenuSeparator />
         <ContextMenuItem>Profile</ContextMenuItem>
@@ -957,20 +953,20 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/glass/
 
 export function Example() {
   return (
-    <Carousel variant="glass" className="w-full max-w-md h-[200px]">
-      <Card variant="glass" className="h-full m-2">
+    <Carousel className="w-full max-w-md h-[200px]">
+      <Card className="h-full m-2">
         <CardHeader>
           <CardTitle>Slide 1</CardTitle>
         </CardHeader>
         <CardContent>Content for slide 1</CardContent>
       </Card>
-      <Card variant="glass" className="h-full m-2">
+      <Card className="h-full m-2">
         <CardHeader>
           <CardTitle>Slide 2</CardTitle>
         </CardHeader>
         <CardContent>Content for slide 2</CardContent>
       </Card>
-      <Card variant="glass" className="h-full m-2">
+      <Card className="h-full m-2">
         <CardHeader>
           <CardTitle>Slide 3</CardTitle>
         </CardHeader>
@@ -985,7 +981,7 @@ export function Example() {
 
 export function Example() {
   return (
-    <ModeToggle variant="glass" />
+    <ModeToggle />
   )
 }`
     

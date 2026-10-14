@@ -71,7 +71,7 @@ export default function ThemesPage() {
         </div>
 
         <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as "presets" | "custom")} className="space-y-8">
-          <TabsList variant="glass" className="mb-8">
+          <TabsList className="mb-8">
             <TabsTrigger value="presets">Presets</TabsTrigger>
             <TabsTrigger value="custom">Custom</TabsTrigger>
           </TabsList>
@@ -81,7 +81,6 @@ export default function ThemesPage() {
               {presetThemes.map((theme) => (
                 <Card
                   key={theme.name}
-                  variant="glass"
                   className={`cursor-pointer transition-opacity hover:opacity-90 ${
                     selectedTheme.name === theme.name ? "ring-2 ring-primary" : ""
                   }`}
@@ -115,7 +114,7 @@ export default function ThemesPage() {
           </TabsContent>
 
           <TabsContent value="custom" className="space-y-8">
-            <Card variant="glass" className="text-foreground">
+            <Card className="text-foreground">
               <CardHeader>
                 <CardTitle className="text-foreground">Customize Colors</CardTitle>
                 <CardDescription className="text-muted-foreground">
@@ -154,9 +153,9 @@ export default function ThemesPage() {
                 </div>
                 
                 <div>
-                  <h3 className="text-lg font-semibold text-foreground mb-4">Glass Effect (Light Mode)</h3>
+                  <h3 className="text-lg font-semibold text-foreground mb-4">Liquid Glass (Light Mode)</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {["glassBg", "glassBorder", "glassShadow", "glassShadowLg", "glassShadowSm", "blur", "blurSm", "blurLg"].map((key) => (
+                    {["glassWash", "glassBlur", "glassRimHi", "glassRimLo", "glassHighlight", "glassDrop"].map((key) => (
                       <div key={key} className="space-y-2">
                         <Label className="text-foreground capitalize">
                           {key.replace(/([A-Z])/g, " $1").trim()}
@@ -165,7 +164,7 @@ export default function ThemesPage() {
                           type="text"
                           value={customColors[key as keyof ThemeColors] || ""}
                           onChange={(e) => updateColor(key as keyof ThemeColors, e.target.value)}
-                          placeholder={key.includes("blur") ? "e.g., 30px" : key.includes("glassBg") ? "e.g., rgba(255, 255, 255, 0.25)" : key.includes("glassBorder") ? "e.g., rgba(255, 255, 255, 0.18)" : "e.g., 0 8px 32px rgba(0, 0, 0, 0.1)"}
+                          placeholder={key === "glassBlur" ? "e.g., 16px" : "e.g., rgba(255, 255, 255, 0.4)"}
                           className="text-foreground"
                         />
                       </div>
@@ -174,9 +173,9 @@ export default function ThemesPage() {
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-semibold text-foreground mb-4">Glass Effect (Dark Mode)</h3>
+                  <h3 className="text-lg font-semibold text-foreground mb-4">Liquid Glass (Dark Mode)</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {["darkGlassBg", "darkGlassBorder", "darkGlassShadow", "darkGlassShadowLg", "darkGlassShadowSm"].map((key) => (
+                    {["darkGlassWash", "darkGlassRimHi", "darkGlassRimLo", "darkGlassHighlight", "darkGlassDrop"].map((key) => (
                       <div key={key} className="space-y-2">
                         <Label className="text-foreground capitalize">
                           {key.replace(/([A-Z])/g, " $1").replace("dark ", "").trim()}
@@ -185,7 +184,7 @@ export default function ThemesPage() {
                           type="text"
                           value={customColors[key as keyof ThemeColors] || ""}
                           onChange={(e) => updateColor(key as keyof ThemeColors, e.target.value)}
-                          placeholder={key.includes("darkGlassBg") ? "e.g., rgba(255, 255, 255, 0.05)" : key.includes("darkGlassBorder") ? "e.g., rgba(255, 255, 255, 0.15)" : "e.g., 0 8px 32px rgba(0, 0, 0, 0.4)"}
+                          placeholder="e.g., rgba(255, 255, 255, 0.07)"
                           className="text-foreground"
                         />
                       </div>
@@ -196,7 +195,7 @@ export default function ThemesPage() {
             </Card>
           </TabsContent>
 
-          <Card variant="glass" className="text-foreground">
+          <Card className="text-foreground">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
@@ -224,7 +223,7 @@ export default function ThemesPage() {
               </div>
             </CardHeader>
             <CardContent>
-              <pre className="glass-bg p-4 rounded-lg font-mono text-sm overflow-x-auto">
+              <pre className="lg lg-regular lg-surface p-4 rounded-lg font-mono text-sm overflow-x-auto">
                 <code className="text-foreground whitespace-pre">
                   {currentCSS}
                 </code>

@@ -24,7 +24,7 @@ export const AccordionTrigger = React.forwardRef<
     <BaseAccordionTrigger
       ref={ref}
       className={cn(
-        glow && "data-[state=open]:shadow-md data-[state=open]:shadow-purple-500/20",
+        glow && "data-[state=open]:shadow-[0_0_0_1px_rgba(255,255,255,0.35),0_0_28px_-4px_rgba(255,255,255,0.45)]",
         className
       )}
       {...props}

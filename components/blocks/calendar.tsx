@@ -24,13 +24,13 @@ export function CalendarBlock() {
           <h2 className="text-3xl font-bold text-white">Calendar</h2>
           <p className="text-muted-foreground">Manage your schedule and events</p>
         </div>
-        <Button variant="glass" className="text-white">
+        <Button className="text-white">
           New Event
         </Button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <Card variant="glass" className="lg:col-span-2 text-white">
+        <Card className="lg:col-span-2 text-white">
           <CardHeader>
             <CardTitle className="text-white">Calendar View</CardTitle>
             <CardDescription className="text-muted-foreground">Select a date to view events</CardDescription>
@@ -40,13 +40,12 @@ export function CalendarBlock() {
               mode="single"
               selected={selectedDate}
               onSelect={setSelectedDate}
-              variant="glass"
               className="rounded-md border"
             />
           </CardContent>
         </Card>
 
-        <Card variant="glass" className="text-white">
+        <Card className="text-white">
           <CardHeader>
             <CardTitle className="text-white">Upcoming Events</CardTitle>
             <CardDescription className="text-muted-foreground">Today&apos;s schedule</CardDescription>
@@ -61,7 +60,7 @@ export function CalendarBlock() {
                   >
                     <div className="flex items-start justify-between mb-2">
                       <h4 className="font-semibold text-white">{event.title}</h4>
-                      <Badge variant="glass">Today</Badge>
+                      <Badge>Today</Badge>
                     </div>
                     <div className="space-y-1 text-sm text-muted-foreground">
                       <div className="flex items-center gap-2">

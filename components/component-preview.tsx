@@ -58,7 +58,6 @@ function DatePickerInputPreview() {
   const [date, setDate] = React.useState<Date | undefined>(undefined)
   return (
     <DatePickerInput
-      variant="glass"
       value={date}
       onChange={setDate}
       placeholder="Pick a date"
@@ -71,7 +70,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
     case "button":
       return (
         <div className="flex flex-wrap gap-2">
-          <Button variant="glass" className="cursor-pointer">Glass Button</Button>
+          <Button className="cursor-pointer">Glass Button</Button>
           <Button variant="outline" className="cursor-pointer">Outline</Button>
           <Button variant="default" className="cursor-pointer">Default</Button>
           <Button variant="ghost" className="cursor-pointer">Ghost</Button>
@@ -81,7 +80,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
 
     case "card":
       return (
-        <Card variant="glass">
+        <Card>
           <CardHeader>
             <CardTitle>Card Title</CardTitle>
             <CardDescription>This is a card with glass effect</CardDescription>
@@ -95,7 +94,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
     case "input":
       return (
         <div className="space-y-2">
-          <Input variant="glass" placeholder="Enter text..." />
+          <Input placeholder="Enter text..." />
           <Input variant="default" placeholder="Default input" />
         </div>
       )
@@ -103,7 +102,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
     case "badge":
       return (
         <div className="flex flex-wrap gap-2">
-          <Badge variant="glass">Glass Badge</Badge>
+          <Badge>Glass Badge</Badge>
           <Badge variant="default">Default</Badge>
           <Badge variant="secondary">Secondary</Badge>
           <Badge variant="destructive">Destructive</Badge>
@@ -113,7 +112,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
     case "checkbox":
       return (
         <div className="flex items-center space-x-2">
-          <Checkbox id="terms" variant="glass" />
+          <Checkbox id="terms" />
           <Label htmlFor="terms">Accept terms and conditions</Label>
         </div>
       )
@@ -121,7 +120,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
     case "switch":
       return (
         <div className="flex items-center space-x-2">
-          <Switch variant="glass" />
+          <Switch />
           <Label>Enable notifications</Label>
         </div>
       )
@@ -129,12 +128,12 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
     case "tabs":
       return (
         <Tabs defaultValue="account" className="w-full">
-          <TabsList variant="glass" className="glass-bg p-1">
+          <TabsList className="lg lg-regular lg-surface p-1">
             <TabsTrigger value="account" className="cursor-pointer">Account</TabsTrigger>
             <TabsTrigger value="password" className="cursor-pointer">Password</TabsTrigger>
           </TabsList>
           <TabsContent value="account" className="mt-4">
-            <Card variant="glass">
+            <Card>
               <CardHeader>
                 <CardTitle>Account</CardTitle>
                 <CardDescription>Make changes to your account here.</CardDescription>
@@ -145,7 +144,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
             </Card>
           </TabsContent>
           <TabsContent value="password" className="mt-4">
-            <Card variant="glass">
+            <Card>
               <CardHeader>
                 <CardTitle>Password</CardTitle>
                 <CardDescription>Change your password here.</CardDescription>
@@ -161,7 +160,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
     case "alert":
       return (
         <div className="space-y-2">
-          <Alert variant="glass">
+          <Alert>
             <Info className="h-4 w-4" />
             <AlertTitle>Heads up!</AlertTitle>
             <AlertDescription>
@@ -218,20 +217,20 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
     case "slider":
       return (
         <div className="space-y-4">
-          <Slider defaultValue={[50]} max={100} step={1} variant="glass" />
+          <Slider defaultValue={[50]} max={100} step={1} />
         </div>
       )
 
     case "textarea":
       return (
-        <Textarea variant="glass" placeholder="Type your message here." />
+        <Textarea placeholder="Type your message here." />
       )
 
     case "label":
       return (
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" variant="glass" type="email" placeholder="name@example.com" />
+          <Input id="email" type="email" placeholder="name@example.com" />
         </div>
       )
 
@@ -239,15 +238,15 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
       return (
         <RadioGroup defaultValue="comfortable">
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="default" id="r1" variant="glass" />
+            <RadioGroupItem value="default" id="r1" />
             <Label htmlFor="r1">Default</Label>
           </div>
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="comfortable" id="r2" variant="glass" />
+            <RadioGroupItem value="comfortable" id="r2" />
             <Label htmlFor="r2">Comfortable</Label>
           </div>
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="compact" id="r3" variant="glass" />
+            <RadioGroupItem value="compact" id="r3" />
             <Label htmlFor="r3">Compact</Label>
           </div>
         </RadioGroup>
@@ -256,10 +255,10 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
     case "select":
       return (
         <Select>
-          <SelectTrigger variant="glass" className="w-[180px]">
+          <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Select a theme" />
           </SelectTrigger>
-          <SelectContent variant="glass">
+          <SelectContent>
             <SelectItem value="light">Light</SelectItem>
             <SelectItem value="dark">Dark</SelectItem>
             <SelectItem value="system">System</SelectItem>
@@ -271,13 +270,13 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
       return (
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1">
-            <AccordionTrigger variant="glass">Is it accessible?</AccordionTrigger>
+            <AccordionTrigger>Is it accessible?</AccordionTrigger>
             <AccordionContent>
               Yes. It adheres to the WAI-ARIA design pattern.
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-2">
-            <AccordionTrigger variant="glass">Is it styled?</AccordionTrigger>
+            <AccordionTrigger>Is it styled?</AccordionTrigger>
             <AccordionContent>
               Yes. It comes with default styles that matches the other components&apos; aesthetic.
             </AccordionContent>
@@ -292,7 +291,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
             <TooltipTrigger asChild>
               <Button variant="outline" className="cursor-pointer">Hover</Button>
             </TooltipTrigger>
-            <TooltipContent variant="glass">
+            <TooltipContent>
               <p>Add to library</p>
             </TooltipContent>
           </Tooltip>
@@ -305,7 +304,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
           <PopoverTrigger asChild>
             <Button variant="outline" className="cursor-pointer">Open popover</Button>
           </PopoverTrigger>
-          <PopoverContent variant="glass" className="w-80">
+          <PopoverContent className="w-80">
             <div className="grid gap-4">
               <div className="space-y-2">
                 <h4 className="font-medium leading-none">Dimensions</h4>
@@ -324,7 +323,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
           <DialogTrigger asChild>
             <Button variant="outline" className="cursor-pointer">Open Dialog</Button>
           </DialogTrigger>
-          <DialogContent variant="glass">
+          <DialogContent>
             <DialogHeader>
               <DialogTitle>Are you absolutely sure?</DialogTitle>
               <DialogDescription>
@@ -342,7 +341,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="cursor-pointer">Open Menu</Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent variant="glass">
+          <DropdownMenuContent>
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>Profile</DropdownMenuItem>
@@ -354,15 +353,15 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
 
     case "calendar":
       return (
-        <div className="p-6 glass-bg rounded-lg inline-block bg-white/10 dark:bg-white/5">
-          <Calendar variant="glass" mode="single" />
+        <div className="p-6 lg lg-regular lg-surface rounded-lg inline-block bg-white/10 dark:bg-white/5">
+          <Calendar mode="single" />
         </div>
       )
 
     case "toggle":
       return (
         <div className="flex gap-2">
-          <Toggle variant="glass" aria-label="Toggle italic">
+          <Toggle aria-label="Toggle italic">
             <Sparkles className="h-4 w-4" />
           </Toggle>
           <Toggle variant="default" aria-label="Toggle bold">
@@ -373,8 +372,8 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
 
     case "toggle-group":
       return (
-        <div className="p-4 glass-bg rounded-lg inline-block">
-          <ToggleGroup type="single" variant="glass" defaultValue="b">
+        <div className="p-4 lg lg-regular lg-surface rounded-lg inline-block">
+          <ToggleGroup type="single" defaultValue="b">
             <ToggleGroupItem value="a" className="cursor-pointer">A</ToggleGroupItem>
             <ToggleGroupItem value="b" className="cursor-pointer">B</ToggleGroupItem>
             <ToggleGroupItem value="c" className="cursor-pointer">C</ToggleGroupItem>
@@ -384,7 +383,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
 
     case "table":
       return (
-        <Table variant="glass">
+        <Table>
           <TableHeader>
             <TableRow>
               <TableHead>Name</TableHead>
@@ -442,7 +441,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
 
     case "command":
       return (
-        <Command variant="glass" className="rounded-lg border shadow-md">
+        <Command className="rounded-lg border shadow-md">
           <CommandInput placeholder="Type a command or search..." />
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
@@ -472,7 +471,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
           <SheetTrigger asChild>
             <Button variant="outline" className="cursor-pointer">Open Sheet</Button>
           </SheetTrigger>
-          <SheetContent variant="glass">
+          <SheetContent>
             <SheetHeader>
               <SheetTitle>Edit profile</SheetTitle>
               <SheetDescription>
@@ -486,10 +485,10 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
     case "navigation-menu":
       return (
         <NavigationMenu>
-          <NavigationMenuList variant="glass">
+          <NavigationMenuList>
             <NavigationMenuItem>
               <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
-              <NavigationMenuContent variant="glass">
+              <NavigationMenuContent>
                 <ul className="grid gap-3 p-6 w-[400px]">
                   <li>
                     <NavigationMenuLink className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground">
@@ -543,7 +542,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
           <HoverCardTrigger asChild>
             <Button variant="link" className="cursor-pointer">@nextjs</Button>
           </HoverCardTrigger>
-          <HoverCardContent variant="glass" className="w-80">
+          <HoverCardContent className="w-80">
             <div className="flex justify-between space-x-4">
               <div className="space-y-1">
                 <h4 className="text-sm font-semibold">@nextjs</h4>
@@ -562,7 +561,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
           <DrawerTrigger asChild>
             <Button variant="outline" className="cursor-pointer">Open Drawer</Button>
           </DrawerTrigger>
-          <DrawerContent variant="glass">
+          <DrawerContent>
             <DrawerHeader>
               <DrawerTitle>Are you absolutely sure?</DrawerTitle>
               <DrawerDescription>This action cannot be undone.</DrawerDescription>
@@ -583,7 +582,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
           <AlertDialogTrigger asChild>
             <Button variant="outline" className="cursor-pointer">Show Dialog</Button>
           </AlertDialogTrigger>
-          <AlertDialogContent variant="glass">
+          <AlertDialogContent>
             <AlertDialogHeader>
               <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
               <AlertDialogDescription>
@@ -601,7 +600,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
 
     case "sidebar":
       return (
-        <Sidebar variant="glass" className="w-64">
+        <Sidebar className="w-64">
           <SidebarHeader>
             <div className="px-3 py-2">
               <h2 className="mb-2 px-4 text-lg font-semibold">Sidebar</h2>
@@ -637,7 +636,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
       }
 
       return (
-        <ChartContainer config={chartConfig} variant="glass" className="h-[300px]">
+        <ChartContainer config={chartConfig} className="h-[300px]">
           <BarChart data={chartData}>
             <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
             <XAxis
@@ -658,7 +657,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
     case "sonner":
       return (
         <>
-          <Alert variant="glass" className="mb-4">
+          <Alert className="mb-4">
             <Info className="h-4 w-4" />
             <AlertTitle>Glass Effects Enabled</AlertTitle>
             <AlertDescription>
@@ -667,7 +666,6 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
           </Alert>
           <div className="flex flex-col gap-3">
             <Button
-              variant="glass"
               className="cursor-pointer"
               onClick={() => toast.success('Success!', {
                 description: 'Your action was completed successfully'
@@ -677,7 +675,6 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
             </Button>
             
             <Button
-              variant="glass"
               className="cursor-pointer"
               onClick={() => toast.error('Error!', {
                 description: 'Something went wrong'
@@ -687,7 +684,6 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
             </Button>
             
             <Button
-              variant="glass"
               className="cursor-pointer"
               onClick={() => toast('Event Created', {
                 description: 'Your event has been scheduled',
@@ -706,8 +702,8 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
 
     case "input-otp":
       return (
-        <div className="p-4 glass-bg rounded-lg inline-block">
-          <InputOTP variant="glass" maxLength={6} />
+        <div className="p-4 lg lg-regular lg-surface rounded-lg inline-block">
+          <InputOTP maxLength={6} />
         </div>
       )
 
@@ -716,13 +712,12 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
         <Cropper
           image="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=800&h=600&fit=crop"
           onCropComplete={() => {}}
-          variant="glass"
         />
       )
 
     case "spinner":
       return (
-        <div className="flex items-center gap-4 p-6 glass-bg rounded-lg bg-white/10 dark:bg-white/5">
+        <div className="flex items-center gap-4 p-6 lg lg-regular lg-surface rounded-lg bg-white/10 dark:bg-white/5">
           <Spinner size="sm" />
           <Spinner size="md" />
           <Spinner size="lg" />
@@ -733,7 +728,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
 
     case "button-group":
       return (
-        <ButtonGroup variant="glass" orientation="horizontal">
+        <ButtonGroup orientation="horizontal">
           <Button variant="ghost" className="cursor-pointer">One</Button>
           <Button variant="ghost" className="cursor-pointer">Two</Button>
           <Button variant="ghost" className="cursor-pointer">Three</Button>
@@ -743,13 +738,13 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
     case "input-group":
       return (
         <div className="space-y-8">
-          <InputGroup variant="glass">
+          <InputGroup>
             <Input placeholder="Search..." className="border-0 rounded-r-none" />
             <Button variant="ghost" size="icon" className="rounded-l-none cursor-pointer">
               <Search className="h-4 w-4" />
             </Button>
           </InputGroup>
-          <InputGroup variant="frosted">
+          <InputGroup>
             <Input placeholder="Email" type="email" className="border-0 rounded-r-none" />
             <Button variant="ghost" size="icon" className="rounded-l-none cursor-pointer">
               <Info className="h-4 w-4" />
@@ -761,7 +756,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
     case "empty-state":
       return (
         <div className="space-y-4">
-          <EmptyState variant="glass">
+          <EmptyState>
             <EmptyStateIcon>
               <Inbox className="h-12 w-12" />
             </EmptyStateIcon>
@@ -769,7 +764,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
             <EmptyStateDescription>
               Get started by creating a new item.
             </EmptyStateDescription>
-            <Button variant="glass" className="mt-4 cursor-pointer">
+            <Button className="mt-4 cursor-pointer">
               Create Item
             </Button>
           </EmptyState>
@@ -778,7 +773,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
 
     case "menu-bar":
       return (
-        <MenuBar variant="glass">
+        <MenuBar>
           <MenuBarItem active>File</MenuBarItem>
           <MenuBarItem>Edit</MenuBarItem>
           <MenuBarItem>View</MenuBarItem>
@@ -788,7 +783,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
 
     case "date-picker-input":
       return (
-        <div className="p-6 glass-bg rounded-lg inline-block bg-white/10 dark:bg-white/5">
+        <div className="p-6 lg lg-regular lg-surface rounded-lg inline-block bg-white/10 dark:bg-white/5">
           <DatePickerInputPreview />
         </div>
       )
@@ -797,11 +792,11 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
       return (
         <ContextMenu>
           <ContextMenuTrigger>
-            <Card variant="glass" className="p-8 cursor-pointer w-fit">
+            <Card className="p-8 cursor-pointer w-fit">
               <CardContent>Right click me</CardContent>
             </Card>
           </ContextMenuTrigger>
-          <ContextMenuContent variant="glass">
+          <ContextMenuContent>
             <ContextMenuLabel>My Account</ContextMenuLabel>
             <ContextMenuSeparator />
             <ContextMenuItem>Profile</ContextMenuItem>
@@ -814,20 +809,20 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
 
     case "carousel":
       return (
-        <Carousel variant="glass" className="w-full max-w-md h-[200px]">
-          <Card variant="glass" className="h-full m-2">
+        <Carousel className="w-full max-w-md h-[200px]">
+          <Card className="h-full m-2">
             <CardHeader>
               <CardTitle>Slide 1</CardTitle>
             </CardHeader>
             <CardContent>Content for slide 1</CardContent>
           </Card>
-          <Card variant="glass" className="h-full m-2">
+          <Card className="h-full m-2">
             <CardHeader>
               <CardTitle>Slide 2</CardTitle>
             </CardHeader>
             <CardContent>Content for slide 2</CardContent>
           </Card>
-          <Card variant="glass" className="h-full m-2">
+          <Card className="h-full m-2">
             <CardHeader>
               <CardTitle>Slide 3</CardTitle>
             </CardHeader>
@@ -838,8 +833,8 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
 
     case "mode-toggle":
       return (
-        <div className="p-4 glass-bg rounded-lg inline-block">
-          <ModeToggle variant="glass" />
+        <div className="p-4 lg lg-regular lg-surface rounded-lg inline-block">
+          <ModeToggle />
         </div>
       )
 

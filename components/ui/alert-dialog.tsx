@@ -4,7 +4,7 @@ import * as React from "react"
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog"
 
 import { cn } from "@/lib/utils"
-import { liquidProps, resolveVariant, type LegacyGlassVariant, type LiquidProps } from "@/lib/liquid-glass/material"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 import { Button, buttonVariants } from "@/components/ui/button"
 
 const AlertDialog = AlertDialogPrimitive.Root
@@ -31,7 +31,7 @@ AlertDialogOverlay.displayName = AlertDialogPrimitive.Overlay.displayName
 const AlertDialogContent = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content> & LiquidProps & {
-    variant?: "liquid" | "default" | LegacyGlassVariant
+    variant?: "liquid" | "default"
   }
 >(({ className, variant, material, tint, glass, webgl, style, ...props }, ref) => {
   const v = resolveVariant<"liquid" | "default">(variant, material)

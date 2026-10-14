@@ -70,7 +70,6 @@ export default function BlocksPage() {
               placeholder="Search blocks..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              variant="glass"
               className="pl-10 text-foreground placeholder:text-muted-foreground"
             />
           </div>
@@ -79,11 +78,11 @@ export default function BlocksPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredBlocks.map((block) => (
             <Link key={block.name} href={`/blocks/${block.name}`} className="group">
-              <Card variant="glass" className="h-full transition-opacity hover:opacity-90">
+              <Card className="h-full transition-opacity hover:opacity-90">
                 <CardHeader>
                   <div className="flex items-center justify-between mb-1">
                     <CardTitle className="text-foreground">{block.title}</CardTitle>
-                    <Badge variant="glass">{block.category}</Badge>
+                    <Badge>{block.category}</Badge>
                   </div>
                   <CardDescription className="text-muted-foreground">
                     {block.description}

@@ -5,7 +5,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import { liquidProps, resolveVariant, type LegacyGlassVariant, type LiquidProps } from "@/lib/liquid-glass/material"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
 const Dialog = DialogPrimitive.Root
 
@@ -33,7 +33,7 @@ DialogOverlay.displayName = DialogPrimitive.Overlay.displayName
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & LiquidProps & {
-    variant?: "liquid" | "default" | LegacyGlassVariant
+    variant?: "liquid" | "default"
   }
 >(({ className, variant, material, tint, glass, webgl, children, style, ...props }, ref) => {
   const v = resolveVariant<"liquid" | "default">(variant, material)

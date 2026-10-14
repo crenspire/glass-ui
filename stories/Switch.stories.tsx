@@ -37,7 +37,6 @@ export const Checked: Story = {
   args: {
     id: 'switch-checked',
     defaultChecked: true,
-    variant: "glass"
   },
   render: (args) => (
     <>

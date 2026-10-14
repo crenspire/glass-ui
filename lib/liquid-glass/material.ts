@@ -23,9 +23,6 @@ export interface LiquidProps {
 /** `data-*` attributes for the WebGL engine. */
 export type DataAttrs = { [K in `data-${string}`]?: string }
 
-/** @deprecated Old variant names, accepted until every usage is migrated. */
-export type LegacyGlassVariant = "glass" | "glassSubtle" | "glassSolid" | "frosted" | "fluted" | "crystal"
-
 const PRESET: Record<GlassRole, string | null> = {
   surface: "card", sheet: "sheet", bar: "bar", control: "button", knob: "knob", inline: null, overlay: null,
 }
@@ -38,10 +35,6 @@ const PARAMS: Record<Material, { frost: number; tint: number }> = {
   clear: { frost: 0.1, tint: 0 },
   tinted: { frost: 0.6, tint: 0.35 },
 }
-const LEGACY: Record<LegacyGlassVariant, Material> = {
-  glass: "regular", glassSubtle: "regular", frosted: "regular", crystal: "clear", fluted: "clear", glassSolid: "tinted",
-}
-
 export function liquidGlass({ role, material = "regular", tint, glass, webgl = WEBGL_DEFAULT[role] }: LiquidProps & { role: GlassRole }): {
   className: string; style: React.CSSProperties; attrs: DataAttrs
 } {
@@ -69,12 +62,7 @@ export function liquidProps(
   return { ...r.attrs, className: cn(r.className, own.className), style: { ...r.style, ...own.style } }
 }
 
-/** Maps a component's `variant` (including deprecated glass names) to a variant + material. */
-export function resolveVariant<V extends string>(
-  variant: V | LegacyGlassVariant | undefined,
-  material: Material | undefined
-): { variant: V | "liquid"; material: Material } {
-  if (variant === undefined) return { variant: "liquid", material: material ?? "regular" }
-  if (variant in LEGACY) return { variant: "liquid", material: material ?? LEGACY[variant as LegacyGlassVariant] }
-  return { variant: variant as V, material: material ?? "regular" }
+/** A component's `variant` (default `liquid`) together with its material (default `regular`). */
+export function resolveVariant<V extends string>(variant: V | undefined, material: Material | undefined) {
+  return { variant: (variant ?? "liquid") as V | "liquid", material: material ?? "regular" }
 }

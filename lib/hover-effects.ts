@@ -11,9 +11,6 @@ import { cva } from "class-variance-authority"
  * - lift: Subtle lift effect with shadow increase
  * - scale: Scale up slightly on hover
  */
-/** Soft white rim bloom used by the `glow` props on Glass UI wrappers. */
-export const glowRing = "shadow-[0_0_0_1px_rgba(255,255,255,0.35),0_0_28px_-4px_rgba(255,255,255,0.45)]"
-
 export const hoverEffects = cva(
   "transition-all duration-300",
   {

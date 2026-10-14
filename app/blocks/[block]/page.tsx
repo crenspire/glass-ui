@@ -89,7 +89,7 @@ function CodeBlock({ code }: { code: string }) {
 
   return (
     <div className="relative">
-      <pre className="glass-bg p-4 rounded-lg font-mono text-sm overflow-x-auto">
+      <pre className="lg lg-regular lg-surface p-4 rounded-lg font-mono text-sm overflow-x-auto">
         <code className="text-foreground whitespace-pre">{code}</code>
       </pre>
       <Button
@@ -138,12 +138,12 @@ export default function BlockPage({
         </div>
 
         <Tabs defaultValue="preview" className="space-y-6">
-          <TabsList variant="glass">
+          <TabsList>
             <TabsTrigger value="preview">Preview</TabsTrigger>
             <TabsTrigger value="code">Code</TabsTrigger>
           </TabsList>
           <TabsContent value="preview" className="space-y-4">
-            <Card variant="glass" className="text-foreground">
+            <Card className="text-foreground">
               <CardContent className="p-0">
                 <div className="bg-background/50 backdrop-blur-sm rounded-lg">
                   <Component />
@@ -152,7 +152,7 @@ export default function BlockPage({
             </Card>
           </TabsContent>
           <TabsContent value="code">
-            <Card variant="glass" className="text-foreground">
+            <Card className="text-foreground">
               <CardHeader>
                 <CardTitle className="text-foreground">Implementation</CardTitle>
                 <CardDescription className="text-muted-foreground">

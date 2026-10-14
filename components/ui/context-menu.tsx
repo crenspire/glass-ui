@@ -5,7 +5,7 @@ import * as ContextMenuPrimitive from "@radix-ui/react-context-menu"
 import { Check, ChevronRight, Circle } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import { liquidProps, resolveVariant, type LegacyGlassVariant, type LiquidProps } from "@/lib/liquid-glass/material"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
 const ContextMenu = ContextMenuPrimitive.Root
 
@@ -43,7 +43,7 @@ ContextMenuSubTrigger.displayName = ContextMenuPrimitive.SubTrigger.displayName
 const ContextMenuSubContent = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.SubContent>,
   React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.SubContent> & LiquidProps & {
-    variant?: "liquid" | "default" | LegacyGlassVariant
+    variant?: "liquid" | "default"
   }
 >(({ className, variant, material, tint, glass, webgl, style, ...props }, ref) => {
   const v = resolveVariant<"liquid" | "default">(variant, material)
@@ -68,7 +68,7 @@ ContextMenuSubContent.displayName = ContextMenuPrimitive.SubContent.displayName
 const ContextMenuContent = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Content> & LiquidProps & {
-    variant?: "liquid" | "default" | LegacyGlassVariant
+    variant?: "liquid" | "default"
   }
 >(({ className, variant, material, tint, glass, webgl, style, ...props }, ref) => {
   const v = resolveVariant<"liquid" | "default">(variant, material)

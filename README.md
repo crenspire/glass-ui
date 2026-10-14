@@ -56,10 +56,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 export function Example() {
   return (
     <div>
-      <Button variant="glass" effect="glow">
+      <Button effect="glow">
         Click me
       </Button>
-      <Card variant="glass" gradient animated>
+      <Card material="clear" gradient animated>
         <CardHeader>
           <CardTitle>Beautiful Card</CardTitle>
         </CardHeader>
@@ -108,9 +108,9 @@ Visit `http://localhost:6006` after starting Storybook.
 Glass UI follows a two-layer component architecture:
 
 ### Base Components (`registry/ui/`)
-Foundation components with glassy variants providing:
+Foundation components with the liquid glass material providing:
 - Core functionality
-- Glassy effect variants
+- `material` (regular, clear, tinted), `tint` and `glass` props
 - Accessibility features (Radix UI)
 - TypeScript support
 
@@ -123,39 +123,34 @@ Enhanced components built on top of base components with:
 
 ## 🎨 Customization
 
-### Global CSS Variables
+### Materials
 
-Customize glass effects globally using CSS variables:
+```tsx
+<Card>Regular liquid glass (default)</Card>
+<Card material="clear">Clear glass</Card>
+<Button material="tinted" tint="#3b82f6">Tinted glass</Button>
+<Card glass={{ tint: "rgba(139, 92, 246, 0.6)", frost: 0.5 }}>Custom tint and frost</Card>
+```
+
+### Global CSS Variables
 
 ```css
 :root {
-  --glass-bg: rgba(255, 255, 255, 0.25);
-  --glass-border: rgba(255, 255, 255, 0.18);
-  --blur: 30px;
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --lg-rim-hi: rgba(255, 255, 255, 0.8);
+  --lg-rim-lo: rgba(255, 255, 255, 0.18);
+  --lg-highlight: rgba(255, 255, 255, 0.6);
+  --lg-drop: rgba(15, 23, 42, 0.14);
 }
-
-.dark {
-  --glass-bg: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.2);
-}
+.lg-regular { --lg-base: rgba(255, 255, 255, 0.42); --lg-blur: 16px; }
 ```
 
-### Per-Component Customization
+See [components/ui/glass/GLASS_CUSTOMIZATION.md](components/ui/glass/GLASS_CUSTOMIZATION.md) for the full reference.
 
-```tsx
-<Card
-  variant="glass"
-  glass={{
-    color: "rgba(139, 92, 246, 0.2)",
-    blur: 30,
-    transparency: 0.3,
-    outline: "rgba(139, 92, 246, 0.5)"
-  }}
->
-  Content
-</Card>
-```
+### Liquid Glass (WebGL)
+
+Wrap your app in `LiquidGlassProvider` and glass resting on the backdrop is drawn with real refraction,
+dispersion and a light-tracking rim. Everything else keeps the CSS look, as does the whole app when WebGL is
+unavailable or the user prefers reduced transparency. See [components/ui/liquid/README.md](components/ui/liquid/README.md).
 
 ## 📦 Available Components
 

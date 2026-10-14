@@ -5,9 +5,8 @@ import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
-import type { LegacyGlassVariant } from "@/lib/liquid-glass/material"
 
-export function ModeToggle({ variant }: { variant?: "liquid" | "default" | LegacyGlassVariant }) {
+export function ModeToggle({ variant }: { variant?: "liquid" | "default" }) {
   const { setTheme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = React.useState(false)
 

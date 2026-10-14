@@ -11,7 +11,11 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'glass', 'glassSubtle', 'frosted', 'fluted', 'crystal', 'destructive', 'outline', 'secondary', 'ghost', 'link'],
+      options: ['liquid', 'default', 'destructive', 'outline', 'secondary', 'ghost', 'link'],
+    },
+    material: {
+      control: 'select',
+      options: ['regular', 'clear', 'tinted'],
     },
     size: {
       control: 'select',
@@ -31,7 +35,6 @@ type Story = StoryObj<typeof meta>;
 export const Glass: Story = {
   args: {
     children: 'Glass Button',
-    variant: 'glass',
     effect: 'glow',
   },
 };
@@ -39,7 +42,6 @@ export const Glass: Story = {
 export const Frosted: Story = {
   args: {
     children: 'Frosted Button',
-    variant: 'frosted',
     effect: 'glow',
   },
 };
@@ -47,7 +49,7 @@ export const Frosted: Story = {
 export const Fluted: Story = {
   args: {
     children: 'Fluted Button',
-    variant: 'fluted',
+    material: 'clear',
     effect: 'glow',
   },
 };
@@ -55,7 +57,7 @@ export const Fluted: Story = {
 export const Crystal: Story = {
   args: {
     children: 'Crystal Button',
-    variant: 'crystal',
+    material: 'clear',
     effect: 'glow',
   },
 };
@@ -63,7 +65,6 @@ export const Crystal: Story = {
 export const WithShimmer: Story = {
   args: {
     children: 'Shimmer Effect',
-    variant: 'glass',
     effect: 'shimmer',
   },
 };
@@ -71,7 +72,6 @@ export const WithShimmer: Story = {
 export const WithRipple: Story = {
   args: {
     children: 'Ripple Effect',
-    variant: 'glass',
     effect: 'ripple',
   },
 };
@@ -79,7 +79,6 @@ export const WithRipple: Story = {
 export const Small: Story = {
   args: {
     children: 'Small Button',
-    variant: 'glass',
     size: 'sm',
   },
 };
@@ -87,7 +86,6 @@ export const Small: Story = {
 export const Large: Story = {
   args: {
     children: 'Large Button',
-    variant: 'glass',
     size: 'lg',
   },
 };

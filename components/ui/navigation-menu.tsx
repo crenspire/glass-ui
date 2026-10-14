@@ -6,7 +6,7 @@ import { cva } from "class-variance-authority"
 import { ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import { liquidProps, resolveVariant, type LegacyGlassVariant, type LiquidProps } from "@/lib/liquid-glass/material"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
 const NavigationMenu = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Root>,
@@ -29,7 +29,7 @@ NavigationMenu.displayName = NavigationMenuPrimitive.Root.displayName
 const NavigationMenuList = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.List>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.List> & LiquidProps & {
-    variant?: "liquid" | "default" | LegacyGlassVariant
+    variant?: "liquid" | "default"
   }
 >(({ className, variant, material, tint, glass, webgl, style, ...props }, ref) => {
   const v = resolveVariant<"liquid" | "default">(variant, material)
@@ -75,7 +75,7 @@ const NavigationMenuContent = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Content> & {
     /** Kept for API compatibility: the glass is on the viewport that holds the content. */
-    variant?: "liquid" | "default" | LegacyGlassVariant
+    variant?: "liquid" | "default"
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 >(({ className, variant, ...props }, ref) => (
@@ -92,7 +92,7 @@ const NavigationMenuLink = NavigationMenuPrimitive.Link
 const NavigationMenuViewport = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Viewport>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Viewport> & LiquidProps & {
-    variant?: "liquid" | "default" | LegacyGlassVariant
+    variant?: "liquid" | "default"
   }
 >(({ className, variant, material, tint, glass, webgl, style, ...props }, ref) => {
   const v = resolveVariant<"liquid" | "default">(variant, material)

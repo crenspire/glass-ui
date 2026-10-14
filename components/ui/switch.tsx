@@ -4,13 +4,13 @@ import * as React from "react"
 import * as SwitchPrimitives from "@radix-ui/react-switch"
 
 import { cn } from "@/lib/utils"
-import { liquidProps, resolveVariant, type LegacyGlassVariant, type LiquidProps } from "@/lib/liquid-glass/material"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 import { useLiquidGlass } from "@/components/ui/liquid/liquid-glass-provider"
 
 const Switch = React.forwardRef<
   React.ElementRef<typeof SwitchPrimitives.Root>,
   React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root> & LiquidProps & {
-    variant?: "liquid" | "default" | LegacyGlassVariant
+    variant?: "liquid" | "default"
   }
 >(({ className, variant, material, tint, glass, webgl, onCheckedChange, ...props }, ref) => {
   const v = resolveVariant<"liquid" | "default">(variant, material)

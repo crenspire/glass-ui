@@ -18,9 +18,9 @@ export const Glass: Story = {
   render: () => (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="glass">Delete Account</Button>
+        <Button>Delete Account</Button>
       </AlertDialogTrigger>
-      <AlertDialogContent variant="glass">
+      <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
@@ -41,9 +41,9 @@ export const Frosted: Story = {
   render: () => (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="frosted">Show Frosted Alert</Button>
+        <Button>Show Frosted Alert</Button>
       </AlertDialogTrigger>
-      <AlertDialogContent variant="frosted">
+      <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Confirm your action</AlertDialogTitle>
           <AlertDialogDescription>
@@ -63,9 +63,9 @@ export const Crystal: Story = {
   render: () => (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="crystal">Show Crystal Alert</Button>
+        <Button material="clear">Show Crystal Alert</Button>
       </AlertDialogTrigger>
-      <AlertDialogContent variant="crystal">
+      <AlertDialogContent material="clear">
         <AlertDialogHeader>
           <AlertDialogTitle>Premium Action</AlertDialogTitle>
           <AlertDialogDescription>
@@ -87,7 +87,7 @@ export const Destructive: Story = {
       <AlertDialogTrigger asChild>
         <Button variant="destructive">Delete Everything</Button>
       </AlertDialogTrigger>
-      <AlertDialogContent variant="glass">
+      <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle className="text-destructive">Warning: Destructive Action</AlertDialogTitle>
           <AlertDialogDescription>

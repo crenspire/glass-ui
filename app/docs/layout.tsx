@@ -28,12 +28,12 @@ export default function DocsLayout({
           <div className="md:hidden">
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="glass" size="sm" className="mb-4">
+                <Button size="sm" className="mb-4">
                   <Menu className="h-4 w-4 mr-2" />
                   Menu
                 </Button>
               </SheetTrigger>
-              <SheetContent variant="glass" side="left" className="w-[300px] sm:w-[400px] p-0">
+              <SheetContent side="left" className="w-[300px] sm:w-[400px] p-0">
                 <div className="h-full overflow-y-auto">
                   <DocsSidebar onLinkClick={() => setMobileMenuOpen(false)} />
                 </div>

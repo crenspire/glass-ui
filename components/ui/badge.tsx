@@ -2,7 +2,7 @@ import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
-import { liquidProps, resolveVariant, type LegacyGlassVariant, type LiquidProps } from "@/lib/liquid-glass/material"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
 const badgeVariants = cva(
   "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
@@ -28,7 +28,7 @@ const badgeVariants = cva(
 type BadgeVariant = NonNullable<VariantProps<typeof badgeVariants>["variant"]>
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement>, LiquidProps {
-  variant?: BadgeVariant | LegacyGlassVariant | null
+  variant?: BadgeVariant | null
 }
 
 function Badge({ className, variant, material, tint, glass, webgl, style, ...props }: BadgeProps) {

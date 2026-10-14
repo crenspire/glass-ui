@@ -17,12 +17,12 @@ type Story = StoryObj<typeof meta>;
 export const Glass: Story = {
   render: () => (
     <Tabs defaultValue="account" className="w-[400px]">
-      <TabsList variant="glass">
+      <TabsList>
         <TabsTrigger value="account">Account</TabsTrigger>
         <TabsTrigger value="password">Password</TabsTrigger>
       </TabsList>
       <TabsContent value="account">
-        <Card variant="glass">
+        <Card>
           <CardHeader>
             <CardTitle>Account</CardTitle>
             <CardDescription>
@@ -35,7 +35,7 @@ export const Glass: Story = {
         </Card>
       </TabsContent>
       <TabsContent value="password">
-        <Card variant="glass">
+        <Card>
           <CardHeader>
             <CardTitle>Password</CardTitle>
             <CardDescription>
@@ -54,13 +54,13 @@ export const Glass: Story = {
 export const Frosted: Story = {
   render: () => (
     <Tabs defaultValue="overview" className="w-[400px]">
-      <TabsList variant="frosted">
+      <TabsList>
         <TabsTrigger value="overview">Overview</TabsTrigger>
         <TabsTrigger value="analytics">Analytics</TabsTrigger>
         <TabsTrigger value="reports">Reports</TabsTrigger>
       </TabsList>
       <TabsContent value="overview">
-        <Card variant="frosted">
+        <Card>
           <CardHeader>
             <CardTitle>Overview</CardTitle>
           </CardHeader>
@@ -70,7 +70,7 @@ export const Frosted: Story = {
         </Card>
       </TabsContent>
       <TabsContent value="analytics">
-        <Card variant="frosted">
+        <Card>
           <CardHeader>
             <CardTitle>Analytics</CardTitle>
           </CardHeader>
@@ -80,7 +80,7 @@ export const Frosted: Story = {
         </Card>
       </TabsContent>
       <TabsContent value="reports">
-        <Card variant="frosted">
+        <Card>
           <CardHeader>
             <CardTitle>Reports</CardTitle>
           </CardHeader>
@@ -96,13 +96,13 @@ export const Frosted: Story = {
 export const Crystal: Story = {
   render: () => (
     <Tabs defaultValue="tab1" className="w-[400px]">
-      <TabsList variant="crystal">
+      <TabsList material="clear">
         <TabsTrigger value="tab1">Tab 1</TabsTrigger>
         <TabsTrigger value="tab2">Tab 2</TabsTrigger>
         <TabsTrigger value="tab3">Tab 3</TabsTrigger>
       </TabsList>
       <TabsContent value="tab1">
-        <Card variant="crystal">
+        <Card material="clear">
           <CardHeader>
             <CardTitle>Crystal Tab 1</CardTitle>
           </CardHeader>
@@ -112,7 +112,7 @@ export const Crystal: Story = {
         </Card>
       </TabsContent>
       <TabsContent value="tab2">
-        <Card variant="crystal">
+        <Card material="clear">
           <CardHeader>
             <CardTitle>Crystal Tab 2</CardTitle>
           </CardHeader>
@@ -122,7 +122,7 @@ export const Crystal: Story = {
         </Card>
       </TabsContent>
       <TabsContent value="tab3">
-        <Card variant="crystal">
+        <Card material="clear">
           <CardHeader>
             <CardTitle>Crystal Tab 3</CardTitle>
           </CardHeader>
@@ -138,27 +138,27 @@ export const Crystal: Story = {
 export const WithGlow: Story = {
   render: () => (
     <Tabs defaultValue="home" className="w-[400px]">
-      <TabsList variant="glass" glow>
+      <TabsList glow>
         <TabsTrigger value="home">Home</TabsTrigger>
         <TabsTrigger value="profile">Profile</TabsTrigger>
         <TabsTrigger value="settings">Settings</TabsTrigger>
       </TabsList>
       <TabsContent value="home">
-        <Card variant="glass">
+        <Card>
           <CardContent className="pt-6">
             <p className="text-sm">Home content with glowing tab list.</p>
           </CardContent>
         </Card>
       </TabsContent>
       <TabsContent value="profile">
-        <Card variant="glass">
+        <Card>
           <CardContent className="pt-6">
             <p className="text-sm">Profile information and settings.</p>
           </CardContent>
         </Card>
       </TabsContent>
       <TabsContent value="settings">
-        <Card variant="glass">
+        <Card>
           <CardContent className="pt-6">
             <p className="text-sm">Application settings and preferences.</p>
           </CardContent>

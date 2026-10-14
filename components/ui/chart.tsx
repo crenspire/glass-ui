@@ -4,7 +4,7 @@ import * as React from "react"
 import * as RechartsPrimitive from "recharts"
 
 import { cn } from "@/lib/utils"
-import { liquidProps, resolveVariant, type LegacyGlassVariant, type LiquidProps } from "@/lib/liquid-glass/material"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: "", dark: ".dark" } as const
@@ -43,7 +43,7 @@ const ChartContainer = React.forwardRef<
     typeof RechartsPrimitive.ResponsiveContainer
   >["children"]
 } & LiquidProps & {
-  variant?: "liquid" | "default" | LegacyGlassVariant
+  variant?: "liquid" | "default"
 }
 >(({ id, className, children, config, variant, material, tint, glass, webgl, style, ...props }, ref) => {
   const uniqueId = React.useId()
@@ -127,7 +127,7 @@ const ChartTooltipContent = React.forwardRef<
   HTMLDivElement,
   TooltipProps &
     React.ComponentProps<"div"> & LiquidProps & {
-      variant?: "liquid" | "default" | LegacyGlassVariant
+      variant?: "liquid" | "default"
       indicator?: "dot" | "line" | "dashed"
     }
 >(
@@ -242,7 +242,7 @@ const ChartLegendContent = React.forwardRef<
   React.ComponentProps<"div"> &
     LegendProps & {
       /** Kept for API compatibility; the legend renders without its own glass. */
-      variant?: "liquid" | "default" | LegacyGlassVariant
+      variant?: "liquid" | "default"
     }
 >(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

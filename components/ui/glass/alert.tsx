@@ -15,7 +15,7 @@ export interface AlertProps extends React.ComponentProps<typeof BaseAlert> {
  * 
  * @example
  * ```tsx
- * <Alert variant="glass" hover="glow">
+ * <Alert hover="glow">
  *   <AlertTitle>Heads up!</AlertTitle>
  *   <AlertDescription>You have new notifications</AlertDescription>
  * </Alert>
@@ -29,7 +29,7 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
         variant={variant}
         className={cn(
           "relative overflow-hidden",
-          glow && "shadow-lg shadow-purple-500/20",
+          glow && "shadow-[0_0_0_1px_rgba(255,255,255,0.35),0_0_28px_-4px_rgba(255,255,255,0.45)]",
           "transition-all duration-200",
           hoverEffects({ hover }),
           className

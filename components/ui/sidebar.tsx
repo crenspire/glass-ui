@@ -2,10 +2,10 @@
 
 import * as React from "react"
 import { cn } from "@/lib/utils"
-import { liquidProps, resolveVariant, type LegacyGlassVariant, type LiquidProps } from "@/lib/liquid-glass/material"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement>, LiquidProps {
-  variant?: "liquid" | "default" | LegacyGlassVariant
+  variant?: "liquid" | "default"
 }
 
 const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(

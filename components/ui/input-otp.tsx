@@ -5,12 +5,12 @@ import { OTPInput, type SlotProps } from "input-otp"
 import { Dot } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import { liquidProps, resolveVariant, type LegacyGlassVariant, type LiquidProps } from "@/lib/liquid-glass/material"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
 const InputOTP = React.forwardRef<
   React.ElementRef<typeof OTPInput>,
   React.ComponentPropsWithoutRef<typeof OTPInput> & LiquidProps & {
-    variant?: "liquid" | "default" | LegacyGlassVariant
+    variant?: "liquid" | "default"
   }
 >(({ className, variant, material, tint, glass, webgl, render, ...props }, ref) => {
   const defaultRender = ({ slots }: { slots: SlotProps[] }) => (
@@ -36,7 +36,7 @@ const InputOTPGroup = React.forwardRef<
   React.ElementRef<"div">,
   React.ComponentPropsWithoutRef<"div"> & {
     /** Kept for API compatibility; the group has no glass of its own. */
-    variant?: "liquid" | "default" | LegacyGlassVariant
+    variant?: "liquid" | "default"
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 >(({ className, variant, ...props }, ref) => {
@@ -49,7 +49,7 @@ InputOTPGroup.displayName = "InputOTPGroup"
 const InputOTPSlot = React.forwardRef<
   React.ElementRef<"div">,
   SlotProps & React.ComponentPropsWithoutRef<"div"> & LiquidProps & {
-    variant?: "liquid" | "default" | LegacyGlassVariant
+    variant?: "liquid" | "default"
   }
 >(({ variant, material, tint, glass, webgl, style, className, char, isActive, hasFakeCaret, placeholderChar = "○", ...props }, ref) => {
   const v = resolveVariant<"liquid" | "default">(variant, material)

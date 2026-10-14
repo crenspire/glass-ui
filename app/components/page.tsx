@@ -45,7 +45,6 @@ export default function ComponentsPage() {
               placeholder="Search components..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              variant="glass"
               icon={<Search className="h-4 w-4 text-muted-foreground" />}
               className="text-foreground placeholder:text-muted-foreground"
             />
@@ -59,14 +58,14 @@ export default function ComponentsPage() {
               href={`/docs/components/${component.name}`}
               className="group"
             >
-              <Card variant="glass" className="h-full transition-opacity hover:opacity-90">
+              <Card className="h-full transition-opacity hover:opacity-90">
                 <CardHeader>
                   <div className="flex items-center justify-between mb-1">
                     <CardTitle className="text-foreground">
                       {component.title || component.name}
                     </CardTitle>
                     {newComponents.has(component.name) && (
-                      <Badge variant="glass" className="bg-primary/20 text-primary border-primary/30">
+                      <Badge className="bg-primary/20 text-primary border-primary/30">
                         NEW
                       </Badge>
                     )}

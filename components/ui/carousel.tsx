@@ -4,10 +4,10 @@ import * as React from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { liquidProps, resolveVariant, type LegacyGlassVariant, type LiquidProps } from "@/lib/liquid-glass/material"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
 export interface CarouselProps extends React.HTMLAttributes<HTMLDivElement>, LiquidProps {
-  variant?: "liquid" | "default" | LegacyGlassVariant
+  variant?: "liquid" | "default"
   autoPlay?: boolean
   interval?: number
 }

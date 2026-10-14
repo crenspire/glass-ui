@@ -1,7 +1,7 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
-import { liquidProps, resolveVariant, type LegacyGlassVariant, type LiquidProps } from "@/lib/liquid-glass/material"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
 function Input({
   className,
@@ -14,7 +14,7 @@ function Input({
   style,
   ...props
 }: React.ComponentProps<"input"> & LiquidProps & {
-  variant?: "liquid" | "default" | LegacyGlassVariant
+  variant?: "liquid" | "default"
 }) {
   const v = resolveVariant<"liquid" | "default">(variant, material)
   const base = cn(

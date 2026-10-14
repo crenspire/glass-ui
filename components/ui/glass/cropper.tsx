@@ -3,13 +3,12 @@
 import * as React from "react"
 import { Cropper as BaseCropper } from "@/components/ui/cropper"
 import { cn } from "@/lib/utils"
-import type { LegacyGlassVariant } from "@/lib/liquid-glass/material"
 
 export interface CropperProps {
   image: string
   onCropComplete: (croppedArea: { x: number; y: number; width: number; height: number }, croppedAreaPixels: { x: number; y: number; width: number; height: number }) => void
   aspect?: number
-  variant?: "liquid" | "default" | LegacyGlassVariant
+  variant?: "liquid" | "default"
   glow?: boolean
   className?: string
 }
@@ -21,7 +20,7 @@ export function Cropper({ className, glow = false, ...props }: CropperProps) {
   return (
     <div
       className={cn(
-        glow && "shadow-lg shadow-purple-500/20",
+        glow && "shadow-[0_0_0_1px_rgba(255,255,255,0.35),0_0_28px_-4px_rgba(255,255,255,0.45)]",
         className
       )}
     >

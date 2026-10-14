@@ -10,7 +10,7 @@ import { ArrowLeft } from "lucide-react"
 export function ForgotPasswordBlock() {
   return (
     <div className="flex items-center justify-center min-h-screen p-6">
-      <Card variant="glass" className="w-full max-w-md text-white">
+      <Card className="w-full max-w-md text-white">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl text-white">Forgot password?</CardTitle>
           <CardDescription className="text-muted-foreground">
@@ -24,11 +24,10 @@ export function ForgotPasswordBlock() {
               id="email"
               type="email"
               placeholder="name@example.com"
-              variant="glass"
               className="text-white placeholder:text-muted-foreground"
             />
           </div>
-          <Button variant="glass" className="w-full text-white">
+          <Button className="w-full text-white">
             Send Reset Link
           </Button>
           <Button variant="link" className="w-full text-muted-foreground" asChild>

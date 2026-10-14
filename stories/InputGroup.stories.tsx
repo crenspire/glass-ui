@@ -14,7 +14,11 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'glass', 'glassSubtle', 'frosted', 'fluted', 'crystal'],
+      options: ['liquid', 'default'],
+    },
+    material: {
+      control: 'select',
+      options: ['regular', 'clear', 'tinted'],
     },
     effect: {
       control: 'select',
@@ -28,7 +32,6 @@ type Story = StoryObj<typeof meta>;
 
 export const WithButton: Story = {
   args: {
-    variant: 'glass',
     children: (
       <>
         <Input placeholder="Search..." className="border-0 rounded-r-none" />
@@ -42,7 +45,6 @@ export const WithButton: Story = {
 
 export const Frosted: Story = {
   args: {
-    variant: 'frosted',
     children: (
       <>
         <Input placeholder="Search..." className="border-0 rounded-r-none" />

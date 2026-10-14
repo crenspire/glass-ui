@@ -12,7 +12,11 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'glass', 'glassSubtle', 'frosted', 'fluted', 'crystal'],
+      options: ['liquid', 'default'],
+    },
+    material: {
+      control: 'select',
+      options: ['regular', 'clear', 'tinted'],
     },
     autoPlay: {
       control: 'boolean',
@@ -32,24 +36,23 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    variant: 'glass',
     autoPlay: false,
     className: 'w-[400px] h-[200px]',
     children: (
       <>
-        <Card variant="glass" className="h-full m-2">
+        <Card className="h-full m-2">
           <CardHeader>
             <CardTitle>Slide 1</CardTitle>
           </CardHeader>
           <CardContent>Content for slide 1</CardContent>
         </Card>
-        <Card variant="glass" className="h-full m-2">
+        <Card className="h-full m-2">
           <CardHeader>
             <CardTitle>Slide 2</CardTitle>
           </CardHeader>
           <CardContent>Content for slide 2</CardContent>
         </Card>
-        <Card variant="glass" className="h-full m-2">
+        <Card className="h-full m-2">
           <CardHeader>
             <CardTitle>Slide 3</CardTitle>
           </CardHeader>
@@ -62,25 +65,24 @@ export const Default: Story = {
 
 export const AutoPlay: Story = {
   args: {
-    variant: 'glass',
     autoPlay: true,
     interval: 3000,
     className: 'w-[400px] h-[200px]',
     children: (
       <>
-        <Card variant="glass" className="h-full m-2">
+        <Card className="h-full m-2">
           <CardHeader>
             <CardTitle>Slide 1</CardTitle>
           </CardHeader>
           <CardContent>Content for slide 1</CardContent>
         </Card>
-        <Card variant="glass" className="h-full m-2">
+        <Card className="h-full m-2">
           <CardHeader>
             <CardTitle>Slide 2</CardTitle>
           </CardHeader>
           <CardContent>Content for slide 2</CardContent>
         </Card>
-        <Card variant="glass" className="h-full m-2">
+        <Card className="h-full m-2">
           <CardHeader>
             <CardTitle>Slide 3</CardTitle>
           </CardHeader>
@@ -93,24 +95,23 @@ export const AutoPlay: Story = {
 
 export const Frosted: Story = {
   args: {
-    variant: 'frosted',
     autoPlay: false,
     className: 'w-[400px] h-[200px]',
     children: (
       <>
-        <Card variant="frosted" className="h-full m-2">
+        <Card className="h-full m-2">
           <CardHeader>
             <CardTitle>Slide 1</CardTitle>
           </CardHeader>
           <CardContent>Content for slide 1</CardContent>
         </Card>
-        <Card variant="frosted" className="h-full m-2">
+        <Card className="h-full m-2">
           <CardHeader>
             <CardTitle>Slide 2</CardTitle>
           </CardHeader>
           <CardContent>Content for slide 2</CardContent>
         </Card>
-        <Card variant="frosted" className="h-full m-2">
+        <Card className="h-full m-2">
           <CardHeader>
             <CardTitle>Slide 3</CardTitle>
           </CardHeader>

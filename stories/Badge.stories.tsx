@@ -11,7 +11,11 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'glass', 'glassSubtle', 'frosted', 'fluted', 'crystal', 'secondary', 'destructive', 'outline'],
+      options: ['liquid', 'default', 'secondary', 'destructive', 'outline'],
+    },
+    material: {
+      control: 'select',
+      options: ['regular', 'clear', 'tinted'],
     },
     glow: {
       control: 'boolean',
@@ -25,28 +29,25 @@ type Story = StoryObj<typeof meta>;
 export const Glass: Story = {
   args: {
     children: 'Glass Badge',
-    variant: 'glass',
   },
 };
 
 export const Frosted: Story = {
   args: {
     children: 'Frosted',
-    variant: 'frosted',
   },
 };
 
 export const Crystal: Story = {
   args: {
     children: 'Crystal',
-    variant: 'crystal',
+    material: 'clear',
   },
 };
 
 export const WithGlow: Story = {
   args: {
     children: 'Glowing Badge',
-    variant: 'glass',
     glow: true,
   },
 };

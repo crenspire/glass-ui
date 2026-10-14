@@ -42,7 +42,6 @@ export function Footer() {
             </div>
             <div className="flex items-center gap-4 flex-wrap justify-center md:justify-end">
               <Button
-                variant="glass"
                 size="sm"
                 asChild
                 effect="glow"

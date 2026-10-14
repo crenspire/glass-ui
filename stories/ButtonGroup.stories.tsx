@@ -12,7 +12,11 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'glass', 'glassSubtle', 'frosted', 'fluted', 'crystal'],
+      options: ['liquid', 'default'],
+    },
+    material: {
+      control: 'select',
+      options: ['regular', 'clear', 'tinted'],
     },
     orientation: {
       control: 'select',
@@ -30,7 +34,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Horizontal: Story = {
   args: {
-    variant: 'glass',
     orientation: 'horizontal',
     children: (
       <>
@@ -44,7 +47,6 @@ export const Horizontal: Story = {
 
 export const Vertical: Story = {
   args: {
-    variant: 'glass',
     orientation: 'vertical',
     children: (
       <>
@@ -58,7 +60,6 @@ export const Vertical: Story = {
 
 export const Frosted: Story = {
   args: {
-    variant: 'frosted',
     orientation: 'horizontal',
     children: (
       <>

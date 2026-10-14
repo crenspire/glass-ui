@@ -5,7 +5,7 @@ import CropperLib from "react-easy-crop"
 import type { Area, Point } from "react-easy-crop"
 
 import { cn } from "@/lib/utils"
-import { liquidProps, resolveVariant, type LegacyGlassVariant } from "@/lib/liquid-glass/material"
+import { liquidProps, resolveVariant } from "@/lib/liquid-glass/material"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Slider } from "@/components/ui/slider"
@@ -14,7 +14,7 @@ interface CropperProps {
   image: string
   onCropComplete: (croppedArea: Area, croppedAreaPixels: Area) => void
   aspect?: number
-  variant?: "liquid" | "default" | LegacyGlassVariant
+  variant?: "liquid" | "default"
 }
 
 export function Cropper({

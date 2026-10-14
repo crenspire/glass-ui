@@ -11,7 +11,11 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'glass', 'glassSubtle', 'frosted', 'fluted', 'crystal'],
+      options: ['liquid', 'default'],
+    },
+    material: {
+      control: 'select',
+      options: ['regular', 'clear', 'tinted'],
     },
     effect: {
       control: 'select',
@@ -25,7 +29,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    variant: 'glass',
     children: (
       <>
         <MenuBarItem active>File</MenuBarItem>
@@ -39,7 +42,6 @@ export const Default: Story = {
 
 export const Frosted: Story = {
   args: {
-    variant: 'frosted',
     children: (
       <>
         <MenuBarItem active>File</MenuBarItem>

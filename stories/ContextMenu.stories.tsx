@@ -25,11 +25,11 @@ export const Default: Story = {
   render: () => (
     <ContextMenu>
       <ContextMenuTrigger>
-        <Card variant="glass" className="p-8 cursor-pointer">
+        <Card className="p-8 cursor-pointer">
           <CardContent>Right click me</CardContent>
         </Card>
       </ContextMenuTrigger>
-      <ContextMenuContent variant="glass">
+      <ContextMenuContent>
         <ContextMenuLabel>My Account</ContextMenuLabel>
         <ContextMenuSeparator />
         <ContextMenuItem>Profile</ContextMenuItem>
@@ -45,11 +45,11 @@ export const Frosted: Story = {
   render: () => (
     <ContextMenu>
       <ContextMenuTrigger>
-        <Card variant="glass" className="p-8 cursor-pointer">
+        <Card className="p-8 cursor-pointer">
           <CardContent>Right click me</CardContent>
         </Card>
       </ContextMenuTrigger>
-      <ContextMenuContent variant="frosted">
+      <ContextMenuContent>
         <ContextMenuLabel>My Account</ContextMenuLabel>
         <ContextMenuSeparator />
         <ContextMenuItem>Profile</ContextMenuItem>

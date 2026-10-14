@@ -19,7 +19,7 @@ export const Switch = React.forwardRef<
     <BaseSwitch
       ref={ref}
       className={cn(
-        glow && "data-[state=checked]:shadow-lg data-[state=checked]:shadow-purple-500/30",
+        glow && "data-[state=checked]:shadow-[0_0_0_1px_rgba(255,255,255,0.35),0_0_28px_-4px_rgba(255,255,255,0.45)]",
         "transition-all duration-200",
         className
       )}

@@ -8,13 +8,12 @@ import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Input } from "@/components/ui/input"
-import type { LegacyGlassVariant } from "@/lib/liquid-glass/material"
 
 export interface DatePickerInputProps extends Omit<React.ComponentProps<typeof Input>, "value" | "onChange"> {
   value?: Date
   onChange?: (date: Date | undefined) => void
   placeholder?: string
-  variant?: "liquid" | "default" | LegacyGlassVariant
+  variant?: "liquid" | "default"
 }
 
 const DatePickerInput = React.forwardRef<HTMLInputElement, DatePickerInputProps>(

@@ -5,7 +5,7 @@ import * as AccordionPrimitive from "@radix-ui/react-accordion"
 import { ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import { resolveVariant, type LegacyGlassVariant } from "@/lib/liquid-glass/material"
+import { resolveVariant } from "@/lib/liquid-glass/material"
 
 const Accordion = AccordionPrimitive.Root
 
@@ -24,7 +24,7 @@ AccordionItem.displayName = "AccordionItem"
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> & {
-    variant?: "liquid" | "default" | LegacyGlassVariant
+    variant?: "liquid" | "default"
   }
 >(({ className, variant, children, ...props }, ref) => {
   const v = resolveVariant<"liquid" | "default">(variant, undefined)

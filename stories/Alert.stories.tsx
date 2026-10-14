@@ -12,7 +12,11 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'glass', 'glassSubtle', 'frosted', 'fluted', 'crystal', 'destructive'],
+      options: ['liquid', 'default', 'destructive'],
+    },
+    material: {
+      control: 'select',
+      options: ['regular', 'clear', 'tinted'],
     },
     hover: {
       control: 'select',
@@ -27,7 +31,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Glass: Story = {
   args: {
-    variant: 'glass',
     children: (
       <>
         <Terminal className="h-4 w-4" />
@@ -42,7 +45,6 @@ export const Glass: Story = {
 
 export const Frosted: Story = {
   args: {
-    variant: 'frosted',
     children: (
       <>
         <AlertCircle className="h-4 w-4" />
@@ -57,7 +59,7 @@ export const Frosted: Story = {
 
 export const Crystal: Story = {
   args: {
-    variant: 'crystal',
+    material: 'clear',
     children: (
       <>
         <CheckCircle2 className="h-4 w-4" />
@@ -87,7 +89,6 @@ export const Destructive: Story = {
 
 export const WithoutIcon: Story = {
   args: {
-    variant: 'glass',
     children: (
       <>
         <AlertTitle>Note</AlertTitle>
@@ -101,7 +102,6 @@ export const WithoutIcon: Story = {
 
 export const WithGlowHover: Story = {
   args: {
-    variant: 'glass',
     hover: 'glow',
     children: (
       <>
@@ -117,7 +117,6 @@ export const WithGlowHover: Story = {
 
 export const WithShimmerHover: Story = {
   args: {
-    variant: 'frosted',
     hover: 'shimmer',
     children: (
       <>
@@ -133,7 +132,7 @@ export const WithShimmerHover: Story = {
 
 export const WithLiftHover: Story = {
   args: {
-    variant: 'crystal',
+    material: 'clear',
     hover: 'lift',
     children: (
       <>
@@ -149,7 +148,6 @@ export const WithLiftHover: Story = {
 
 export const WithScaleHover: Story = {
   args: {
-    variant: 'glass',
     hover: 'scale',
     children: (
       <>

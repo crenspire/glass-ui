@@ -66,16 +66,6 @@ describe("resolveVariant", () => {
   it("passes non-glass variants through", () => {
     expect(resolveVariant<"default" | "liquid">("default", undefined)).toEqual({ variant: "default", material: "regular" })
   })
-  it("maps legacy glass names to liquid materials", () => {
-    expect(resolveVariant("glass", undefined)).toEqual({ variant: "liquid", material: "regular" })
-    expect(resolveVariant("frosted", undefined)).toEqual({ variant: "liquid", material: "regular" })
-    expect(resolveVariant("crystal", undefined)).toEqual({ variant: "liquid", material: "clear" })
-    expect(resolveVariant("fluted", undefined)).toEqual({ variant: "liquid", material: "clear" })
-    expect(resolveVariant("glassSolid", undefined)).toEqual({ variant: "liquid", material: "tinted" })
-  })
-  it("prefers an explicit material", () => {
-    expect(resolveVariant("crystal", "tinted")).toEqual({ variant: "liquid", material: "tinted" })
-  })
   it("defaults to liquid", () => {
     expect(resolveVariant(undefined, undefined)).toEqual({ variant: "liquid", material: "regular" })
   })

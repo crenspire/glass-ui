@@ -12,7 +12,11 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'glass', 'glassSubtle', 'frosted', 'fluted', 'crystal'],
+      options: ['liquid', 'default'],
+    },
+    material: {
+      control: 'select',
+      options: ['regular', 'clear', 'tinted'],
     },
     effect: {
       control: 'select',
@@ -30,7 +34,6 @@ export const Default: Story = {
     return <DatePickerInput {...args} value={date} onChange={setDate} />;
   },
   args: {
-    variant: 'glass',
     placeholder: 'Pick a date',
   },
 };
@@ -41,7 +44,6 @@ export const Frosted: Story = {
     return <DatePickerInput {...args} value={date} onChange={setDate} />;
   },
   args: {
-    variant: 'frosted',
     placeholder: 'Pick a date',
   },
 };

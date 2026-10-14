@@ -36,7 +36,7 @@ export const NavigationMenuList = React.forwardRef<
     <BaseNavigationMenuList
       ref={ref}
       className={cn(
-        glow && "shadow-md shadow-purple-500/20",
+        glow && "shadow-[0_0_0_1px_rgba(255,255,255,0.35),0_0_28px_-4px_rgba(255,255,255,0.45)]",
         className
       )}
       {...props}
@@ -53,7 +53,7 @@ export const NavigationMenuContent = React.forwardRef<
     <BaseNavigationMenuContent
       ref={ref}
       className={cn(
-        glow && "shadow-lg shadow-purple-500/30",
+        glow && "shadow-[0_0_0_1px_rgba(255,255,255,0.35),0_0_28px_-4px_rgba(255,255,255,0.45)]",
         className
       )}
       {...props}
@@ -70,7 +70,7 @@ export const NavigationMenuViewport = React.forwardRef<
     <BaseNavigationMenuViewport
       ref={ref}
       className={cn(
-        glow && "shadow-lg shadow-purple-500/30",
+        glow && "shadow-[0_0_0_1px_rgba(255,255,255,0.35),0_0_28px_-4px_rgba(255,255,255,0.45)]",
         className
       )}
       {...props}

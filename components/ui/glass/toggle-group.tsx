@@ -3,13 +3,12 @@
 import * as React from "react"
 import { ToggleGroup as BaseToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { cn } from "@/lib/utils"
-import type { LegacyGlassVariant } from "@/lib/liquid-glass/material"
 
 type BaseToggleGroupProps = React.ComponentProps<typeof BaseToggleGroup>
 
 export type ToggleGroupProps = Omit<BaseToggleGroupProps, "variant" | "className"> & {
   glow?: boolean
-  variant?: "liquid" | "default" | LegacyGlassVariant
+  variant?: "liquid" | "default"
   className?: string
 }
 
@@ -24,7 +23,7 @@ export const ToggleGroup = React.forwardRef<
     <BaseToggleGroup
       ref={ref}
       className={cn(
-        glow && "shadow-md shadow-purple-500/20",
+        glow && "shadow-[0_0_0_1px_rgba(255,255,255,0.35),0_0_28px_-4px_rgba(255,255,255,0.45)]",
         className
       )}
       {...(props as BaseToggleGroupProps)}

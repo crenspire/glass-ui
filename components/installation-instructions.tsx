@@ -31,7 +31,7 @@ export function InstallationInstructions({
 
   return (
     <Tabs defaultValue="pnpm" className="w-full">
-      <TabsList variant="glass" className="mb-4 grid w-full grid-cols-4">
+      <TabsList className="mb-4 grid w-full grid-cols-4">
         <TabsTrigger value="pnpm">pnpm</TabsTrigger>
         <TabsTrigger value="yarn">yarn</TabsTrigger>
         <TabsTrigger value="npm">npm</TabsTrigger>

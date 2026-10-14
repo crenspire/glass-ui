@@ -32,7 +32,7 @@ function CodeBlock({ code }: { code: string }) {
 
   return (
     <div className="relative">
-      <pre className="glass-bg p-4 rounded-lg font-mono text-sm overflow-x-auto">
+      <pre className="lg lg-regular lg-surface p-4 rounded-lg font-mono text-sm overflow-x-auto">
         <code className="text-foreground break-words">{code}</code>
       </pre>
       <Button
@@ -62,7 +62,7 @@ export default function GettingStartedPage() {
       </div>
 
       <div className="space-y-8">
-        <Card variant="glass" className="text-foreground">
+        <Card className="text-foreground">
           <CardHeader>
             <CardTitle className="text-foreground">Installation</CardTitle>
             <CardDescription className="text-muted-foreground">
@@ -92,7 +92,7 @@ export default function GettingStartedPage() {
           </CardContent>
         </Card>
 
-        <Card variant="glass" className="text-foreground" id="mcp">
+        <Card className="text-foreground" id="mcp">
           <CardHeader>
             <CardTitle className="text-foreground">MCP (Model Context Protocol) Setup</CardTitle>
             <CardDescription className="text-muted-foreground">
@@ -124,7 +124,7 @@ export default function GettingStartedPage() {
           </CardContent>
         </Card>
 
-        <Card variant="glass" className="text-foreground">
+        <Card className="text-foreground">
           <CardHeader>
             <CardTitle className="text-foreground">Basic Usage</CardTitle>
             <CardDescription className="text-muted-foreground">
@@ -133,16 +133,16 @@ export default function GettingStartedPage() {
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="example" className="w-full">
-              <TabsList variant="glass" className="mb-4">
+              <TabsList className="mb-4">
                 <TabsTrigger value="example">Example</TabsTrigger>
                 <TabsTrigger value="code">Code</TabsTrigger>
               </TabsList>
               <TabsContent value="example" className="space-y-4">
                 <div className="space-y-2">
-                  <Button variant="glass">Glass Button</Button>
+                  <Button>Glass Button</Button>
                   <Button variant="outline">Outline Button</Button>
                 </div>
-                <Card variant="glass" className="text-foreground">
+                <Card className="text-foreground">
                   <CardHeader>
                     <CardTitle className="text-foreground">Glass Card</CardTitle>
                     <CardDescription className="text-muted-foreground">
@@ -161,8 +161,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 export function Example() {
   return (
     <div>
-      <Button variant="glass">Glass Button</Button>
-      <Card variant="glass">
+      <Button>Glass Button</Button>
+      <Card>
         <CardHeader>
           <CardTitle>Glass Card</CardTitle>
           <CardDescription>This is a card with glass effect</CardDescription>
@@ -179,7 +179,7 @@ export function Example() {
           </CardContent>
         </Card>
 
-        <Card variant="glass" className="text-foreground" id="glass-customization">
+        <Card className="text-foreground" id="glass-customization">
           <CardHeader>
             <CardTitle className="text-foreground">Customizing Glass Effects</CardTitle>
             <CardDescription className="text-muted-foreground">
@@ -188,125 +188,33 @@ export function Example() {
           </CardHeader>
           <CardContent className="space-y-6">
             <div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">Global CSS Variables</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-2">Materials</h3>
               <p className="text-muted-foreground mb-4">
-                All Glass UI components automatically use CSS variables for glass effects. You can override these 
-                in your global CSS file to change the appearance of all components at once. Changes take effect immediately.
+                Every glass component takes a <code className="bg-muted px-1 rounded">material</code> prop:{" "}
+                <code className="bg-muted px-1 rounded">regular</code> (default, frosted),{" "}
+                <code className="bg-muted px-1 rounded">clear</code> (barely frosted, most refraction) or{" "}
+                <code className="bg-muted px-1 rounded">tinted</code> (washed with a colour, the primary colour by default).
               </p>
-              
-              <div className="space-y-4">
-                <div>
-                  <h4 className="text-md font-semibold text-foreground mb-2">Light Mode Variables</h4>
-                  <CodeBlock code={`/* In your globals.css or main CSS file */
-:root {
-  /* Glass background transparency (0-1) */
-  --glass-bg: rgba(255, 255, 255, 0.25);
-  
-  /* Glass border color and opacity */
-  --glass-border: rgba(255, 255, 255, 0.18);
-  
-  /* Blur amount - Apple standard is 30px */
-  --blur: 30px;
-  --blur-sm: 15px;  /* Small blur for subtle effects */
-  --blur-lg: 50px;  /* Large blur for strong effects */
-  
-  /* Glass shadows */
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.06);
-  --glass-shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(0, 0, 0, 0.1);
-  --glass-shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04);
-}`} />
-                </div>
-
-                <div>
-                  <h4 className="text-md font-semibold text-foreground mb-2">Dark Mode Variables</h4>
-                  <CodeBlock code={`/* Dark mode overrides */
-.dark {
-  /* More transparent for dark backgrounds */
-  --glass-bg: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.2);
-  
-  /* Same blur values work for both modes */
-  --blur: 30px;
-  --blur-sm: 15px;
-  --blur-lg: 50px;
-  
-  /* Deeper shadows for dark mode */
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
-  --glass-shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.5), 0 4px 16px rgba(0, 0, 0, 0.3);
-  --glass-shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.3), 0 1px 4px rgba(0, 0, 0, 0.15);
-}`} />
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">Example: Custom Transparency & Blur</h3>
-              <p className="text-muted-foreground mb-4">
-                Here&apos;s an example of customizing the glass effect to be more or less transparent with different blur amounts:
-              </p>
-              <CodeBlock code={`/* More transparent, stronger blur */
-:root {
-  --glass-bg: rgba(255, 255, 255, 0.15);  /* 15% opacity - more transparent */
-  --blur: 40px;                            /* Stronger blur */
-}
-
-.dark {
-  --glass-bg: rgba(255, 255, 255, 0.08);  /* 8% opacity for dark mode */
-  --blur: 40px;
-}
-
-/* Less transparent, subtle blur */
-:root {
-  --glass-bg: rgba(255, 255, 255, 0.4);   /* 40% opacity - less transparent */
-  --blur: 20px;                            /* Subtle blur */
-}
-
-.dark {
-  --glass-bg: rgba(255, 255, 255, 0.15);  /* 15% opacity for dark mode */
-  --blur: 20px;
-}`} />
-            </div>
-
-            <div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">How It Works</h3>
-              <p className="text-muted-foreground mb-2">
-                All Glass UI components with glass variants automatically use these CSS variables:
-              </p>
-              <ul className="list-disc list-inside space-y-1 text-muted-foreground ml-4">
-                <li>Components read <code className="bg-muted px-1 rounded">--glass-bg</code> for background color</li>
-                <li>Components use <code className="bg-muted px-1 rounded">backdrop-blur-[var(--blur)]</code> for blur effect</li>
-                <li>Borders use <code className="bg-muted px-1 rounded">--glass-border</code> for color</li>
-                <li>Shadows use <code className="bg-muted px-1 rounded">--glass-shadow</code> variables</li>
-              </ul>
-              <p className="text-muted-foreground mt-4">
-                When you change these variables, all components with glass effects will automatically update 
-                without needing to modify individual component code.
-              </p>
+              <CodeBlock code={`<Button>Regular</Button>
+<Button material="clear">Clear</Button>
+<Button material="tinted" tint="#3b82f6">Tinted</Button>`} />
             </div>
 
             <div>
               <h3 className="text-lg font-semibold text-foreground mb-2">Per-Component Customization</h3>
               <p className="text-muted-foreground mb-4">
-                You can also customize glass effects for individual components using the <code className="bg-muted px-1 rounded">glass</code> prop:
+                Override the tint colour and frost of a single component with the <code className="bg-muted px-1 rounded">glass</code> prop:
               </p>
               <CodeBlock code={`import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 
 export function CustomGlassCard() {
   return (
-    <Card
-      variant="glass"
-      glass={{
-        color: "rgba(139, 92, 246, 0.2)",  // Purple tint
-        blur: 40,                            // 40px blur
-        transparency: 0.3,                   // 30% opacity
-        outline: "rgba(139, 92, 246, 0.5)",  // Purple border
-      }}
-    >
+    <Card glass={{ tint: "rgba(139, 92, 246, 0.6)", frost: 0.5 }}>
       <CardHeader>
         <CardTitle>Custom Glass Card</CardTitle>
       </CardHeader>
       <CardContent>
-        This card has custom glass properties that override the global defaults.
+        This card has a violet tint and lighter frost.
       </CardContent>
     </Card>
   )
@@ -314,19 +222,36 @@ export function CustomGlassCard() {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">Apple Standards</h3>
-              <p className="text-muted-foreground mb-2">
-                Glass UI uses Apple&apos;s glassmorphism standards by default:
+              <h3 className="text-lg font-semibold text-foreground mb-2">Global CSS Variables</h3>
+              <p className="text-muted-foreground mb-4">
+                The CSS look comes from the <code className="bg-muted px-1 rounded">.lg</code> layer in globals.css. Override its
+                variables to restyle every component at once:
               </p>
-              <ul className="list-disc list-inside space-y-1 text-muted-foreground ml-4">
-                <li><strong>Light Mode:</strong> 25% opacity, 30px blur</li>
-                <li><strong>Dark Mode:</strong> 10% opacity, 30px blur</li>
-                <li>Subtle borders and shadows for depth</li>
-                <li>Consistent blur values across all components</li>
-              </ul>
-              <p className="text-muted-foreground mt-4">
-                You can adjust these values to match your design needs while maintaining the glass aesthetic.
+              <CodeBlock code={`:root {
+  --lg-rim-hi: rgba(255, 255, 255, 0.8);   /* bright edge of the rim */
+  --lg-rim-lo: rgba(255, 255, 255, 0.18);  /* dim edge of the rim */
+  --lg-highlight: rgba(255, 255, 255, 0.6); /* inner top highlight */
+  --lg-drop: rgba(15, 23, 42, 0.14);       /* drop shadow */
+}
+
+/* Per material: wash colour, blur and saturation */
+.lg-regular { --lg-base: rgba(255, 255, 255, 0.42); --lg-blur: 16px; --lg-sat: 180%; }
+.dark .lg-regular { --lg-base: rgba(255, 255, 255, 0.07); }`} />
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold text-foreground mb-2">Real Refraction with WebGL</h3>
+              <p className="text-muted-foreground mb-4">
+                Wrap your app in <code className="bg-muted px-1 rounded">LiquidGlassProvider</code> and components that rest
+                on the backdrop are drawn by a WebGL shader with real refraction, chromatic dispersion and a light-tracking rim.
+                Popovers, menus, dialogs and anything over other content keep the CSS look, and so does everything when WebGL
+                is unavailable or the user prefers reduced transparency.
               </p>
+              <CodeBlock code={`import { LiquidGlassProvider } from "@/components/ui/liquid/liquid-glass-provider"
+
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return <LiquidGlassProvider backdrop="/wallpaper.jpg">{children}</LiquidGlassProvider>
+}`} />
             </div>
           </CardContent>
         </Card>

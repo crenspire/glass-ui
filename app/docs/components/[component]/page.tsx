@@ -25,7 +25,7 @@ function CodeBlock({ code }: { code: string }) {
 
   return (
     <div className="relative">
-      <pre className="glass-bg p-4 rounded-lg font-mono text-sm overflow-x-auto">
+      <pre className="lg lg-regular lg-surface p-4 rounded-lg font-mono text-sm overflow-x-auto">
         <code className="text-foreground whitespace-pre break-words">{code}</code>
       </pre>
       <Button
@@ -64,10 +64,9 @@ export default function ComponentPage({
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2">
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">{component.title || component.name}</h1>
-            <Badge variant="glass" className="w-fit">Component</Badge>
+            <Badge className="w-fit">Component</Badge>
           </div>
           <Button
-            variant="glass"
             size="sm"
             asChild
           >
@@ -86,7 +85,7 @@ export default function ComponentPage({
       </div>
 
       <div className="space-y-8">
-        <Card variant="glass" className="text-foreground">
+        <Card className="text-foreground">
           <CardHeader>
             <CardTitle className="text-foreground">Installation</CardTitle>
             <CardDescription className="text-muted-foreground">
@@ -98,7 +97,7 @@ export default function ComponentPage({
           </CardContent>
         </Card>
 
-        <Card variant="glass" className="text-foreground">
+        <Card className="text-foreground">
           <CardHeader>
             <CardTitle className="text-foreground">Usage</CardTitle>
             <CardDescription className="text-muted-foreground">
@@ -107,7 +106,7 @@ export default function ComponentPage({
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="example" className="w-full">
-              <TabsList variant="glass" className="mb-4">
+              <TabsList className="mb-4">
                 <TabsTrigger value="example">Example</TabsTrigger>
                 <TabsTrigger value="code">Code</TabsTrigger>
               </TabsList>
@@ -123,7 +122,7 @@ export default function ComponentPage({
           </CardContent>
         </Card>
 
-        <Card variant="glass" className="text-foreground">
+        <Card className="text-foreground">
           <CardHeader>
             <CardTitle className="text-foreground">Props</CardTitle>
             <CardDescription className="text-muted-foreground">
@@ -132,17 +131,12 @@ export default function ComponentPage({
           </CardHeader>
           <CardContent>
             <div className="space-y-2 text-sm text-muted-foreground">
-              <p>This component supports the following variants:</p>
+              <p>Glass props shared by every Glass UI component:</p>
               <ul className="list-disc list-inside space-y-1 ml-4">
-                <li>default - Standard styling</li>
-                <li>glass - Glassmorphism effect (default)</li>
-                {component.name === "button" && (
-                  <>
-                    <li>glassSolid - Solid glass variant</li>
-                    <li>outline - Outline variant</li>
-                    <li>ghost - Ghost variant</li>
-                  </>
-                )}
+                <li><code>material</code> - regular (default), clear or tinted liquid glass</li>
+                <li><code>tint</code> - any CSS colour to tint the glass</li>
+                <li><code>glass</code> - per-instance override: <code>{"{ tint, frost }"}</code></li>
+                <li><code>variant</code> - liquid (default) or default for the plain shadcn style{component.name === "button" && "; also destructive, outline, secondary, ghost and link"}</li>
               </ul>
             </div>
           </CardContent>

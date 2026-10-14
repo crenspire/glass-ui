@@ -52,7 +52,7 @@ export default function Home() {
         {/* ───────────────────── Hero ───────────────────── */}
         <section className="container mx-auto px-4 pt-24 pb-32 md:pt-32 md:pb-40">
           <div className="max-w-3xl mx-auto text-center">
-            <Badge variant="glass" className="mb-8 px-4 py-1.5 text-sm">
+            <Badge className="mb-8 px-4 py-1.5 text-sm">
               <Sparkles className="h-3.5 w-3.5 mr-1.5" />
               50+ Liquid Glass Components
             </Badge>
@@ -69,7 +69,7 @@ export default function Home() {
             </p>
 
             <div className="flex items-center justify-center gap-4 flex-wrap mb-12">
-              <Button asChild size="lg" variant="glass" effect="glow">
+              <Button asChild size="lg" effect="glow">
                 <Link href="/docs/getting-started">
                   Get Started
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -83,7 +83,7 @@ export default function Home() {
             </div>
 
             <div
-              className="glass-bg max-w-xl mx-auto flex items-center justify-between gap-3 px-5 py-3 font-mono text-sm rounded-xl"
+              className="lg lg-regular lg-surface max-w-xl mx-auto flex items-center justify-between gap-3 px-5 py-3 font-mono text-sm rounded-xl"
               onClick={handleCopy}
             >
               <code className="text-foreground/70 truncate select-all">pnpm dlx shadcn@latest add @glass-ui/button</code>
@@ -110,7 +110,7 @@ export default function Home() {
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
             {/* Settings */}
-            <Card variant="glass">
+            <Card>
               <CardHeader>
                 <CardTitle className="text-lg flex items-center gap-2">
                   <Settings className="h-4 w-4" />
@@ -124,12 +124,12 @@ export default function Home() {
                     <Label className="text-sm">Dark Mode</Label>
                     <p className="text-xs text-muted-foreground">Use dark theme</p>
                   </div>
-                  <Switch variant="glass" />
+                  <Switch />
                 </div>
                 <Separator />
                 <div className="space-y-2">
                   <Label className="text-sm">Volume</Label>
-                  <Slider variant="glass" defaultValue={[65]} max={100} step={1} />
+                  <Slider defaultValue={[65]} max={100} step={1} />
                 </div>
                 <Separator />
                 <div className="flex items-center justify-between">
@@ -137,13 +137,13 @@ export default function Home() {
                     <Label className="text-sm">Notifications</Label>
                     <p className="text-xs text-muted-foreground">Push alerts</p>
                   </div>
-                  <Switch variant="glass" defaultChecked />
+                  <Switch defaultChecked />
                 </div>
               </CardContent>
             </Card>
 
             {/* Chat */}
-            <Card variant="glass">
+            <Card>
               <CardHeader>
                 <CardTitle className="text-lg flex items-center gap-2">
                   <Bot className="h-4 w-4" />
@@ -159,12 +159,12 @@ export default function Home() {
                         <Bot className="h-3.5 w-3.5" />
                       </AvatarFallback>
                     </Avatar>
-                    <div className="glass-bg rounded-lg px-3 py-2">
+                    <div className="lg lg-regular lg-surface rounded-lg px-3 py-2">
                       <p className="text-sm">How can I help you today?</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-2 justify-end">
-                    <div className="glass-bg rounded-lg px-3 py-2 max-w-[80%]">
+                    <div className="lg lg-regular lg-surface rounded-lg px-3 py-2 max-w-[80%]">
                       <p className="text-sm">Show me the glass variants.</p>
                     </div>
                     <Avatar className="h-7 w-7">
@@ -173,8 +173,8 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <Input variant="glass" placeholder="Type a message..." className="flex-1 min-w-0" />
-                  <Button variant="glass" size="icon" effect="glow" className="shrink-0">
+                  <Input placeholder="Type a message..." className="flex-1 min-w-0" />
+                  <Button size="icon" effect="glow" className="shrink-0">
                     <Send className="h-4 w-4" />
                   </Button>
                 </div>
@@ -182,7 +182,7 @@ export default function Home() {
             </Card>
 
             {/* Profile */}
-            <Card variant="glass">
+            <Card>
               <CardHeader>
                 <CardTitle className="text-lg flex items-center gap-2">
                   <User className="h-4 w-4" />
@@ -205,7 +205,7 @@ export default function Home() {
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">Status</span>
-                    <Badge variant="glass" className="bg-green-500/20 text-green-600 dark:text-green-400">Active</Badge>
+                    <Badge className="bg-green-500/20 text-green-600 dark:text-green-400">Active</Badge>
                   </div>
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">Role</span>
@@ -217,7 +217,7 @@ export default function Home() {
             </Card>
 
             {/* Metrics */}
-            <Card variant="glass">
+            <Card>
               <CardHeader>
                 <CardTitle className="text-lg flex items-center gap-2">
                   <TrendingUp className="h-4 w-4" />
@@ -226,7 +226,7 @@ export default function Home() {
                 <CardDescription>Key performance data</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="glass-bg rounded-lg p-3">
+                <div className="lg lg-regular lg-surface rounded-lg p-3">
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-xs text-muted-foreground">Revenue</span>
                     <DollarSign className="h-3.5 w-3.5 text-muted-foreground" />
@@ -237,7 +237,7 @@ export default function Home() {
                     +20.1% from last month
                   </p>
                 </div>
-                <div className="glass-bg rounded-lg p-3">
+                <div className="lg lg-regular lg-surface rounded-lg p-3">
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-xs text-muted-foreground">Users</span>
                     <User className="h-3.5 w-3.5 text-muted-foreground" />
@@ -252,7 +252,7 @@ export default function Home() {
             </Card>
 
             {/* Payment */}
-            <Card variant="glass">
+            <Card>
               <CardHeader>
                 <CardTitle className="text-lg flex items-center gap-2">
                   <CreditCard className="h-4 w-4" />
@@ -261,10 +261,10 @@ export default function Home() {
                 <CardDescription>Saved payment method</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="glass-bg rounded-lg p-4">
+                <div className="lg lg-regular lg-surface rounded-lg p-4">
                   <div className="flex items-center justify-between mb-3">
                     <CreditCard className="h-5 w-5 text-muted-foreground" />
-                    <Badge variant="glass">Primary</Badge>
+                    <Badge>Primary</Badge>
                   </div>
                   <p className="text-sm font-mono tracking-wider text-foreground">**** **** **** 4242</p>
                   <p className="text-xs text-muted-foreground mt-1">Expires 12/27</p>
@@ -277,7 +277,7 @@ export default function Home() {
             </Card>
 
             {/* Sign In */}
-            <Card variant="glass">
+            <Card>
               <CardHeader>
                 <CardTitle className="text-lg flex items-center gap-2">
                   <Lock className="h-4 w-4" />
@@ -287,17 +287,15 @@ export default function Home() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <Input
-                  variant="glass"
                   placeholder="Email address"
                   icon={<Mail className="h-4 w-4 text-muted-foreground" />}
                 />
                 <Input
-                  variant="glass"
                   type="password"
                   placeholder="Password"
                   icon={<Lock className="h-4 w-4 text-muted-foreground" />}
                 />
-                <Button variant="glass" className="w-full" effect="glow">
+                <Button className="w-full" effect="glow">
                   Sign In
                 </Button>
               </CardContent>
@@ -310,38 +308,37 @@ export default function Home() {
         <section className="container mx-auto px-4 pb-32">
           <div className="max-w-3xl mx-auto text-center mb-14">
             <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-3">
-              Four distinct glass variants
+              Three liquid glass materials
             </h2>
             <p className="text-muted-foreground">
-              Every component ships with Glass, Frosted, Fluted, and Crystal styles.
+              Every component ships with Regular, Clear, and Tinted glass, upgraded to real refraction where WebGL is available.
             </p>
           </div>
 
           <div className="max-w-3xl mx-auto">
-            <Tabs defaultValue="glass">
-              <TabsList variant="glass" className="mb-6 w-full grid grid-cols-4">
-                <TabsTrigger value="glass">Glass</TabsTrigger>
-                <TabsTrigger value="frosted">Frosted</TabsTrigger>
-                <TabsTrigger value="fluted">Fluted</TabsTrigger>
-                <TabsTrigger value="crystal">Crystal</TabsTrigger>
+            <Tabs defaultValue="regular">
+              <TabsList className="mb-6 w-full grid grid-cols-3">
+                <TabsTrigger value="regular">Regular</TabsTrigger>
+                <TabsTrigger value="clear">Clear</TabsTrigger>
+                <TabsTrigger value="tinted">Tinted</TabsTrigger>
               </TabsList>
 
-              {(["glass", "frosted", "fluted", "crystal"] as const).map((v) => (
-                <TabsContent key={v} value={v}>
-                  <Card variant={v}>
+              {(["regular", "clear", "tinted"] as const).map((m) => (
+                <TabsContent key={m} value={m}>
+                  <Card material={m}>
                     <CardHeader>
-                      <CardTitle className="capitalize">{v} Variant</CardTitle>
-                      <CardDescription>See how every primitive adapts to the {v} style.</CardDescription>
+                      <CardTitle className="capitalize">{m} Glass</CardTitle>
+                      <CardDescription>See how every primitive adapts to {m} glass.</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <div className="flex flex-wrap gap-2">
-                        <Badge variant={v}>Badge</Badge>
-                        <Badge variant={v}>Status</Badge>
-                        <Badge variant={v}>Tag</Badge>
+                        <Badge material={m}>Badge</Badge>
+                        <Badge material={m}>Status</Badge>
+                        <Badge material={m}>Tag</Badge>
                       </div>
-                      <Input variant={v} placeholder={`${v} input...`} />
+                      <Input material={m} placeholder={`${m} input...`} />
                       <div className="flex gap-3">
-                        <Button variant={v} effect="glow" className="flex-1">Primary</Button>
+                        <Button material={m} className="flex-1">Primary</Button>
                         <Button variant="outline" className="flex-1">Secondary</Button>
                       </div>
                     </CardContent>
@@ -366,25 +363,25 @@ export default function Home() {
           <div className="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
             <Dialog>
               <DialogTrigger asChild>
-                <button className="glass-bg rounded-lg py-6 px-4 text-center transition-transform hover:scale-[1.02] active:scale-[0.98]">
+                <button className="lg lg-regular lg-surface rounded-lg py-6 px-4 text-center transition-transform hover:scale-[1.02] active:scale-[0.98]">
                   <div className="font-semibold text-foreground">Open Dialog</div>
                   <div className="text-xs text-muted-foreground mt-1">Glass modal overlay</div>
                 </button>
               </DialogTrigger>
-              <DialogContent variant="frosted" className="max-w-md">
+              <DialogContent className="max-w-md">
                 <DialogHeader>
                   <DialogTitle>Glass Dialog</DialogTitle>
                   <DialogDescription>
-                    A frosted glass modal with form controls inside.
+                    A liquid glass modal with form controls inside.
                   </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-4 py-4">
-                  <Input variant="glass" placeholder="Your name" />
+                  <Input placeholder="Your name" />
                   <Select>
-                    <SelectTrigger variant="glass">
+                    <SelectTrigger>
                       <SelectValue placeholder="Pick an option" />
                     </SelectTrigger>
-                    <SelectContent variant="glass">
+                    <SelectContent>
                       <SelectItem value="a">Option A</SelectItem>
                       <SelectItem value="b">Option B</SelectItem>
                       <SelectItem value="c">Option C</SelectItem>
@@ -392,14 +389,14 @@ export default function Home() {
                   </Select>
                   <div className="flex gap-2 justify-end">
                     <Button variant="outline">Cancel</Button>
-                    <Button variant="glass" effect="glow">Confirm</Button>
+                    <Button effect="glow">Confirm</Button>
                   </div>
                 </div>
               </DialogContent>
             </Dialog>
 
             <button
-              className="glass-bg rounded-lg py-6 px-4 text-center transition-transform hover:scale-[1.02] active:scale-[0.98]"
+              className="lg lg-regular lg-surface rounded-lg py-6 px-4 text-center transition-transform hover:scale-[1.02] active:scale-[0.98]"
               onClick={() =>
                 toast.success("Success!", {
                   description: "This is a glass toast notification.",
@@ -411,7 +408,7 @@ export default function Home() {
             </button>
 
             <button
-              className="glass-bg rounded-lg py-6 px-4 text-center transition-transform hover:scale-[1.02] active:scale-[0.98]"
+              className="lg lg-regular lg-surface rounded-lg py-6 px-4 text-center transition-transform hover:scale-[1.02] active:scale-[0.98]"
               onClick={() =>
                 toast("New update available", {
                   description: "Glass UI v2.0 includes 10 new components.",
@@ -448,8 +445,8 @@ export default function Home() {
               },
               {
                 icon: Palette,
-                title: "4 Variants",
-                desc: "Glass, Frosted, Fluted, and Crystal. Each component adapts to every variant automatically.",
+                title: "3 Materials",
+                desc: "Regular, Clear, and Tinted liquid glass. Every component adapts to each material automatically.",
               },
               {
                 icon: Layers,
@@ -462,8 +459,8 @@ export default function Home() {
                 desc: "Built on Radix UI primitives with full keyboard navigation and screen reader support.",
               },
             ].map((f) => (
-              <div key={f.title} className="glass-bg rounded-xl p-6 text-center">
-                <div className="glass-bg w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <div key={f.title} className="lg lg-regular lg-surface rounded-xl p-6 text-center">
+                <div className="lg lg-regular lg-surface w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <f.icon className="h-6 w-6 text-foreground" />
                 </div>
                 <h3 className="font-semibold text-foreground mb-2">{f.title}</h3>
@@ -484,7 +481,7 @@ export default function Home() {
               Works with any Next.js + shadcn/ui project.
             </p>
             <div className="flex items-center justify-center gap-4 flex-wrap">
-              <Button asChild size="lg" variant="glass" effect="glow">
+              <Button asChild size="lg" effect="glow">
                 <Link href="/docs/getting-started">
                   Read the Docs
                   <ArrowRight className="ml-2 h-4 w-4" />

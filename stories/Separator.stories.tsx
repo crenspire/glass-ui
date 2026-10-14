@@ -47,7 +47,7 @@ export const Vertical: Story = {
 
 export const InCard: Story = {
   render: () => (
-    <div className="w-[350px] glass-bg backdrop-blur-[var(--blur)] border border-[var(--glass-border)] rounded-lg p-6 space-y-4">
+    <div className="w-[350px] lg lg-regular lg-surface p-6 space-y-4">
       <div className="space-y-1">
         <h4 className="text-sm font-medium leading-none">radix-ui/primitives</h4>
         <p className="text-sm text-muted-foreground">
