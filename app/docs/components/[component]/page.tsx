@@ -9,8 +9,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Copy, Check, BookOpen } from "lucide-react"
 import * as React from "react"
 import { getComponent } from "@/lib/registry"
-import { ComponentPreview } from "@/components/component-preview"
-import { getComponentExampleCode } from "@/lib/component-examples"
+import { useDemo } from "@/components/demos/use-demo"
+import { Skeleton } from "@/components/ui/skeleton"
 import { InstallationInstructions } from "@/components/installation-instructions"
 import { getStorybookUrl } from "@/lib/storybook-url"
 
@@ -51,12 +51,12 @@ export default function ComponentPage({
 }) {
   const { component: componentName } = use(params)
   const component = getComponent(componentName)
+  const demo = useDemo(componentName)
 
   if (!component) {
     notFound()
   }
 
-  const exampleCode = getComponentExampleCode(component.name)
 
   return (
     <div className="text-foreground">
@@ -112,11 +112,11 @@ export default function ComponentPage({
               </TabsList>
               <TabsContent value="example" className="space-y-4">
                 <div className="p-4 border border-border rounded-lg bg-muted/20">
-                  <ComponentPreview componentName={component.name} />
+                  {demo ? <demo.default /> : <Skeleton className="h-24 w-full" />}
                 </div>
               </TabsContent>
               <TabsContent value="code">
-                <CodeBlock code={exampleCode} />
+                <CodeBlock code={demo?.code ?? ""} />
               </TabsContent>
             </Tabs>
           </CardContent>
