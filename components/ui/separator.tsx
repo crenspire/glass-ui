@@ -7,19 +7,12 @@ import { cn } from "@/lib/utils"
 
 const Separator = React.forwardRef<
   React.ElementRef<typeof SeparatorPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root> & {
-    variant?: "default" | "glass"
-  }
+  React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root>
 >(
   (
-    { className, orientation = "horizontal", decorative = true, variant = "glass", ...props },
+    { className, orientation = "horizontal", decorative = true, ...props },
     ref
   ) => {
-    const variants = {
-      default: "bg-border",
-      glass: "bg-[var(--glass-border)]",
-    }
-    
     return (
       <SeparatorPrimitive.Root
         ref={ref}
@@ -28,7 +21,7 @@ const Separator = React.forwardRef<
         className={cn(
           "shrink-0",
           orientation === "horizontal" ? "h-[1px] w-full" : "h-full w-[1px]",
-          variants[variant],
+          "bg-foreground/10",
           className
         )}
         {...props}

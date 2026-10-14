@@ -5,6 +5,7 @@ import * as ContextMenuPrimitive from "@radix-ui/react-context-menu"
 import { Check, ChevronRight, Circle } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
 const ContextMenu = ContextMenuPrimitive.Root
 
@@ -27,7 +28,7 @@ const ContextMenuSubTrigger = React.forwardRef<
   <ContextMenuPrimitive.SubTrigger
     ref={ref}
     className={cn(
-      "flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent data-[state=open]:bg-accent",
+      "flex cursor-default select-none items-center rounded-lg px-2 py-1.5 text-sm outline-none focus:bg-accent data-[state=open]:bg-accent",
       inset && "pl-8",
       className
     )}
@@ -41,29 +42,21 @@ ContextMenuSubTrigger.displayName = ContextMenuPrimitive.SubTrigger.displayName
 
 const ContextMenuSubContent = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.SubContent>,
-  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.SubContent> & {
-    variant?: "default" | "glass" | "glassSubtle" | "frosted" | "fluted" | "crystal"
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.SubContent> & LiquidProps & {
+    variant?: "liquid" | "default"
   }
->(({ className, variant = "glass", ...props }, ref) => {
-  const getVariantClass = () => {
-    if (variant === "default") return "bg-popover text-popover-foreground border"
-    
-    const variants = {
-      glass: "glass-bg backdrop-blur-[var(--blur)] border border-[var(--glass-border)] text-foreground shadow-[var(--glass-shadow)]",
-      glassSubtle: "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] text-foreground shadow-[var(--glass-shadow)] opacity-50",
-      frosted: "glass-frosted backdrop-blur-[var(--blur-frosted)] border border-[var(--glass-frosted-border)] text-foreground shadow-[var(--glass-frosted-shadow)]",
-      fluted: "glass-fluted backdrop-blur-[var(--blur)] border border-[var(--glass-border)] text-foreground shadow-[var(--glass-shadow)]",
-      crystal: "glass-crystal backdrop-blur-[var(--blur-crystal)] border border-[var(--glass-crystal-border)] text-foreground shadow-[var(--glass-crystal-shadow)]",
-    }
-    return variants[variant] || variants.glass
-  }
+>(({ className, variant, material, tint, glass, webgl, style, ...props }, ref) => {
+  const v = resolveVariant<"liquid" | "default">(variant, material)
+  const lg = v.variant === "liquid" ? liquidProps({ role: "overlay", material: v.material, tint, glass, webgl }, { className: "rounded-2xl" }) : null
   
   return (
     <ContextMenuPrimitive.SubContent
       ref={ref}
+      {...lg}
+      style={{ ...lg?.style, ...style }}
       className={cn(
-        "z-50 min-w-[8rem] overflow-hidden rounded-md p-1 shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-        getVariantClass(),
+        "z-50 min-w-[8rem] overflow-hidden p-1 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+        lg ? lg.className : "bg-popover text-popover-foreground border rounded-md shadow-lg",
         className
       )}
       {...props}
@@ -74,30 +67,22 @@ ContextMenuSubContent.displayName = ContextMenuPrimitive.SubContent.displayName
 
 const ContextMenuContent = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Content> & {
-    variant?: "default" | "glass" | "glassSubtle" | "frosted" | "fluted" | "crystal"
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Content> & LiquidProps & {
+    variant?: "liquid" | "default"
   }
->(({ className, variant = "glass", ...props }, ref) => {
-  const getVariantClass = () => {
-    if (variant === "default") return "bg-popover text-popover-foreground border"
-    
-    const variants = {
-      glass: "glass-bg backdrop-blur-[var(--blur)] border border-[var(--glass-border)] text-foreground shadow-[var(--glass-shadow)]",
-      glassSubtle: "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] text-foreground shadow-[var(--glass-shadow)] opacity-50",
-      frosted: "glass-frosted backdrop-blur-[var(--blur-frosted)] border border-[var(--glass-frosted-border)] text-foreground shadow-[var(--glass-frosted-shadow)]",
-      fluted: "glass-fluted backdrop-blur-[var(--blur)] border border-[var(--glass-border)] text-foreground shadow-[var(--glass-shadow)]",
-      crystal: "glass-crystal backdrop-blur-[var(--blur-crystal)] border border-[var(--glass-crystal-border)] text-foreground shadow-[var(--glass-crystal-shadow)]",
-    }
-    return variants[variant] || variants.glass
-  }
+>(({ className, variant, material, tint, glass, webgl, style, ...props }, ref) => {
+  const v = resolveVariant<"liquid" | "default">(variant, material)
+  const lg = v.variant === "liquid" ? liquidProps({ role: "overlay", material: v.material, tint, glass, webgl }, { className: "rounded-2xl" }) : null
   
   return (
     <ContextMenuPrimitive.Portal>
       <ContextMenuPrimitive.Content
         ref={ref}
+        {...lg}
+        style={{ ...lg?.style, ...style }}
         className={cn(
-          "z-50 min-w-[8rem] overflow-hidden rounded-md p-1 shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-          getVariantClass(),
+          "z-50 min-w-[8rem] overflow-hidden p-1 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+          lg ? lg.className : "bg-popover text-popover-foreground border rounded-md shadow-md",
           className
         )}
         {...props}
@@ -116,7 +101,7 @@ const ContextMenuItem = React.forwardRef<
   <ContextMenuPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "relative flex cursor-default select-none items-center rounded-lg px-2 py-1.5 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       inset && "pl-8",
       className
     )}

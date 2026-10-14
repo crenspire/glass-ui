@@ -4,7 +4,7 @@ This folder contains the main designed components for Glass UI. These components
 
 ## Architecture
 
-- **Base Components** (`../`): Foundation components with glassy variants
+- **Base Components** (`../`): Foundation components with the liquid glass material (`material`, `tint`, `glass` props)
 - **Glass UI Components** (`./glass/`): Designed components that use base components with enhanced styling
 
 ## Usage
@@ -12,10 +12,9 @@ This folder contains the main designed components for Glass UI. These components
 ```tsx
 import { Button, Card, Input, CardHeader, CardTitle } from "@/components/ui/glass"
 
-// Use Glass UI components
-<Button effect="glow" variant="glass">
-  Click me
-</Button>
+// Liquid glass by default; pick a material per component
+<Button effect="glow">Click me</Button>
+<Button material="tinted">Continue</Button>
 
 <Card gradient animated>
   <CardHeader>
@@ -23,6 +22,9 @@ import { Button, Card, Input, CardHeader, CardTitle } from "@/components/ui/glas
   </CardHeader>
 </Card>
 ```
+
+See [GLASS_CUSTOMIZATION.md](./GLASS_CUSTOMIZATION.md) for materials, roles and CSS variables, and
+[../liquid/README.md](../liquid/README.md) for WebGL refraction.
 
 ## Component Pattern
 

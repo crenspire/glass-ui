@@ -6,33 +6,26 @@ import { Command as CommandPrimitive } from "cmdk"
 import { Search } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 
 const Command = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive>,
-  React.ComponentPropsWithoutRef<typeof CommandPrimitive> & {
-    variant?: "default" | "glass" | "glassSubtle" | "frosted" | "fluted" | "crystal"
+  React.ComponentPropsWithoutRef<typeof CommandPrimitive> & LiquidProps & {
+    variant?: "liquid" | "default"
   }
->(({ className, variant = "glass", ...props }, ref) => {
-  const getVariantClass = () => {
-    if (variant === "default") return "bg-popover text-popover-foreground"
-    
-    const variants = {
-      glass: "glass-bg backdrop-blur-[var(--blur)] border border-[var(--glass-border)] text-foreground shadow-[var(--glass-shadow)]",
-      glassSubtle: "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] text-foreground shadow-[var(--glass-shadow)] opacity-50",
-      frosted: "glass-frosted backdrop-blur-[var(--blur-frosted)] border border-[var(--glass-frosted-border)] text-foreground shadow-[var(--glass-frosted-shadow)]",
-      fluted: "glass-fluted backdrop-blur-[var(--blur)] border border-[var(--glass-border)] text-foreground shadow-[var(--glass-shadow)]",
-      crystal: "glass-crystal backdrop-blur-[var(--blur-crystal)] border border-[var(--glass-crystal-border)] text-foreground shadow-[var(--glass-crystal-shadow)]",
-    }
-    return variants[variant] || variants.glass
-  }
+>(({ className, variant, material, tint, glass, webgl, style, ...props }, ref) => {
+  const v = resolveVariant<"liquid" | "default">(variant, material)
+  const lg = v.variant === "liquid" ? liquidProps({ role: "overlay", material: v.material, tint, glass, webgl }) : null
   
   return (
     <CommandPrimitive
       ref={ref}
+      {...lg}
+      style={{ ...lg?.style, ...style }}
       className={cn(
-        "flex h-full w-full flex-col overflow-hidden rounded-md",
-        getVariantClass(),
+        "flex h-full w-full flex-col overflow-hidden",
+        lg ? lg.className : "bg-popover text-popover-foreground rounded-md",
         className
       )}
       {...props}
@@ -133,7 +126,7 @@ const CommandItem = React.forwardRef<
   <CommandPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "relative flex cursor-default select-none items-center rounded-lg px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       className
     )}
     {...props}

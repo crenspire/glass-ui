@@ -5,22 +5,18 @@ import { OTPInput, type SlotProps } from "input-otp"
 import { Dot } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
 const InputOTP = React.forwardRef<
   React.ElementRef<typeof OTPInput>,
-  React.ComponentPropsWithoutRef<typeof OTPInput> & {
-    variant?: "default" | "glass"
+  React.ComponentPropsWithoutRef<typeof OTPInput> & LiquidProps & {
+    variant?: "liquid" | "default"
   }
->(({ className, variant = "glass", render, ...props }, ref) => {
-  const variants = {
-    default: "",
-    glass: "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] shadow-[var(--glass-shadow-sm)]",
-  }
-  
+>(({ className, variant, material, tint, glass, webgl, render, ...props }, ref) => {
   const defaultRender = ({ slots }: { slots: SlotProps[] }) => (
     <InputOTPGroup variant={variant}>
       {slots.map((slot, index) => (
-        <InputOTPSlot key={index} {...slot} variant={variant} />
+        <InputOTPSlot key={index} {...slot} variant={variant} material={material} tint={tint} glass={glass} webgl={webgl} />
       ))}
     </InputOTPGroup>
   )
@@ -28,7 +24,7 @@ const InputOTP = React.forwardRef<
   return (
     <OTPInput
       ref={ref}
-      containerClassName={cn("flex items-center gap-2", variants[variant], className)}
+      containerClassName={cn("flex items-center gap-2", className)}
       render={render || defaultRender}
       {...props}
     />
@@ -39,36 +35,36 @@ InputOTP.displayName = "InputOTP"
 const InputOTPGroup = React.forwardRef<
   React.ElementRef<"div">,
   React.ComponentPropsWithoutRef<"div"> & {
-    variant?: "default" | "glass"
+    /** Kept for API compatibility; the group has no glass of its own. */
+    variant?: "liquid" | "default"
   }
->(({ className, variant = "glass", ...props }, ref) => {
-  const variants = {
-    default: "flex items-center gap-1",
-    glass: "flex items-center gap-1",
-  }
-  
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+>(({ className, variant, ...props }, ref) => {
   return (
-    <div ref={ref} className={cn(variants[variant], className)} {...props} />
+    <div ref={ref} className={cn("flex items-center gap-1", className)} {...props} />
   )
 })
 InputOTPGroup.displayName = "InputOTPGroup"
 
 const InputOTPSlot = React.forwardRef<
   React.ElementRef<"div">,
-  SlotProps & React.ComponentPropsWithoutRef<"div"> & {
-    variant?: "default" | "glass"
+  SlotProps & React.ComponentPropsWithoutRef<"div"> & LiquidProps & {
+    variant?: "liquid" | "default"
   }
->(({ variant = "glass", className, char, isActive, hasFakeCaret, placeholderChar = "○", ...props }, ref) => {
-  const variants = {
-    default: "relative flex h-12 w-12 items-center justify-center border-y border-r border-input text-foreground text-lg font-semibold transition-all first:rounded-l-md first:border-l last:rounded-r-md",
-    glass: "relative flex h-12 w-12 items-center justify-center border-y border-r border-[var(--glass-border)] glass-bg backdrop-blur-[var(--blur-sm)] text-foreground text-lg font-semibold transition-all first:rounded-l-md first:border-l last:rounded-r-md",
-  }
+>(({ variant, material, tint, glass, webgl, style, className, char, isActive, hasFakeCaret, placeholderChar = "○", ...props }, ref) => {
+  const v = resolveVariant<"liquid" | "default">(variant, material)
+  const base = "relative flex h-12 w-12 items-center justify-center text-foreground text-lg font-semibold transition-all"
+  const own = v.variant === "liquid"
+    ? liquidProps({ role: "inline", material: v.material, tint, glass, webgl }, { className: "rounded-xl", style })
+    : { className: "border-y border-r border-input first:rounded-l-md first:border-l last:rounded-r-md", style }
 
   return (
     <div
       ref={ref}
+      {...own}
       className={cn(
-        variants[variant],
+        base,
+        own.className,
         isActive && "z-10 ring-2 ring-ring ring-offset-background opacity-100",
         !char && !isActive && "opacity-70",
         className

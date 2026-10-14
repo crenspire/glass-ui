@@ -35,13 +35,11 @@ const Toaster = ({ ...props }: ToasterProps) => {
       className="toaster group"
       toastOptions={{
         classNames: {
-          toast:
-            "group toast group-[.toaster]:glass-bg group-[.toaster]:backdrop-blur-[var(--blur)] group-[.toaster]:border group-[.toaster]:border-[var(--glass-border)] group-[.toaster]:shadow-[var(--glass-shadow-lg)] group-[.toaster]:text-foreground",
+          toast: "group toast lg lg-regular lg-overlay text-foreground",
           description: "group-[.toast]:text-muted-foreground",
-          actionButton:
-            "group-[.toast]:glass-bg group-[.toast]:backdrop-blur-[var(--blur-sm)] group-[.toast]:border group-[.toast]:border-[var(--glass-border)] group-[.toast]:text-foreground group-[.toast]:hover:opacity-90",
-          cancelButton:
-            "group-[.toast]:glass-bg group-[.toast]:backdrop-blur-[var(--blur-sm)] group-[.toast]:border group-[.toast]:border-[var(--glass-border)] group-[.toast]:text-muted-foreground group-[.toast]:hover:opacity-90",
+          actionButton: "lg lg-regular lg-inline",
+          cancelButton: "lg lg-regular lg-inline",
+          closeButton: "lg lg-regular lg-inline",
           success: "group-[.toast]:border-green-500/30",
           error: "group-[.toast]:border-red-500/30",
           warning: "group-[.toast]:border-yellow-500/30",

@@ -20,9 +20,9 @@ export const GlassRight: Story = {
   render: () => (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="glass">Open Sheet (Right)</Button>
+        <Button>Open Sheet (Right)</Button>
       </SheetTrigger>
-      <SheetContent variant="glass" side="right">
+      <SheetContent side="right">
         <SheetHeader>
           <SheetTitle>Edit profile</SheetTitle>
           <SheetDescription>
@@ -32,14 +32,14 @@ export const GlassRight: Story = {
         <div className="grid gap-4 py-4">
           <div className="grid gap-2">
             <Label htmlFor="name">Name</Label>
-            <Input id="name" placeholder="Your name" variant="glass" />
+            <Input id="name" placeholder="Your name" />
           </div>
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="email@example.com" variant="glass" />
+            <Input id="email" type="email" placeholder="email@example.com" />
           </div>
         </div>
-        <Button variant="glass" className="w-full">Save changes</Button>
+        <Button className="w-full">Save changes</Button>
       </SheetContent>
     </Sheet>
   ),
@@ -49,9 +49,9 @@ export const FrostedLeft: Story = {
   render: () => (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="frosted">Open Sheet (Left)</Button>
+        <Button>Open Sheet (Left)</Button>
       </SheetTrigger>
-      <SheetContent variant="frosted" side="left">
+      <SheetContent side="left">
         <SheetHeader>
           <SheetTitle>Frosted Sheet</SheetTitle>
           <SheetDescription>
@@ -72,9 +72,9 @@ export const CrystalTop: Story = {
   render: () => (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="crystal">Open Sheet (Top)</Button>
+        <Button material="clear">Open Sheet (Top)</Button>
       </SheetTrigger>
-      <SheetContent variant="crystal" side="top">
+      <SheetContent material="clear" side="top">
         <SheetHeader>
           <SheetTitle>Crystal Sheet</SheetTitle>
           <SheetDescription>
@@ -95,9 +95,9 @@ export const GlassBottom: Story = {
   render: () => (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="glass">Open Sheet (Bottom)</Button>
+        <Button>Open Sheet (Bottom)</Button>
       </SheetTrigger>
-      <SheetContent variant="glass" side="bottom">
+      <SheetContent side="bottom">
         <SheetHeader>
           <SheetTitle>Bottom Sheet</SheetTitle>
           <SheetDescription>

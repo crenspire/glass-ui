@@ -1,56 +1,27 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
-import { getGlassStyles, type GlassCustomization } from "@/lib/glass-utils"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
-function Card({ 
-  className, 
-  variant = "glass",
+function Card({
+  className,
+  variant,
+  material,
+  tint,
   glass,
+  webgl,
   style,
-  ...props 
-}: React.ComponentProps<"div"> & {
-  variant?: "default" | "glass" | "glassSubtle" | "frosted" | "fluted" | "crystal"
-  glass?: GlassCustomization
+  ...props
+}: React.ComponentProps<"div"> & LiquidProps & {
+  variant?: "liquid" | "default"
 }) {
-  // When custom glass props are provided, use base glass-bg class and apply custom styles
-  // Otherwise use the variant-specific class
-  const hasCustomGlass = glass !== undefined
-  
-  const getVariantClass = () => {
-    if (variant === "default") return "bg-card text-card-foreground border shadow-sm"
-    if (hasCustomGlass) return "glass-bg text-foreground" // Use base glass class when customizing
-    
-    // Use variant-specific classes only when no custom glass props
-    const variants = {
-      glass: "glass-bg text-foreground",
-      glassSubtle: "glass-bg text-foreground opacity-50 backdrop-blur-[var(--blur-sm)]",
-      frosted: "glass-frosted text-foreground",
-      fluted: "glass-fluted text-foreground",
-      crystal: "glass-crystal text-foreground",
-    }
-    return variants[variant] || variants.glass
-  }
-  
-  const glassStyles = variant !== "default"
-    ? getGlassStyles(glass) 
-    : {}
-  
-  return (
-    <div
-      data-slot="card"
-      className={cn(
-        "flex flex-col gap-6 rounded-xl py-6",
-        getVariantClass(),
-        className
-      )}
-      style={{
-        ...glassStyles,
-        ...style,
-      }}
-      {...props}
-    />
-  )
+  const v = resolveVariant<"liquid" | "default">(variant, material)
+  const base = "flex flex-col gap-6 py-6"
+  const own = v.variant === "liquid"
+    ? liquidProps({ role: "surface", material: v.material, tint, glass, webgl }, { className: cn(base, className), style })
+    : { className: cn(base, "rounded-xl bg-card text-card-foreground border shadow-sm", className), style }
+
+  return <div data-slot="card" {...own} {...props} />
 }
 
 function CardHeader({ className, ...props }: React.ComponentProps<"div">) {

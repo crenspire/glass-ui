@@ -11,7 +11,11 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'glass', 'glassSubtle', 'frosted', 'fluted', 'crystal'],
+      options: ['liquid', 'default'],
+    },
+    material: {
+      control: 'select',
+      options: ['regular', 'clear', 'tinted'],
     },
   },
 } satisfies Meta<typeof Table>;
@@ -54,7 +58,7 @@ const invoices = [
 
 export const Glass: Story = {
   render: () => (
-    <Table variant="glass">
+    <Table>
       <TableCaption>A list of your recent invoices.</TableCaption>
       <TableHeader>
         <TableRow>
@@ -80,7 +84,7 @@ export const Glass: Story = {
 
 export const Frosted: Story = {
   render: () => (
-    <Table variant="frosted">
+    <Table>
       <TableCaption>Recent transactions with frosted glass effect.</TableCaption>
       <TableHeader>
         <TableRow>
@@ -106,7 +110,7 @@ export const Frosted: Story = {
 
 export const Crystal: Story = {
   render: () => (
-    <Table variant="crystal">
+    <Table material="clear">
       <TableCaption>Premium table with crystal glass effect.</TableCaption>
       <TableHeader>
         <TableRow>
@@ -132,7 +136,7 @@ export const Crystal: Story = {
 
 export const Simple: Story = {
   render: () => (
-    <Table variant="glass">
+    <Table>
       <TableHeader>
         <TableRow>
           <TableHead>Name</TableHead>

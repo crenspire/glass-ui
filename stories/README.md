@@ -66,28 +66,20 @@ Storybook will start on `http://localhost:6006`
 - 🌓 **Theme Support** - Test in light and dark modes
 - 📱 **Responsive** - Test different viewport sizes
 
-## 🎨 Glass Variants
+## 🎨 Glass Materials
 
-All components support these glass variants:
+All glass components take a `material` prop:
 
-- **glass** - Base glass effect with balanced blur and transparency
-- **glassSubtle** - Subtle glass with reduced opacity
-- **frosted** - Frosted glass with stronger blur
-- **fluted** - Textured glass with unique pattern
-- **crystal** - Crystal clear with layered effects and animations
+- **regular** (default) - Frosted liquid glass
+- **clear** - Barely frosted, the most see-through
+- **tinted** - Washed with a colour (`tint`, the primary colour by default)
 
 ## 🛠️ Custom Glass Properties
 
-Many components accept a `glass` prop for fine-tuned customization:
+Any glass component accepts a `glass` prop to override its tint and frost:
 
 ```tsx
-glass={{
-  color: "rgba(139, 92, 246, 0.15)",
-  blur: 25,
-  outline: "rgba(139, 92, 246, 0.4)",
-  innerGlow: "rgba(255, 255, 255, 0.2)",
-  innerGlowBlur: 20
-}}
+glass={{ tint: "rgba(139, 92, 246, 0.6)", frost: 0.5 }}
 ```
 
 ## 📝 Adding New Stories
@@ -127,7 +119,7 @@ export const Default: Story = {
 ## 🎯 Best Practices
 
 1. **Use Backgrounds** - Test components on different backgrounds using the toolbar
-2. **Test Variants** - Try all glass variants to find the perfect look
+2. **Test Materials** - Try regular, clear and tinted glass to find the perfect look
 3. **Check Accessibility** - Use the a11y addon to ensure components are accessible
 4. **Responsive Testing** - Check components on different screen sizes
 5. **Interactive States** - Test hover, focus, and disabled states

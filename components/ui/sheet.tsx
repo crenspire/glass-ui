@@ -6,6 +6,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
 const Sheet = DialogPrimitive.Root
 
@@ -31,7 +32,7 @@ const SheetOverlay = React.forwardRef<
 SheetOverlay.displayName = DialogPrimitive.Overlay.displayName
 
 const sheetVariants = cva(
-  "fixed z-50 gap-4 bg-background p-6 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out",
+  "fixed z-50 gap-4 p-6 transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out",
   {
     variants: {
       side: {
@@ -51,35 +52,33 @@ const sheetVariants = cva(
 
 interface SheetContentProps
   extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>,
-    VariantProps<typeof sheetVariants> {
-  variant?: "default" | "glass" | "glassSubtle" | "frosted" | "fluted" | "crystal"
+    VariantProps<typeof sheetVariants>,
+    LiquidProps {
+  variant?: "liquid" | "default"
+}
+
+// Liquid sheets float inset from the edge they slide in from, rounded on the open sides.
+const liquidSide = {
+  top: "top-2 inset-x-2 border-b-0",
+  bottom: "bottom-2 inset-x-2 border-t-0",
+  left: "left-2 inset-y-2 h-[calc(100%-1rem)] border-r-0",
+  right: "right-2 inset-y-2 h-[calc(100%-1rem)] border-l-0",
 }
 
 const SheetContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   SheetContentProps
->(({ side = "right", variant = "glass", className, children, ...props }, ref) => {
-  const getVariantClass = () => {
-    if (variant === "default") return "bg-background border"
-    
-    const variants = {
-      glass: "glass-bg backdrop-blur-[var(--blur-lg)] border border-[var(--glass-border)] text-foreground shadow-[var(--glass-shadow-lg)]",
-      glassSubtle: "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] text-foreground shadow-[var(--glass-shadow-lg)] opacity-50",
-      frosted: "glass-frosted backdrop-blur-[var(--blur-frosted)] border border-[var(--glass-frosted-border)] text-foreground shadow-[var(--glass-frosted-shadow)]",
-      fluted: "glass-fluted backdrop-blur-[var(--blur)] border border-[var(--glass-border)] text-foreground shadow-[var(--glass-shadow-lg)]",
-      crystal: "glass-crystal backdrop-blur-[var(--blur-crystal)] border border-[var(--glass-crystal-border)] text-foreground shadow-[var(--glass-crystal-shadow)]",
-    }
-    return variants[variant] || variants.glass
-  }
-  
+>(({ side = "right", variant, material, tint, glass, webgl, className, style, children, ...props }, ref) => {
+  const v = resolveVariant<"liquid" | "default">(variant, material)
+  const base = sheetVariants({ side })
+  const own = v.variant === "liquid"
+    ? liquidProps({ role: "sheet", material: v.material, tint, glass, webgl }, { className: cn(base, liquidSide[side ?? "right"], className), style })
+    : { className: cn(base, "bg-background shadow-lg", className), style }
+
   return (
     <SheetPortal>
       <SheetOverlay />
-      <DialogPrimitive.Content
-        ref={ref}
-        className={cn(sheetVariants({ side }), getVariantClass(), className)}
-        {...props}
-      >
+      <DialogPrimitive.Content ref={ref} {...own} {...props}>
         {children}
         <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
           <X className="h-4 w-4" />

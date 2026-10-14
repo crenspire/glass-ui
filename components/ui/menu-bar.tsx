@@ -2,46 +2,29 @@
 
 import * as React from "react"
 import { cn } from "@/lib/utils"
-import { getGlassStyles, type GlassCustomization } from "@/lib/glass-utils"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 import { Button } from "@/components/ui/button"
 
-export interface MenuBarProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: "default" | "glass" | "glassSubtle" | "frosted" | "fluted" | "crystal"
-  glass?: GlassCustomization
+export interface MenuBarProps extends React.HTMLAttributes<HTMLDivElement>, LiquidProps {
+  variant?: "liquid" | "default"
 }
 
 const MenuBar = React.forwardRef<HTMLDivElement, MenuBarProps>(
-  ({ className, variant = "glass", glass, children, ...props }, ref) => {
-    const hasCustomGlass = glass !== undefined
-    
-    const getVariantClass = () => {
-      if (variant === "default") return "bg-card text-card-foreground border shadow-sm"
-      if (hasCustomGlass) return "glass-bg text-foreground"
-      
-      const variants = {
-        glass: "glass-bg text-foreground",
-        glassSubtle: "glass-bg text-foreground opacity-50",
-        frosted: "glass-frosted text-foreground",
-        fluted: "glass-fluted text-foreground",
-        crystal: "glass-crystal text-foreground",
-      }
-      return variants[variant] || variants.glass
-    }
-    
-    const glassStyles = variant !== "default" ? getGlassStyles(glass) : {}
+  ({ className, variant, material, tint, glass, webgl, style, children, ...props }, ref) => {
+    const v = resolveVariant<"liquid" | "default">(variant, material)
+    const lg = v.variant === "liquid" ? liquidProps({ role: "bar", material: v.material, tint, glass, webgl }) : null
     
     return (
       <div
         ref={ref}
         role="menubar"
+        {...lg}
         className={cn(
-          "inline-flex items-center gap-1 rounded-md p-1",
-          getVariantClass(),
+          "inline-flex items-center gap-1 p-1",
+          lg ? lg.className : "bg-card text-card-foreground border shadow-sm rounded-md",
           className
         )}
-        style={{
-          ...glassStyles,
-        }}
+        style={{ ...lg?.style, ...style }}
         {...props}
       >
         {children}

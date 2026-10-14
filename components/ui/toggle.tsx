@@ -5,42 +5,51 @@ import * as TogglePrimitive from "@radix-ui/react-toggle"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
 const toggleVariants = cva(
-  "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=on]:bg-accent data-[state=on]:text-accent-foreground",
+  "inline-flex items-center justify-center text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
-        default: "bg-transparent",
+        liquid: "data-[state=on]:text-primary data-[state=on]:[--lg-tint:var(--primary)] data-[state=on]:[--lg-tint-amt:22%]",
+        default: "rounded-md bg-transparent hover:bg-accent hover:text-accent-foreground data-[state=on]:bg-accent data-[state=on]:text-accent-foreground",
         outline:
-          "border border-input bg-transparent hover:bg-accent hover:text-accent-foreground",
-        glass:
-          "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] hover:opacity-90 shadow-[var(--glass-shadow-sm)]",
+          "rounded-md border border-input bg-transparent hover:bg-accent hover:text-accent-foreground data-[state=on]:bg-accent data-[state=on]:text-accent-foreground",
       },
       size: {
-        default: "h-10 px-3",
-        sm: "h-9 px-2.5",
-        lg: "h-11 px-5",
+        default: "h-11 px-4",
+        sm: "h-9 px-3",
+        lg: "h-13 px-5",
       },
     },
     defaultVariants: {
-      variant: "glass",
+      variant: "liquid",
       size: "default",
     },
   }
 )
 
+type ToggleVariant = NonNullable<VariantProps<typeof toggleVariants>["variant"]>
+
 const Toggle = React.forwardRef<
   React.ElementRef<typeof TogglePrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof TogglePrimitive.Root> &
-    VariantProps<typeof toggleVariants>
->(({ className, variant, size, ...props }, ref) => (
-  <TogglePrimitive.Root
-    ref={ref}
-    className={cn(toggleVariants({ variant, size }), className)}
-    {...props}
-  />
-))
+    Omit<VariantProps<typeof toggleVariants>, "variant"> &
+    LiquidProps & { variant?: ToggleVariant | null }
+>(({ className, variant, size, material, tint, glass, webgl, style, ...props }, ref) => {
+  const v = resolveVariant<ToggleVariant>(variant ?? undefined, material)
+  const lg = v.variant === "liquid" ? liquidProps({ role: "control", material: v.material, tint, glass, webgl }) : null
+  return (
+    <TogglePrimitive.Root
+      ref={ref}
+      {...lg}
+      className={cn(toggleVariants({ variant: v.variant, size }), lg?.className, className)}
+      style={{ ...lg?.style, ...style }}
+      {...props}
+    />
+  )
+})
 
 Toggle.displayName = TogglePrimitive.Root.displayName
 

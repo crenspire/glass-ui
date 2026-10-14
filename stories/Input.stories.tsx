@@ -12,7 +12,11 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'glass', 'glassSubtle', 'frosted', 'fluted', 'crystal'],
+      options: ['liquid', 'default'],
+    },
+    material: {
+      control: 'select',
+      options: ['regular', 'clear', 'tinted'],
     },
   },
 } satisfies Meta<typeof Input>;
@@ -23,28 +27,25 @@ type Story = StoryObj<typeof meta>;
 export const Glass: Story = {
   args: {
     placeholder: 'Enter text...',
-    variant: 'glass',
   },
 };
 
 export const Frosted: Story = {
   args: {
     placeholder: 'Frosted input...',
-    variant: 'frosted',
   },
 };
 
 export const Crystal: Story = {
   args: {
     placeholder: 'Crystal input...',
-    variant: 'crystal',
+    material: 'clear',
   },
 };
 
 export const WithIcon: Story = {
   args: {
     placeholder: 'Search...',
-    variant: 'glass',
     icon: <Search className="h-4 w-4" />,
   },
 };
@@ -52,7 +53,6 @@ export const WithIcon: Story = {
 export const WithEmailIcon: Story = {
   args: {
     placeholder: 'Email address...',
-    variant: 'glass',
     icon: <Mail className="h-4 w-4" />,
     type: 'email',
   },
@@ -61,7 +61,6 @@ export const WithEmailIcon: Story = {
 export const Disabled: Story = {
   args: {
     placeholder: 'Disabled input',
-    variant: 'glass',
     disabled: true,
   },
 };

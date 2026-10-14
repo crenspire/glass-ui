@@ -11,14 +11,12 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { cn } from "@/lib/utils"
-import type { GlassCustomization } from "@/lib/glass-utils"
 import { hoverEffects, type HoverEffect } from "@/lib/hover-effects"
 
-export interface DialogContentProps extends Omit<React.ComponentProps<typeof BaseDialogContent>, "glass"> {
-  variant?: "default" | "glass" | "glassSubtle" | "frosted" | "fluted" | "crystal"
+export interface DialogContentProps extends React.ComponentProps<typeof BaseDialogContent> {
+  /** @deprecated No effect: the liquid material carries its own blur. */
   animated?: boolean
   hover?: HoverEffect
-  glass?: GlassCustomization
 }
 
 /**
@@ -26,13 +24,7 @@ export interface DialogContentProps extends Omit<React.ComponentProps<typeof Bas
  * 
  * @example
  * ```tsx
- * <DialogContent 
- *   glass={{
- *     color: "rgba(139, 92, 246, 0.15)",
- *     blur: 40,
- *     outline: "rgba(139, 92, 246, 0.3)"
- *   }}
- * >
+ * <DialogContent glass={{ tint: "rgba(139, 92, 246, 0.5)", frost: 0.6 }}>
  *   Dialog content
  * </DialogContent>
  * ```
@@ -40,15 +32,12 @@ export interface DialogContentProps extends Omit<React.ComponentProps<typeof Bas
 export const DialogContent = React.forwardRef<
   React.ElementRef<typeof BaseDialogContent>,
   DialogContentProps
->(({ className, variant = "glass", animated = true, hover = "none", glass, children, ...props }, ref) => {
+>(({ className, animated: _animated, hover = "none", children, ...props }, ref) => {
   return (
     <BaseDialogContent
       ref={ref}
-      variant={variant}
-      glass={glass}
       className={cn(
         "relative overflow-hidden",
-        animated && "backdrop-blur-[var(--blur-lg)]",
         hoverEffects({ hover }),
         className
       )}

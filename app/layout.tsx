@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/sonner";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
-import { GridBackground } from "@/components/grid-background";
+import { AppFrame } from "@/components/shell/app-frame";
+import { Wallpaper, WallpaperProvider } from "@/components/wallpaper";
+import { LiquidGlassProvider } from "@/components/ui/liquid/liquid-glass-provider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -37,13 +37,13 @@ export default function RootLayout({
           defaultTheme="dark"
           disableTransitionOnChange
         >
-          <GridBackground />
-          {/* <div className="flex min-h-screen flex-col"> */}
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          {/* </div> */}
-          <Toaster />
+          <LiquidGlassProvider>
+            <WallpaperProvider>
+              <Wallpaper />
+              <AppFrame>{children}</AppFrame>
+              <Toaster />
+            </WallpaperProvider>
+          </LiquidGlassProvider>
         </ThemeProvider>
       </body>
     </html>

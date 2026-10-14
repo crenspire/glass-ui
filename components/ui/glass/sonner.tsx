@@ -36,10 +36,10 @@ import { Toaster as BaseToaster } from "@/components/ui/sonner"
  * toast.warning('Warning!', { description: 'Please review' })
  * toast.info('Info', { description: 'Useful information' })
  * 
- * // With custom styling (additional glass variants)
+ * // Clear glass instead of the default regular glass
  * toast('Custom Toast', {
- *   description: 'With custom glass effect',
- *   className: 'glass-frosted backdrop-blur-[var(--blur-frosted)]',
+ *   description: 'With clear glass',
+ *   className: 'lg-clear',
  * })
  * ```
  */

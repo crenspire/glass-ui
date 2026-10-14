@@ -1,24 +1,19 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
-import { getGlassStyles, type GlassCustomization } from "@/lib/glass-utils"
 
 export interface SpinnerProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: "default" | "glass" | "glassSubtle" | "frosted" | "fluted" | "crystal"
   size?: "sm" | "md" | "lg"
-  glass?: GlassCustomization
 }
 
 const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
-  ({ className, variant = "glass", size = "md", glass, ...props }, ref) => {
+  ({ className, size = "md", ...props }, ref) => {
     const sizeClasses = {
       sm: "h-4 w-4 border-2",
       md: "h-8 w-8 border-2",
       lg: "h-12 w-12 border-[3px]",
     }
     
-    // Spinner should always be visible - use primary color for border
-    // The variant is for styling context, but spinner itself should be clearly visible
-    // Use solid primary color for top border (visible part), transparent for others
+    // Solid primary for the visible arc, transparent for the rest
     const borderColor = "border-primary"
     
     return (

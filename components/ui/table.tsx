@@ -1,33 +1,20 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
 const Table = React.forwardRef<
   HTMLTableElement,
-  React.HTMLAttributes<HTMLTableElement> & {
-    variant?: "default" | "glass" | "glassSubtle" | "frosted" | "fluted" | "crystal"
+  React.HTMLAttributes<HTMLTableElement> & LiquidProps & {
+    variant?: "liquid" | "default"
   }
->(({ className, variant = "glass", ...props }, ref) => {
-  const getVariantClass = () => {
-    if (variant === "default") return "w-full caption-bottom text-sm"
-    
-    const variants = {
-      glass: "w-full caption-bottom text-sm glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] rounded-lg overflow-hidden shadow-[var(--glass-shadow-sm)]",
-      glassSubtle: "w-full caption-bottom text-sm glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] rounded-lg overflow-hidden shadow-[var(--glass-shadow-sm)] opacity-50",
-      frosted: "w-full caption-bottom text-sm glass-frosted backdrop-blur-[var(--blur-frosted)] border border-[var(--glass-frosted-border)] rounded-lg overflow-hidden shadow-[var(--glass-frosted-shadow)]",
-      fluted: "w-full caption-bottom text-sm glass-fluted backdrop-blur-[var(--blur)] border border-[var(--glass-border)] rounded-lg overflow-hidden shadow-[var(--glass-shadow-sm)]",
-      crystal: "w-full caption-bottom text-sm glass-crystal backdrop-blur-[var(--blur-crystal)] border border-[var(--glass-crystal-border)] rounded-lg overflow-hidden shadow-[var(--glass-crystal-shadow)]",
-    }
-    return variants[variant] || variants.glass
-  }
-  
+>(({ className, variant, material, tint, glass, webgl, style, ...props }, ref) => {
+  const v = resolveVariant<"liquid" | "default">(variant, material)
+  const table = <table ref={ref} className={cn("w-full caption-bottom text-sm", className)} style={style} {...props} />
+  if (v.variant !== "liquid") return table
   return (
-    <div className={variant !== "default" ? "rounded-lg overflow-hidden" : ""}>
-      <table
-        ref={ref}
-        className={cn(getVariantClass(), className)}
-        {...props}
-      />
+    <div {...liquidProps({ role: "surface", material: v.material, tint, glass, webgl }, { className: "overflow-hidden rounded-[20px]" })}>
+      {table}
     </div>
   )
 })

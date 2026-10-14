@@ -9,10 +9,6 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
-    variant: {
-      control: 'select',
-      options: ['default', 'glass', 'glassSubtle', 'frosted', 'fluted', 'crystal'],
-    },
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg'],
@@ -30,42 +26,38 @@ type Story = StoryObj<typeof meta>;
 
 export const Glass: Story = {
   args: {
-    variant: 'glass',
     size: 'md',
   },
 };
 
 export const Frosted: Story = {
   args: {
-    variant: 'frosted',
     size: 'md',
   },
 };
 
 export const Fluted: Story = {
   args: {
-    variant: 'fluted',
+    material: 'clear',
     size: 'md',
   },
 };
 
 export const Crystal: Story = {
   args: {
-    variant: 'crystal',
+    material: 'clear',
     size: 'md',
   },
 };
 
 export const Small: Story = {
   args: {
-    variant: 'glass',
     size: 'sm',
   },
 };
 
 export const Large: Story = {
   args: {
-    variant: 'glass',
     size: 'lg',
   },
 };

@@ -5,6 +5,7 @@ import * as AccordionPrimitive from "@radix-ui/react-accordion"
 import { ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { resolveVariant } from "@/lib/liquid-glass/material"
 
 const Accordion = AccordionPrimitive.Root
 
@@ -23,13 +24,10 @@ AccordionItem.displayName = "AccordionItem"
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> & {
-    variant?: "default" | "glass"
+    variant?: "liquid" | "default"
   }
->(({ className, variant = "glass", children, ...props }, ref) => {
-  const variants = {
-    default: "hover:bg-accent",
-    glass: "hover:glass-bg hover:opacity-50",
-  }
+>(({ className, variant, children, ...props }, ref) => {
+  const v = resolveVariant<"liquid" | "default">(variant, undefined)
   
   return (
     <AccordionPrimitive.Header className="flex">
@@ -37,7 +35,7 @@ const AccordionTrigger = React.forwardRef<
         ref={ref}
         className={cn(
           "flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180",
-          variants[variant],
+          v.variant === "liquid" ? "rounded-2xl px-3 hover:bg-foreground/5 hover:no-underline" : "hover:bg-accent",
           className
         )}
         {...props}

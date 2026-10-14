@@ -12,7 +12,11 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'glass', 'glassSubtle', 'frosted', 'fluted', 'crystal'],
+      options: ['liquid', 'default'],
+    },
+    material: {
+      control: 'select',
+      options: ['regular', 'clear', 'tinted'],
     },
   },
 } satisfies Meta<typeof Command>;
@@ -22,7 +26,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Glass: Story = {
   render: () => (
-    <Command variant="glass" className="rounded-lg border shadow-md w-[450px]">
+    <Command className="rounded-lg border shadow-md w-[450px]">
       <CommandInput placeholder="Type a command or search..." />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
@@ -65,7 +69,7 @@ export const Glass: Story = {
 
 export const Frosted: Story = {
   render: () => (
-    <Command variant="frosted" className="rounded-lg border shadow-md w-[450px]">
+    <Command className="rounded-lg border shadow-md w-[450px]">
       <CommandInput placeholder="Search with frosted glass..." />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
@@ -90,7 +94,7 @@ export const Frosted: Story = {
 
 export const Crystal: Story = {
   render: () => (
-    <Command variant="crystal" className="rounded-lg border shadow-md w-[450px]">
+    <Command material="clear" className="rounded-lg border shadow-md w-[450px]">
       <CommandInput placeholder="Search with crystal glass..." />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
@@ -113,7 +117,7 @@ export const Crystal: Story = {
 
 export const Simple: Story = {
   render: () => (
-    <Command variant="glass" className="rounded-lg border w-[350px]">
+    <Command className="rounded-lg border w-[350px]">
       <CommandInput placeholder="Search..." />
       <CommandList>
         <CommandEmpty>No results.</CommandEmpty>

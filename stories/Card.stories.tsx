@@ -11,7 +11,11 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'glass', 'glassSubtle', 'frosted', 'fluted', 'crystal'],
+      options: ['liquid', 'default'],
+    },
+    material: {
+      control: 'select',
+      options: ['regular', 'clear', 'tinted'],
     },
     hover: {
       control: 'select',
@@ -26,7 +30,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Glass: Story = {
   args: {
-    variant: 'glass',
     children: (
       <>
         <CardHeader>
@@ -46,7 +49,6 @@ export const Glass: Story = {
 
 export const Frosted: Story = {
   args: {
-    variant: 'frosted',
     children: (
       <>
         <CardHeader>
@@ -63,7 +65,7 @@ export const Frosted: Story = {
 
 export const Fluted: Story = {
   args: {
-    variant: 'fluted',
+    material: 'clear',
     children: (
       <>
         <CardHeader>
@@ -80,7 +82,7 @@ export const Fluted: Story = {
 
 export const Crystal: Story = {
   args: {
-    variant: 'crystal',
+    material: 'clear',
     children: (
       <>
         <CardHeader>
@@ -97,7 +99,6 @@ export const Crystal: Story = {
 
 export const WithGlowHover: Story = {
   args: {
-    variant: 'glass',
     hover: 'glow',
     children: (
       <>
@@ -115,7 +116,6 @@ export const WithGlowHover: Story = {
 
 export const WithShimmerHover: Story = {
   args: {
-    variant: 'glass',
     hover: 'shimmer',
     children: (
       <>
@@ -133,7 +133,6 @@ export const WithShimmerHover: Story = {
 
 export const WithLiftHover: Story = {
   args: {
-    variant: 'glass',
     hover: 'lift',
     children: (
       <>
@@ -151,14 +150,10 @@ export const WithLiftHover: Story = {
 
 export const WithCustomGlass: Story = {
   args: {
-    variant: 'glass',
     hover: 'scale',
     glass: {
-      color: 'rgba(139, 92, 246, 0.15)',
-      blur: 25,
-      outline: 'rgba(139, 92, 246, 0.4)',
-      innerGlow: 'rgba(255, 255, 255, 0.2)',
-      innerGlowBlur: 20,
+      tint: 'rgba(139, 92, 246, 0.6)',
+      frost: 0.5,
     },
     children: (
       <>

@@ -11,7 +11,7 @@ import { Separator } from "@/components/ui/separator"
 export function AuthenticationBlock() {
   return (
     <div className="flex items-center justify-center min-h-screen p-6">
-      <Card variant="glass" className="w-full max-w-md text-white">
+      <Card className="w-full max-w-md text-white">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl text-white">Welcome back</CardTitle>
           <CardDescription className="text-muted-foreground">
@@ -25,7 +25,6 @@ export function AuthenticationBlock() {
               id="email"
               type="email"
               placeholder="name@example.com"
-              variant="glass"
               className="text-white placeholder:text-muted-foreground"
             />
           </div>
@@ -34,13 +33,12 @@ export function AuthenticationBlock() {
             <Input
               id="password"
               type="password"
-              variant="glass"
               className="text-white placeholder:text-muted-foreground"
             />
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Checkbox id="remember" variant="glass" />
+              <Checkbox id="remember" />
               <Label htmlFor="remember" className="text-white text-sm cursor-pointer">
                 Remember me
               </Label>
@@ -49,12 +47,12 @@ export function AuthenticationBlock() {
               Forgot password?
             </Button>
           </div>
-          <Button variant="glass" className="w-full text-white">
+          <Button className="w-full text-white">
             Sign In
           </Button>
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <Separator variant="glass" />
+              <Separator />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
               <span className="bg-background px-2 text-muted-foreground">Or continue with</span>

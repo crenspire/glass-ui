@@ -5,6 +5,7 @@ import CropperLib from "react-easy-crop"
 import type { Area, Point } from "react-easy-crop"
 
 import { cn } from "@/lib/utils"
+import { liquidProps, resolveVariant } from "@/lib/liquid-glass/material"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Slider } from "@/components/ui/slider"
@@ -13,15 +14,16 @@ interface CropperProps {
   image: string
   onCropComplete: (croppedArea: Area, croppedAreaPixels: Area) => void
   aspect?: number
-  variant?: "default" | "glass"
+  variant?: "liquid" | "default"
 }
 
 export function Cropper({
   image,
   onCropComplete,
   aspect = 1,
-  variant = "glass",
+  variant,
 }: CropperProps) {
+  const v = resolveVariant<"liquid" | "default">(variant, undefined)
   const [crop, setCrop] = React.useState<Point>({ x: 0, y: 0 })
   const [zoom, setZoom] = React.useState(1)
   const [croppedAreaPixels, setCroppedAreaPixels] = React.useState<Area | null>(null)
@@ -34,10 +36,10 @@ export function Cropper({
   )
 
   return (
-    <div className={cn(
-      "relative w-full h-[400px]",
-      variant === "glass" && "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] rounded-lg overflow-hidden shadow-[var(--glass-shadow)]"
-    )}>
+    // The image covers the surface, so the glass stays CSS: shader glass would sit beneath it.
+    <div {...(v.variant === "liquid"
+      ? liquidProps({ role: "surface", webgl: false }, { className: "relative w-full h-[400px] overflow-hidden" })
+      : { className: "relative w-full h-[400px]" })}>
       <CropperLib
         image={image}
         crop={crop}

@@ -6,6 +6,7 @@ import { cva } from "class-variance-authority"
 import { ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
 const NavigationMenu = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Root>,
@@ -27,19 +28,19 @@ NavigationMenu.displayName = NavigationMenuPrimitive.Root.displayName
 
 const NavigationMenuList = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.List>,
-  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.List> & {
-    variant?: "default" | "glass"
+  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.List> & LiquidProps & {
+    variant?: "liquid" | "default"
   }
->(({ className, variant = "glass", ...props }, ref) => {
-  const variants = {
-    default: "group flex flex-1 list-none items-center justify-center space-x-1",
-    glass: "group flex flex-1 list-none items-center justify-center space-x-1 glass-bg rounded-lg px-2 py-1",
-  }
+>(({ className, variant, material, tint, glass, webgl, style, ...props }, ref) => {
+  const v = resolveVariant<"liquid" | "default">(variant, material)
+  const lg = v.variant === "liquid" ? liquidProps({ role: "bar", material: v.material, tint, glass, webgl }, { className: "px-2 py-1" }) : null
   
   return (
     <NavigationMenuPrimitive.List
       ref={ref}
-      className={cn(variants[variant], className)}
+      {...lg}
+      style={{ ...lg?.style, ...style }}
+      className={cn(lg ? lg.className : "", className)}
       {...props}
     />
   )
@@ -73,44 +74,36 @@ NavigationMenuTrigger.displayName = NavigationMenuPrimitive.Trigger.displayName
 const NavigationMenuContent = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Content> & {
-    variant?: "default" | "glass"
+    /** Kept for API compatibility: the glass is on the viewport that holds the content. */
+    variant?: "liquid" | "default"
   }
->(({ className, variant = "glass", ...props }, ref) => {
-  const variants = {
-    default: "left-0 top-0 w-full data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 md:absolute md:w-auto",
-    glass: "left-0 top-0 w-full glass-bg backdrop-blur-[var(--blur)] border border-[var(--glass-border)] rounded-lg text-foreground shadow-[var(--glass-shadow)] data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 md:absolute md:w-auto",
-  }
-  
-  return (
-    <NavigationMenuPrimitive.Content
-      ref={ref}
-      className={cn(variants[variant], className)}
-      {...props}
-    />
-  )
-})
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+>(({ className, variant, ...props }, ref) => (
+  <NavigationMenuPrimitive.Content
+    ref={ref}
+    className={cn("left-0 top-0 w-full data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 md:absolute md:w-auto", className)}
+    {...props}
+  />
+))
 NavigationMenuContent.displayName = NavigationMenuPrimitive.Content.displayName
 
 const NavigationMenuLink = NavigationMenuPrimitive.Link
 
 const NavigationMenuViewport = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Viewport>,
-  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Viewport> & {
-    variant?: "default" | "glass"
+  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Viewport> & LiquidProps & {
+    variant?: "liquid" | "default"
   }
->(({ className, variant = "glass", ...props }, ref) => {
-  const variants = {
-    default: "origin-top-center relative mt-1.5 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 md:w-[var(--radix-navigation-menu-viewport-width)]",
-    glass: "origin-top-center relative mt-1.5 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden rounded-md border border-[var(--glass-border)] glass-bg backdrop-blur-[var(--blur)] text-foreground shadow-[var(--glass-shadow)] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 md:w-[var(--radix-navigation-menu-viewport-width)]",
-  }
-  
+>(({ className, variant, material, tint, glass, webgl, style, ...props }, ref) => {
+  const v = resolveVariant<"liquid" | "default">(variant, material)
+  const base = "origin-top-center relative mt-1.5 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 md:w-[var(--radix-navigation-menu-viewport-width)]"
+  const own = v.variant === "liquid"
+    ? liquidProps({ role: "overlay", material: v.material, tint, glass, webgl }, { className: cn(base, className), style })
+    : { className: cn(base, "rounded-md border bg-popover text-popover-foreground shadow-lg", className), style }
+
   return (
     <div className={cn("absolute left-0 top-full flex justify-center")}>
-      <NavigationMenuPrimitive.Viewport
-        className={cn(variants[variant], className)}
-        ref={ref}
-        {...props}
-      />
+      <NavigationMenuPrimitive.Viewport ref={ref} {...own} {...props} />
     </div>
   )
 })

@@ -3,6 +3,7 @@ import { Slot } from "@radix-ui/react-slot"
 import { ChevronRight, MoreHorizontal } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
 const Breadcrumb = React.forwardRef<
   HTMLElement,
@@ -14,21 +15,21 @@ Breadcrumb.displayName = "Breadcrumb"
 
 const BreadcrumbList = React.forwardRef<
   HTMLOListElement,
-  React.ComponentPropsWithoutRef<"ol"> & {
-    variant?: "default" | "glass"
+  React.ComponentPropsWithoutRef<"ol"> & LiquidProps & {
+    variant?: "liquid" | "default"
   }
->(({ className, variant = "glass", ...props }, ref) => {
-  const variants = {
-    default: "",
-    glass: "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] rounded-lg px-4 py-2 shadow-[var(--glass-shadow-sm)]",
-  }
+>(({ className, variant, material, tint, glass, webgl, style, ...props }, ref) => {
+  const v = resolveVariant<"liquid" | "default">(variant, material)
+  const lg = v.variant === "liquid" ? liquidProps({ role: "bar", material: v.material, tint, glass, webgl }, { className: "px-4 py-2" }) : null
   
   return (
     <ol
       ref={ref}
+      {...lg}
+      style={{ ...lg?.style, ...style }}
       className={cn(
         "flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5",
-        variants[variant],
+        lg ? lg.className : "",
         className
       )}
       {...props}

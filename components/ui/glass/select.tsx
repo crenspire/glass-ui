@@ -24,13 +24,13 @@ export interface SelectContentProps extends React.ComponentProps<typeof BaseSele
 export const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof BaseSelectTrigger>,
   SelectTriggerProps
->(({ className, variant = "glass", glow = false, ...props }, ref) => {
+>(({ className, variant, glow = false, ...props }, ref) => {
   return (
     <BaseSelectTrigger
       ref={ref}
       variant={variant}
       className={cn(
-        glow && "shadow-md shadow-purple-500/20",
+        glow && "shadow-[0_0_0_1px_rgba(255,255,255,0.35),0_0_28px_-4px_rgba(255,255,255,0.45)]",
         "transition-all duration-200",
         className
       )}
@@ -43,13 +43,13 @@ SelectTrigger.displayName = "SelectTrigger"
 export const SelectContent = React.forwardRef<
   React.ElementRef<typeof BaseSelectContent>,
   SelectContentProps
->(({ className, variant = "glass", glow = false, ...props }, ref) => {
+>(({ className, variant, glow = false, ...props }, ref) => {
   return (
     <BaseSelectContent
       ref={ref}
       variant={variant}
       className={cn(
-        glow && "shadow-lg shadow-purple-500/30",
+        glow && "shadow-[0_0_0_1px_rgba(255,255,255,0.35),0_0_28px_-4px_rgba(255,255,255,0.45)]",
         className
       )}
       {...props}

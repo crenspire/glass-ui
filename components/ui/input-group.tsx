@@ -1,43 +1,26 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
-import { getGlassStyles, type GlassCustomization } from "@/lib/glass-utils"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
-export interface InputGroupProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: "default" | "glass" | "glassSubtle" | "frosted" | "fluted" | "crystal"
-  glass?: GlassCustomization
+export interface InputGroupProps extends React.HTMLAttributes<HTMLDivElement>, LiquidProps {
+  variant?: "liquid" | "default"
 }
 
 const InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(
-  ({ className, variant = "glass", glass, ...props }, ref) => {
-    const hasCustomGlass = glass !== undefined
-    
-    const getVariantClass = () => {
-      if (variant === "default") return "bg-card border shadow-sm"
-      if (hasCustomGlass) return "glass-bg"
-      
-      const variants = {
-        glass: "glass-bg",
-        glassSubtle: "glass-bg opacity-50",
-        frosted: "glass-frosted",
-        fluted: "glass-fluted",
-        crystal: "glass-crystal",
-      }
-      return variants[variant] || variants.glass
-    }
-    
-    const glassStyles = variant !== "default" ? getGlassStyles(glass) : {}
+  ({ className, variant, material, tint, glass, webgl, style, ...props }, ref) => {
+    const v = resolveVariant<"liquid" | "default">(variant, material)
+    const lg = v.variant === "liquid" ? liquidProps({ role: "bar", material: v.material, tint, glass, webgl }) : null
     
     return (
       <div
         ref={ref}
+        {...lg}
         className={cn(
-          "inline-flex items-center rounded-md",
-          getVariantClass(),
+          "inline-flex items-center",
+          lg ? lg.className : "bg-card border shadow-sm rounded-md",
           className
         )}
-        style={{
-          ...glassStyles,
-        }}
+        style={{ ...lg?.style, ...style }}
         {...props}
       />
     )

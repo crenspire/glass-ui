@@ -15,7 +15,7 @@ export function DashboardBlock() {
     <div className="space-y-6 p-6">
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card variant="glass" className="text-white">
+        <Card className="text-white">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-white">Total Revenue</CardTitle>
             <DollarSign className="h-4 w-4 text-muted-foreground" />
@@ -27,7 +27,7 @@ export function DashboardBlock() {
             </p>
           </CardContent>
         </Card>
-        <Card variant="glass" className="text-white">
+        <Card className="text-white">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-white">Subscriptions</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
@@ -39,7 +39,7 @@ export function DashboardBlock() {
             </p>
           </CardContent>
         </Card>
-        <Card variant="glass" className="text-white">
+        <Card className="text-white">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-white">Sales</CardTitle>
             <CreditCard className="h-4 w-4 text-muted-foreground" />
@@ -51,7 +51,7 @@ export function DashboardBlock() {
             </p>
           </CardContent>
         </Card>
-        <Card variant="glass" className="text-white">
+        <Card className="text-white">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-white">Active Now</CardTitle>
             <Activity className="h-4 w-4 text-muted-foreground" />
@@ -67,13 +67,13 @@ export function DashboardBlock() {
 
       {/* Charts and Tables */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card variant="glass" className="text-white">
+        <Card className="text-white">
           <CardHeader>
             <CardTitle className="text-white">Recent Activity</CardTitle>
             <CardDescription className="text-muted-foreground">Latest transactions and events</CardDescription>
           </CardHeader>
           <CardContent>
-            <Table variant="glass">
+            <Table>
               <TableHeader>
                 <TableRow>
                   <TableHead className="text-white">User</TableHead>
@@ -86,14 +86,14 @@ export function DashboardBlock() {
                   <TableCell className="text-white">John Doe</TableCell>
                   <TableCell className="text-white">Purchase</TableCell>
                   <TableCell>
-                    <Badge variant="glass">Completed</Badge>
+                    <Badge>Completed</Badge>
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell className="text-white">Jane Smith</TableCell>
                   <TableCell className="text-white">Subscription</TableCell>
                   <TableCell>
-                    <Badge variant="glass">Active</Badge>
+                    <Badge>Active</Badge>
                   </TableCell>
                 </TableRow>
               </TableBody>
@@ -101,7 +101,7 @@ export function DashboardBlock() {
           </CardContent>
         </Card>
 
-        <Card variant="glass" className="text-white">
+        <Card className="text-white">
           <CardHeader>
             <CardTitle className="text-white">Overview</CardTitle>
             <CardDescription className="text-muted-foreground">Performance metrics</CardDescription>
@@ -118,7 +118,6 @@ export function DashboardBlock() {
                   color: "hsl(var(--chart-2))",
                 },
               }}
-              variant="glass"
               className="h-[300px]"
             >
               <BarChart data={[

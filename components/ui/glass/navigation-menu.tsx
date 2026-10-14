@@ -31,13 +31,12 @@ export interface NavigationMenuViewportProps extends React.ComponentProps<typeof
 export const NavigationMenuList = React.forwardRef<
   React.ElementRef<typeof BaseNavigationMenuList>,
   NavigationMenuListProps
->(({ className, variant = "glass", glow = false, ...props }, ref) => {
+>(({ className, glow = false, ...props }, ref) => {
   return (
     <BaseNavigationMenuList
       ref={ref}
-      variant={variant}
       className={cn(
-        glow && "shadow-md shadow-purple-500/20",
+        glow && "shadow-[0_0_0_1px_rgba(255,255,255,0.35),0_0_28px_-4px_rgba(255,255,255,0.45)]",
         className
       )}
       {...props}
@@ -49,13 +48,12 @@ NavigationMenuList.displayName = "NavigationMenuList"
 export const NavigationMenuContent = React.forwardRef<
   React.ElementRef<typeof BaseNavigationMenuContent>,
   NavigationMenuContentProps
->(({ className, variant = "glass", glow = false, ...props }, ref) => {
+>(({ className, glow = false, ...props }, ref) => {
   return (
     <BaseNavigationMenuContent
       ref={ref}
-      variant={variant}
       className={cn(
-        glow && "shadow-lg shadow-purple-500/30",
+        glow && "shadow-[0_0_0_1px_rgba(255,255,255,0.35),0_0_28px_-4px_rgba(255,255,255,0.45)]",
         className
       )}
       {...props}
@@ -67,13 +65,12 @@ NavigationMenuContent.displayName = "NavigationMenuContent"
 export const NavigationMenuViewport = React.forwardRef<
   React.ElementRef<typeof BaseNavigationMenuViewport>,
   NavigationMenuViewportProps
->(({ className, variant = "glass", glow = false, ...props }, ref) => {
+>(({ className, glow = false, ...props }, ref) => {
   return (
     <BaseNavigationMenuViewport
       ref={ref}
-      variant={variant}
       className={cn(
-        glow && "shadow-lg shadow-purple-500/30",
+        glow && "shadow-[0_0_0_1px_rgba(255,255,255,0.35),0_0_28px_-4px_rgba(255,255,255,0.45)]",
         className
       )}
       {...props}

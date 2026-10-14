@@ -14,13 +14,12 @@ export interface ScrollAreaProps extends React.ComponentProps<typeof BaseScrollA
 export const ScrollArea = React.forwardRef<
   React.ElementRef<typeof BaseScrollArea>,
   ScrollAreaProps
->(({ className, variant = "glass", glow = false, ...props }, ref) => {
+>(({ className, glow = false, ...props }, ref) => {
   return (
     <BaseScrollArea
       ref={ref}
-      variant={variant}
       className={cn(
-        glow && "shadow-md shadow-purple-500/20",
+        glow && "shadow-[0_0_0_1px_rgba(255,255,255,0.35),0_0_28px_-4px_rgba(255,255,255,0.45)]",
         className
       )}
       {...props}

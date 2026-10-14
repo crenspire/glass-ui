@@ -14,13 +14,12 @@ export interface RadioGroupItemProps extends React.ComponentProps<typeof BaseRad
 export const RadioGroupItem = React.forwardRef<
   React.ElementRef<typeof BaseRadioGroupItem>,
   RadioGroupItemProps
->(({ className, variant = "glass", glow = false, ...props }, ref) => {
+>(({ className, glow = false, ...props }, ref) => {
   return (
     <BaseRadioGroupItem
       ref={ref}
-      variant={variant}
       className={cn(
-        glow && "data-[state=checked]:shadow-lg data-[state=checked]:shadow-purple-500/30",
+        glow && "data-[state=checked]:shadow-[0_0_0_1px_rgba(255,255,255,0.35),0_0_28px_-4px_rgba(255,255,255,0.45)]",
         "transition-all duration-200",
         className
       )}

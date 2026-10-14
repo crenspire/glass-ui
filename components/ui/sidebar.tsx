@@ -2,29 +2,21 @@
 
 import * as React from "react"
 import { cn } from "@/lib/utils"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
-interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: "default" | "glass"
+interface SidebarProps extends React.HTMLAttributes<HTMLDivElement>, LiquidProps {
+  variant?: "liquid" | "default"
 }
 
 const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
-  ({ className, variant = "glass", ...props }, ref) => {
-    const variants = {
-      default: "bg-sidebar text-sidebar-foreground border-r",
-      glass: "glass-bg backdrop-blur-[var(--blur)] border-r border-[var(--glass-border)] text-foreground shadow-[var(--glass-shadow)]",
-    }
-    
-    return (
-      <aside
-        ref={ref}
-        className={cn(
-          "flex h-screen w-64 flex-col",
-          variants[variant],
-          className
-        )}
-        {...props}
-      />
-    )
+  ({ className, variant, material, tint, glass, webgl, style, ...props }, ref) => {
+    const v = resolveVariant<"liquid" | "default">(variant, material)
+    // Liquid sidebars float inset from the viewport edge, Apple-style.
+    const own = v.variant === "liquid"
+      ? liquidProps({ role: "surface", material: v.material, tint, glass, webgl }, { className: cn("m-2 flex h-[calc(100vh-1rem)] w-64 flex-col", className), style })
+      : { className: cn("flex h-screen w-64 flex-col bg-sidebar text-sidebar-foreground border-r", className), style }
+
+    return <aside ref={ref} {...own} {...props} />
   }
 )
 Sidebar.displayName = "Sidebar"

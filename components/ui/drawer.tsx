@@ -4,6 +4,7 @@ import * as React from "react"
 import { Drawer as DrawerPrimitive } from "vaul"
 
 import { cn } from "@/lib/utils"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
 const Drawer = ({
   shouldScaleBackground = true,
@@ -36,27 +37,20 @@ DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName
 
 const DrawerContent = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content> & {
-    variant?: "default" | "glass"
+  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content> & LiquidProps & {
+    variant?: "liquid" | "default"
   }
->(({ className, children, variant = "glass", ...props }, ref) => {
-  const variants = {
-    default: "bg-background border-t",
-    glass: "glass-bg backdrop-blur-[var(--blur-lg)] border-t border-[var(--glass-border)] text-foreground shadow-[var(--glass-shadow-lg)]",
-  }
-  
+>(({ className, children, variant, material, tint, glass, webgl, style, ...props }, ref) => {
+  const v = resolveVariant<"liquid" | "default">(variant, material)
+  const base = "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col"
+  const own = v.variant === "liquid"
+    ? liquidProps({ role: "sheet", material: v.material, tint, glass, webgl }, { className: cn(base, "rounded-b-none border-b-0", className), style })
+    : { className: cn(base, "rounded-t-[10px] bg-background border-t", className), style }
+
   return (
     <DrawerPortal>
       <DrawerOverlay />
-      <DrawerPrimitive.Content
-        ref={ref}
-        className={cn(
-          "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px]",
-          variants[variant],
-          className
-        )}
-        {...props}
-      >
+      <DrawerPrimitive.Content ref={ref} {...own} {...props}>
         <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted" />
         {children}
       </DrawerPrimitive.Content>

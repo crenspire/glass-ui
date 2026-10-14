@@ -1,46 +1,29 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
-import { getGlassStyles, type GlassCustomization } from "@/lib/glass-utils"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
-export interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: "default" | "glass" | "glassSubtle" | "frosted" | "fluted" | "crystal"
+export interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement>, LiquidProps {
+  variant?: "liquid" | "default"
   orientation?: "horizontal" | "vertical"
-  glass?: GlassCustomization
 }
 
 const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
-  ({ className, variant = "glass", orientation = "horizontal", glass, ...props }, ref) => {
-    const hasCustomGlass = glass !== undefined
-    
-    const getVariantClass = () => {
-      if (variant === "default") return "bg-card border shadow-sm"
-      if (hasCustomGlass) return "glass-bg"
-      
-      const variants = {
-        glass: "glass-bg",
-        glassSubtle: "glass-bg opacity-50",
-        frosted: "glass-frosted",
-        fluted: "glass-fluted",
-        crystal: "glass-crystal",
-      }
-      return variants[variant] || variants.glass
-    }
-    
-    const glassStyles = variant !== "default" ? getGlassStyles(glass) : {}
+  ({ className, variant, material, tint, glass, webgl, style, orientation = "horizontal", ...props }, ref) => {
+    const v = resolveVariant<"liquid" | "default">(variant, material)
+    const lg = v.variant === "liquid" ? liquidProps({ role: "bar", material: v.material, tint, glass, webgl }) : null
     
     return (
       <div
         ref={ref}
         role="group"
+        {...lg}
         className={cn(
-          "inline-flex rounded-md",
+          "inline-flex",
           orientation === "horizontal" ? "flex-row" : "flex-col",
-          getVariantClass(),
+          lg ? lg.className : "bg-card border shadow-sm rounded-md",
           className
         )}
-        style={{
-          ...glassStyles,
-        }}
+        style={{ ...lg?.style, ...style }}
         {...props}
       />
     )

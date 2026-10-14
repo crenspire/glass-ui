@@ -4,22 +4,23 @@ import * as React from "react"
 import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group"
 
 import { cn } from "@/lib/utils"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
 const ToggleGroup = React.forwardRef<
   React.ElementRef<typeof ToggleGroupPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> & {
-    variant?: "default" | "glass"
+  React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> & LiquidProps & {
+    variant?: "liquid" | "default"
   }
->(({ className, variant = "glass", ...props }, ref) => {
-  const variants = {
-    default: "",
-    glass: "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] rounded-md p-1 shadow-[var(--glass-shadow-sm)]",
-  }
+>(({ className, variant, material, tint, glass, webgl, style, ...props }, ref) => {
+  const v = resolveVariant<"liquid" | "default">(variant, material)
+  const lg = v.variant === "liquid" ? liquidProps({ role: "bar", material: v.material, tint, glass, webgl }, { className: "p-1" }) : null
   
   return (
     <ToggleGroupPrimitive.Root
       ref={ref}
-      className={cn("inline-flex items-center justify-center rounded-md", variants[variant], className)}
+      {...lg}
+      style={{ ...lg?.style, ...style }}
+      className={cn("inline-flex items-center justify-center", lg ? lg.className : "rounded-md", className)}
       {...props}
     />
   )

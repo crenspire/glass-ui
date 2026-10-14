@@ -4,6 +4,7 @@ import * as React from "react"
 import * as AvatarPrimitive from "@radix-ui/react-avatar"
 
 import { cn } from "@/lib/utils"
+import { liquidProps } from "@/lib/liquid-glass/material"
 
 const Avatar = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,
@@ -35,13 +36,10 @@ AvatarImage.displayName = AvatarPrimitive.Image.displayName
 const AvatarFallback = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Fallback>,
   React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>
->(({ className, ...props }, ref) => (
+>(({ className, style, ...props }, ref) => (
   <AvatarPrimitive.Fallback
     ref={ref}
-    className={cn(
-      "flex h-full w-full items-center justify-center rounded-full glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] text-foreground",
-      className
-    )}
+    {...liquidProps({ role: "inline" }, { className: cn("flex h-full w-full items-center justify-center", className), style })}
     {...props}
   />
 ))

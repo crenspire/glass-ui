@@ -18,13 +18,13 @@ export interface HoverCardContentProps extends React.ComponentProps<typeof BaseH
 export const HoverCardContent = React.forwardRef<
   React.ElementRef<typeof BaseHoverCardContent>,
   HoverCardContentProps
->(({ className, variant = "glass", glow = false, ...props }, ref) => {
+>(({ className, variant, glow = false, ...props }, ref) => {
   return (
     <BaseHoverCardContent
       ref={ref}
       variant={variant}
       className={cn(
-        glow && "shadow-lg shadow-purple-500/30",
+        glow && "shadow-[0_0_0_1px_rgba(255,255,255,0.35),0_0_28px_-4px_rgba(255,255,255,0.45)]",
         className
       )}
       {...props}

@@ -29,9 +29,9 @@ export const ContextMenuTrigger = BaseContextMenuTrigger
 export const ContextMenuContent = React.forwardRef<
   React.ElementRef<typeof BaseContextMenuContent>,
   React.ComponentProps<typeof BaseContextMenuContent> & {
-    variant?: "default" | "glass" | "glassSubtle" | "frosted" | "fluted" | "crystal"
+    variant?: "liquid" | "default"
   }
->(({ className, variant = "glass", ...props }, ref) => {
+>(({ className, variant, ...props }, ref) => {
   return (
     <BaseContextMenuContent
       ref={ref}

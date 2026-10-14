@@ -5,6 +5,7 @@ import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
 import { Circle } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
 const RadioGroup = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Root>,
@@ -22,25 +23,18 @@ RadioGroup.displayName = RadioGroupPrimitive.Root.displayName
 
 const RadioGroupItem = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item> & {
-    variant?: "default" | "glass"
+  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item> & LiquidProps & {
+    variant?: "liquid" | "default"
   }
->(({ className, variant = "glass", ...props }, ref) => {
-  const variants = {
-    default: "border-primary",
-    glass: "border border-[var(--glass-border)] glass-bg opacity-30 backdrop-blur-[var(--blur-sm)] shadow-[var(--glass-shadow-sm)]",
-  }
-  
+>(({ className, variant, material, tint, glass, webgl, style, ...props }, ref) => {
+  const v = resolveVariant<"liquid" | "default">(variant, material)
+  const base = "aspect-square focus:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+  const own = v.variant === "liquid"
+    ? liquidProps({ role: "inline", material: v.material, tint, glass, webgl }, { className: cn(base, "size-5", className), style })
+    : { className: cn(base, "h-4 w-4 rounded-full border border-primary shadow", className), style }
+
   return (
-    <RadioGroupPrimitive.Item
-      ref={ref}
-      className={cn(
-        "aspect-square h-4 w-4 rounded-full border shadow focus:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
-        variants[variant],
-        className
-      )}
-      {...props}
-    >
+    <RadioGroupPrimitive.Item ref={ref} {...own} {...props}>
       <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
         <Circle className="h-2.5 w-2.5 fill-primary text-primary" />
       </RadioGroupPrimitive.Indicator>

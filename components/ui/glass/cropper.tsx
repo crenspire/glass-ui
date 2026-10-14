@@ -8,7 +8,7 @@ export interface CropperProps {
   image: string
   onCropComplete: (croppedArea: { x: number; y: number; width: number; height: number }, croppedAreaPixels: { x: number; y: number; width: number; height: number }) => void
   aspect?: number
-  variant?: "default" | "glass"
+  variant?: "liquid" | "default"
   glow?: boolean
   className?: string
 }
@@ -16,16 +16,15 @@ export interface CropperProps {
 /**
  * Glass UI Cropper - Enhanced image cropper with glassy effects
  */
-export function Cropper({ className, variant = "glass", glow = false, ...props }: CropperProps) {
+export function Cropper({ className, glow = false, ...props }: CropperProps) {
   return (
     <div
       className={cn(
-        glow && "shadow-lg shadow-purple-500/20",
+        glow && "shadow-[0_0_0_1px_rgba(255,255,255,0.35),0_0_28px_-4px_rgba(255,255,255,0.45)]",
         className
       )}
     >
       <BaseCropper
-        variant={variant}
         {...props}
       />
     </div>

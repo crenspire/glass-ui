@@ -4,17 +4,16 @@ import * as React from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { getGlassStyles, type GlassCustomization } from "@/lib/glass-utils"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
-export interface CarouselProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: "default" | "glass" | "glassSubtle" | "frosted" | "fluted" | "crystal"
-  glass?: GlassCustomization
+export interface CarouselProps extends React.HTMLAttributes<HTMLDivElement>, LiquidProps {
+  variant?: "liquid" | "default"
   autoPlay?: boolean
   interval?: number
 }
 
 const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
-  ({ className, variant = "glass", glass, autoPlay = false, interval = 3000, children, ...props }, ref) => {
+  ({ className, variant, material, tint, glass, webgl, style, autoPlay = false, interval = 3000, children, ...props }, ref) => {
     const [currentIndex, setCurrentIndex] = React.useState(0)
     const items = React.Children.toArray(children)
     const totalItems = items.length
@@ -41,39 +40,16 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       setCurrentIndex((prev) => (prev + 1) % totalItems)
     }
     
-    const hasCustomGlass = glass !== undefined
-    
-    const getVariantClass = () => {
-      if (variant === "default") return "bg-card text-card-foreground border shadow-sm"
-      if (hasCustomGlass) return "glass-bg text-foreground"
-      
-      const variants = {
-        glass: "glass-bg text-foreground",
-        glassSubtle: "glass-bg text-foreground opacity-50",
-        frosted: "glass-frosted text-foreground",
-        fluted: "glass-fluted text-foreground",
-        crystal: "glass-crystal text-foreground",
-      }
-      return variants[variant] || variants.glass
-    }
-    
-    const glassStyles = variant !== "default" ? getGlassStyles(glass) : {}
-    
+    const v = resolveVariant<"liquid" | "default">(variant, material)
+    const base = "relative w-full overflow-hidden"
+    const own = v.variant === "liquid"
+      ? liquidProps({ role: "surface", material: v.material, tint, glass, webgl }, { className: cn(base, className), style })
+      : { className: cn(base, "rounded-lg bg-card text-card-foreground border shadow-sm", className), style }
+
     if (totalItems === 0) return null
     
     return (
-      <div
-        ref={ref}
-        className={cn(
-          "relative w-full overflow-hidden rounded-lg",
-          getVariantClass(),
-          className
-        )}
-        style={{
-          ...glassStyles,
-        }}
-        {...props}
-      >
+      <div ref={ref} {...own} {...props}>
         <div
           className="flex transition-transform duration-500 ease-in-out"
           style={{
@@ -90,17 +66,17 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
         {totalItems > 1 && (
           <>
             <Button
-              variant="ghost"
+              webgl={false}
               size="icon"
-              className="absolute left-2 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full glass-bg"
+              className="absolute left-2 top-1/2 -translate-y-1/2 size-9"
               onClick={goToPrevious}
             >
               <ChevronLeft className="h-4 w-4" />
             </Button>
             <Button
-              variant="ghost"
+              webgl={false}
               size="icon"
-              className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full glass-bg"
+              className="absolute right-2 top-1/2 -translate-y-1/2 size-9"
               onClick={goToNext}
             >
               <ChevronRight className="h-4 w-4" />

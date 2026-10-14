@@ -8,9 +8,6 @@
       "type": "registry:component",
       "title": "Button",
       "description": "Displays a button or a component that looks like a button with glassy variants.",
-      "registryDependencies": [
-        "button"
-      ],
       "files": [
         {
           "path": "lib/utils.ts",
@@ -18,9 +15,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -31,6 +28,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/button.tsx"
         },
         {
           "path": "components/ui/glass/button.tsx",
@@ -39,7 +41,10 @@
         }
       ],
       "dependencies": [
-        "@radix-ui/react-slot"
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ]
     },
     {
@@ -47,9 +52,6 @@
       "type": "registry:component",
       "title": "Card",
       "description": "Displays a card with optional glassy variant.",
-      "registryDependencies": [
-        "card"
-      ],
       "files": [
         {
           "path": "lib/utils.ts",
@@ -57,9 +59,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -72,10 +74,20 @@
           "target": "app/globals.css"
         },
         {
+          "path": "components/ui/card.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/card.tsx"
+        },
+        {
           "path": "components/ui/glass/card.tsx",
           "type": "registry:component",
           "target": "components/ui/glass/card.tsx"
         }
+      ],
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ]
     },
     {
@@ -83,9 +95,6 @@
       "type": "registry:component",
       "title": "Input",
       "description": "Displays a form input field with optional glassy variant.",
-      "registryDependencies": [
-        "input"
-      ],
       "files": [
         {
           "path": "lib/utils.ts",
@@ -93,9 +102,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -108,10 +117,20 @@
           "target": "app/globals.css"
         },
         {
+          "path": "components/ui/input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/input.tsx"
+        },
+        {
           "path": "components/ui/glass/input.tsx",
           "type": "registry:component",
           "target": "components/ui/glass/input.tsx"
         }
+      ],
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ]
     },
     {
@@ -119,9 +138,6 @@
       "type": "registry:component",
       "title": "Textarea",
       "description": "Displays a form textarea with optional glassy variant.",
-      "registryDependencies": [
-        "textarea"
-      ],
       "files": [
         {
           "path": "lib/utils.ts",
@@ -129,9 +145,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -144,10 +160,20 @@
           "target": "app/globals.css"
         },
         {
+          "path": "components/ui/textarea.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/textarea.tsx"
+        },
+        {
           "path": "components/ui/glass/textarea.tsx",
           "type": "registry:component",
           "target": "components/ui/glass/textarea.tsx"
         }
+      ],
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ]
     },
     {
@@ -156,10 +182,10 @@
       "title": "Label",
       "description": "Renders an accessible label associated with controls.",
       "dependencies": [
-        "@radix-ui/react-label"
-      ],
-      "registryDependencies": [
-        "label"
+        "@radix-ui/react-label",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -168,9 +194,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -181,6 +207,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/label.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/label.tsx"
         },
         {
           "path": "components/ui/glass/label.tsx",
@@ -194,9 +225,6 @@
       "type": "registry:component",
       "title": "Badge",
       "description": "Displays a badge or a component that looks like a badge with glassy variant.",
-      "registryDependencies": [
-        "badge"
-      ],
       "files": [
         {
           "path": "lib/utils.ts",
@@ -204,9 +232,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -219,10 +247,20 @@
           "target": "app/globals.css"
         },
         {
+          "path": "components/ui/badge.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/badge.tsx"
+        },
+        {
           "path": "components/ui/glass/badge.tsx",
           "type": "registry:component",
           "target": "components/ui/glass/badge.tsx"
         }
+      ],
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ]
     },
     {
@@ -231,10 +269,10 @@
       "title": "Avatar",
       "description": "An image element with a fallback for representing the user.",
       "dependencies": [
-        "@radix-ui/react-avatar"
-      ],
-      "registryDependencies": [
-        "avatar"
+        "@radix-ui/react-avatar",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -243,9 +281,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -256,6 +294,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/avatar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/avatar.tsx"
         },
         {
           "path": "components/ui/glass/avatar.tsx",
@@ -271,10 +314,10 @@
       "description": "A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.",
       "dependencies": [
         "@radix-ui/react-dialog",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "dialog"
+        "class-variance-authority",
+        "clsx",
+        "lucide-react",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -283,9 +326,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -296,6 +339,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/dialog.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/dialog.tsx"
         },
         {
           "path": "components/ui/glass/dialog.tsx",
@@ -310,11 +358,13 @@
       "title": "Alert Dialog",
       "description": "A modal dialog that interrupts the user with important content and expects a response.",
       "dependencies": [
-        "@radix-ui/react-alert-dialog"
+        "@radix-ui/react-alert-dialog",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ],
       "registryDependencies": [
-        "alert-dialog",
-        "button"
+        "@glass-ui/button"
       ],
       "files": [
         {
@@ -323,9 +373,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -336,6 +386,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/alert-dialog.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/alert-dialog.tsx"
         },
         {
           "path": "components/ui/glass/alert-dialog.tsx",
@@ -350,10 +405,10 @@
       "title": "Separator",
       "description": "Visually or semantically separates content with optional glassy variant.",
       "dependencies": [
-        "@radix-ui/react-separator"
-      ],
-      "registryDependencies": [
-        "separator"
+        "@radix-ui/react-separator",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -362,9 +417,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -375,6 +430,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/separator.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/separator.tsx"
         },
         {
           "path": "components/ui/glass/separator.tsx",
@@ -389,10 +449,10 @@
       "title": "Switch",
       "description": "A control that allows the user to toggle between checked and not checked with optional glassy variant.",
       "dependencies": [
-        "@radix-ui/react-switch"
-      ],
-      "registryDependencies": [
-        "switch"
+        "@radix-ui/react-switch",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -401,9 +461,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -416,10 +476,18 @@
           "target": "app/globals.css"
         },
         {
+          "path": "components/ui/switch.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/switch.tsx"
+        },
+        {
           "path": "components/ui/glass/switch.tsx",
           "type": "registry:component",
           "target": "components/ui/glass/switch.tsx"
         }
+      ],
+      "registryDependencies": [
+        "@glass-ui/liquid-glass"
       ]
     },
     {
@@ -429,10 +497,10 @@
       "description": "A control that allows the user to toggle between checked and not checked with optional glassy variant.",
       "dependencies": [
         "@radix-ui/react-checkbox",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "checkbox"
+        "class-variance-authority",
+        "clsx",
+        "lucide-react",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -441,9 +509,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -454,6 +522,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/checkbox.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/checkbox.tsx"
         },
         {
           "path": "components/ui/glass/checkbox.tsx",
@@ -468,10 +541,10 @@
       "title": "Tabs",
       "description": "A set of layered sections of content—known as tab panels—that are displayed one at a time with optional glassy variant.",
       "dependencies": [
-        "@radix-ui/react-tabs"
-      ],
-      "registryDependencies": [
-        "tabs"
+        "@radix-ui/react-tabs",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -480,9 +553,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -493,6 +566,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/tabs.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/tabs.tsx"
         },
         {
           "path": "components/ui/glass/tabs.tsx",
@@ -507,10 +585,10 @@
       "title": "Tooltip",
       "description": "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it with optional glassy variant.",
       "dependencies": [
-        "@radix-ui/react-tooltip"
-      ],
-      "registryDependencies": [
-        "tooltip"
+        "@radix-ui/react-tooltip",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -519,9 +597,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -532,6 +610,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/tooltip.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/tooltip.tsx"
         },
         {
           "path": "components/ui/glass/tooltip.tsx",
@@ -546,10 +629,10 @@
       "title": "Popover",
       "description": "Displays rich content in a portal, triggered by a button with optional glassy variant.",
       "dependencies": [
-        "@radix-ui/react-popover"
-      ],
-      "registryDependencies": [
-        "popover"
+        "@radix-ui/react-popover",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -558,9 +641,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -571,6 +654,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/popover.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/popover.tsx"
         },
         {
           "path": "components/ui/glass/popover.tsx",
@@ -586,10 +674,10 @@
       "description": "Displays a menu to the user — such as a set of actions or functions — triggered by a button with optional glassy variant.",
       "dependencies": [
         "@radix-ui/react-dropdown-menu",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "dropdown-menu"
+        "class-variance-authority",
+        "clsx",
+        "lucide-react",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -598,9 +686,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -611,6 +699,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/dropdown-menu.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/dropdown-menu.tsx"
         },
         {
           "path": "components/ui/glass/dropdown-menu.tsx",
@@ -626,10 +719,10 @@
       "description": "Displays a list of options for the user to pick from—triggered by a button with optional glassy variant.",
       "dependencies": [
         "@radix-ui/react-select",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "select"
+        "class-variance-authority",
+        "clsx",
+        "lucide-react",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -638,9 +731,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -651,6 +744,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/select.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/select.tsx"
         },
         {
           "path": "components/ui/glass/select.tsx",
@@ -666,10 +764,10 @@
       "description": "A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time with optional glassy variant.",
       "dependencies": [
         "@radix-ui/react-radio-group",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "radio-group"
+        "class-variance-authority",
+        "clsx",
+        "lucide-react",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -678,9 +776,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -691,6 +789,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/radio-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/radio-group.tsx"
         },
         {
           "path": "components/ui/glass/radio-group.tsx",
@@ -704,9 +807,6 @@
       "type": "registry:component",
       "title": "Skeleton",
       "description": "Use to show a placeholder while content is loading with optional glassy variant.",
-      "registryDependencies": [
-        "skeleton"
-      ],
       "files": [
         {
           "path": "lib/utils.ts",
@@ -714,9 +814,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -729,10 +829,20 @@
           "target": "app/globals.css"
         },
         {
+          "path": "components/ui/skeleton.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/skeleton.tsx"
+        },
+        {
           "path": "components/ui/glass/skeleton.tsx",
           "type": "registry:component",
           "target": "components/ui/glass/skeleton.tsx"
         }
+      ],
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ]
     },
     {
@@ -740,9 +850,6 @@
       "type": "registry:component",
       "title": "Alert",
       "description": "Displays a callout for user attention with optional glassy variant.",
-      "registryDependencies": [
-        "alert"
-      ],
       "files": [
         {
           "path": "lib/utils.ts",
@@ -750,9 +857,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -765,10 +872,20 @@
           "target": "app/globals.css"
         },
         {
+          "path": "components/ui/alert.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/alert.tsx"
+        },
+        {
           "path": "components/ui/glass/alert.tsx",
           "type": "registry:component",
           "target": "components/ui/glass/alert.tsx"
         }
+      ],
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ]
     },
     {
@@ -778,10 +895,10 @@
       "description": "A vertically stacked set of interactive headings that each reveal a section of content.",
       "dependencies": [
         "@radix-ui/react-accordion",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "accordion"
+        "class-variance-authority",
+        "clsx",
+        "lucide-react",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -790,9 +907,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -803,6 +920,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/accordion.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/accordion.tsx"
         },
         {
           "path": "components/ui/glass/accordion.tsx",
@@ -818,10 +940,10 @@
       "description": "Displays the path to the current resource using a hierarchy of links.",
       "dependencies": [
         "@radix-ui/react-slot",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "breadcrumb"
+        "class-variance-authority",
+        "clsx",
+        "lucide-react",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -830,9 +952,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -843,6 +965,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/breadcrumb.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/breadcrumb.tsx"
         },
         {
           "path": "components/ui/glass/breadcrumb.tsx",
@@ -857,13 +984,15 @@
       "title": "Calendar",
       "description": "A date field component that allows users to enter and edit date.",
       "dependencies": [
+        "class-variance-authority",
+        "clsx",
         "date-fns",
         "lucide-react",
-        "react-day-picker"
+        "react-day-picker",
+        "tailwind-merge"
       ],
       "registryDependencies": [
-        "button",
-        "calendar"
+        "@glass-ui/button"
       ],
       "files": [
         {
@@ -872,9 +1001,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -885,6 +1014,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/calendar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/calendar.tsx"
         },
         {
           "path": "components/ui/glass/calendar.tsx",
@@ -899,10 +1033,10 @@
       "title": "Chart",
       "description": "Chart components built with Recharts with optional glassy variant.",
       "dependencies": [
-        "recharts"
-      ],
-      "registryDependencies": [
-        "chart"
+        "class-variance-authority",
+        "clsx",
+        "recharts",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -911,9 +1045,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -924,6 +1058,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/chart.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/chart.tsx"
         },
         {
           "path": "components/ui/glass/chart.tsx",
@@ -938,10 +1077,10 @@
       "title": "Collapsible",
       "description": "An interactive component which expands/collapses a panel.",
       "dependencies": [
-        "@radix-ui/react-collapsible"
-      ],
-      "registryDependencies": [
-        "collapsible"
+        "@radix-ui/react-collapsible",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -950,9 +1089,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -963,6 +1102,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/collapsible.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/collapsible.tsx"
         },
         {
           "path": "components/ui/glass/collapsible.tsx",
@@ -978,12 +1122,14 @@
       "description": "Fast, composable, unstyled command menu for React.",
       "dependencies": [
         "@radix-ui/react-dialog",
+        "class-variance-authority",
+        "clsx",
         "cmdk",
-        "lucide-react"
+        "lucide-react",
+        "tailwind-merge"
       ],
       "registryDependencies": [
-        "command",
-        "dialog"
+        "@glass-ui/dialog"
       ],
       "files": [
         {
@@ -992,9 +1138,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -1005,6 +1151,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/command.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/command.tsx"
         },
         {
           "path": "components/ui/glass/command.tsx",
@@ -1019,13 +1170,15 @@
       "title": "Cropper",
       "description": "An image cropper component with optional glassy variant.",
       "dependencies": [
-        "react-easy-crop"
+        "class-variance-authority",
+        "clsx",
+        "react-easy-crop",
+        "tailwind-merge"
       ],
       "registryDependencies": [
-        "button",
-        "cropper",
-        "dialog",
-        "slider"
+        "@glass-ui/button",
+        "@glass-ui/dialog",
+        "@glass-ui/slider"
       ],
       "files": [
         {
@@ -1034,9 +1187,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -1047,6 +1200,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/cropper.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/cropper.tsx"
         },
         {
           "path": "components/ui/glass/cropper.tsx",
@@ -1061,10 +1219,10 @@
       "title": "Drawer",
       "description": "A drawer component for mobile with optional glassy variant.",
       "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge",
         "vaul"
-      ],
-      "registryDependencies": [
-        "drawer"
       ],
       "files": [
         {
@@ -1073,9 +1231,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -1086,6 +1244,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/drawer.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/drawer.tsx"
         },
         {
           "path": "components/ui/glass/drawer.tsx",
@@ -1100,10 +1263,10 @@
       "title": "Hover Card",
       "description": "For sighted users to preview content available behind a link.",
       "dependencies": [
-        "@radix-ui/react-hover-card"
-      ],
-      "registryDependencies": [
-        "hover-card"
+        "@radix-ui/react-hover-card",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -1112,9 +1275,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -1125,6 +1288,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/hover-card.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/hover-card.tsx"
         },
         {
           "path": "components/ui/glass/hover-card.tsx",
@@ -1139,11 +1307,11 @@
       "title": "Input OTP",
       "description": "Accessible one-time password component with copy paste functionality.",
       "dependencies": [
+        "class-variance-authority",
+        "clsx",
         "input-otp",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "input-otp"
+        "lucide-react",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -1152,9 +1320,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -1165,6 +1333,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/input-otp.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/input-otp.tsx"
         },
         {
           "path": "components/ui/glass/input-otp.tsx",
@@ -1180,10 +1353,10 @@
       "description": "A collection of links for navigating websites.",
       "dependencies": [
         "@radix-ui/react-navigation-menu",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "navigation-menu"
+        "class-variance-authority",
+        "clsx",
+        "lucide-react",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -1192,9 +1365,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -1205,6 +1378,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/navigation-menu.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/navigation-menu.tsx"
         },
         {
           "path": "components/ui/glass/navigation-menu.tsx",
@@ -1219,8 +1397,7 @@
       "title": "Pagination",
       "description": "Pagination with page navigation with optional glassy variant.",
       "registryDependencies": [
-        "button",
-        "pagination"
+        "@glass-ui/button"
       ],
       "files": [
         {
@@ -1229,9 +1406,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -1242,6 +1419,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/pagination.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/pagination.tsx"
         },
         {
           "path": "components/ui/glass/pagination.tsx",
@@ -1250,7 +1432,10 @@
         }
       ],
       "dependencies": [
-        "lucide-react"
+        "class-variance-authority",
+        "clsx",
+        "lucide-react",
+        "tailwind-merge"
       ]
     },
     {
@@ -1259,10 +1444,10 @@
       "title": "Scroll Area",
       "description": "Augments native scroll functionality for custom, cross-browser styling.",
       "dependencies": [
-        "@radix-ui/react-scroll-area"
-      ],
-      "registryDependencies": [
-        "scroll-area"
+        "@radix-ui/react-scroll-area",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -1271,9 +1456,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -1284,6 +1469,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/scroll-area.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/scroll-area.tsx"
         },
         {
           "path": "components/ui/glass/scroll-area.tsx",
@@ -1299,10 +1489,10 @@
       "description": "Extends the Dialog component to display content that complements the main content of the screen.",
       "dependencies": [
         "@radix-ui/react-dialog",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "sheet"
+        "class-variance-authority",
+        "clsx",
+        "lucide-react",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -1311,9 +1501,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -1324,6 +1514,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/sheet.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sheet.tsx"
         },
         {
           "path": "components/ui/glass/sheet.tsx",
@@ -1337,9 +1532,6 @@
       "type": "registry:component",
       "title": "Sidebar",
       "description": "A sidebar component with optional glassy variant.",
-      "registryDependencies": [
-        "sidebar"
-      ],
       "files": [
         {
           "path": "lib/utils.ts",
@@ -1347,9 +1539,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -1362,10 +1554,20 @@
           "target": "app/globals.css"
         },
         {
+          "path": "components/ui/sidebar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sidebar.tsx"
+        },
+        {
           "path": "components/ui/glass/sidebar.tsx",
           "type": "registry:component",
           "target": "components/ui/glass/sidebar.tsx"
         }
+      ],
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ]
     },
     {
@@ -1374,10 +1576,10 @@
       "title": "Slider",
       "description": "An input where the user selects a value from within a given range.",
       "dependencies": [
-        "@radix-ui/react-slider"
-      ],
-      "registryDependencies": [
-        "slider"
+        "@radix-ui/react-slider",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -1386,9 +1588,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -1399,6 +1601,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/slider.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/slider.tsx"
         },
         {
           "path": "components/ui/glass/slider.tsx",
@@ -1413,11 +1620,11 @@
       "title": "Sonner",
       "description": "An opinionated toast component for React.",
       "dependencies": [
+        "class-variance-authority",
+        "clsx",
         "next-themes",
-        "sonner"
-      ],
-      "registryDependencies": [
-        "sonner"
+        "sonner",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -1426,9 +1633,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -1439,6 +1646,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/sonner.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sonner.tsx"
         },
         {
           "path": "components/ui/glass/sonner.tsx",
@@ -1452,9 +1664,6 @@
       "type": "registry:component",
       "title": "Table",
       "description": "A responsive table component with optional glassy variant.",
-      "registryDependencies": [
-        "table"
-      ],
       "files": [
         {
           "path": "lib/utils.ts",
@@ -1462,9 +1671,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -1477,10 +1686,20 @@
           "target": "app/globals.css"
         },
         {
+          "path": "components/ui/table.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/table.tsx"
+        },
+        {
           "path": "components/ui/glass/table.tsx",
           "type": "registry:component",
           "target": "components/ui/glass/table.tsx"
         }
+      ],
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ]
     },
     {
@@ -1489,10 +1708,10 @@
       "title": "Toggle",
       "description": "A two-state button that can be either on or off.",
       "dependencies": [
-        "@radix-ui/react-toggle"
-      ],
-      "registryDependencies": [
-        "toggle"
+        "@radix-ui/react-toggle",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -1501,9 +1720,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -1514,6 +1733,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/toggle.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/toggle.tsx"
         },
         {
           "path": "components/ui/glass/toggle.tsx",
@@ -1528,10 +1752,10 @@
       "title": "Toggle Group",
       "description": "A set of two-state buttons that can be toggled on or off.",
       "dependencies": [
-        "@radix-ui/react-toggle-group"
-      ],
-      "registryDependencies": [
-        "toggle-group"
+        "@radix-ui/react-toggle-group",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -1540,9 +1764,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -1553,6 +1777,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/toggle-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/toggle-group.tsx"
         },
         {
           "path": "components/ui/glass/toggle-group.tsx",
@@ -1567,12 +1796,14 @@
       "title": "Mode Toggle",
       "description": "A theme switcher component with optional glassy variant.",
       "dependencies": [
+        "class-variance-authority",
+        "clsx",
         "lucide-react",
-        "next-themes"
+        "next-themes",
+        "tailwind-merge"
       ],
       "registryDependencies": [
-        "button",
-        "mode-toggle"
+        "@glass-ui/button"
       ],
       "files": [
         {
@@ -1581,9 +1812,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -1594,6 +1825,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/mode-toggle.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/mode-toggle.tsx"
         },
         {
           "path": "components/ui/glass/mode-toggle.tsx",
@@ -1607,9 +1843,6 @@
       "type": "registry:component",
       "title": "Spinner",
       "description": "A loading spinner component with glassy variants.",
-      "registryDependencies": [
-        "spinner"
-      ],
       "files": [
         {
           "path": "lib/utils.ts",
@@ -1617,9 +1850,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -1632,10 +1865,20 @@
           "target": "app/globals.css"
         },
         {
+          "path": "components/ui/spinner.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/spinner.tsx"
+        },
+        {
           "path": "components/ui/glass/spinner.tsx",
           "type": "registry:component",
           "target": "components/ui/glass/spinner.tsx"
         }
+      ],
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ]
     },
     {
@@ -1643,9 +1886,6 @@
       "type": "registry:component",
       "title": "Button Group",
       "description": "A group of buttons with glassy variants.",
-      "registryDependencies": [
-        "button-group"
-      ],
       "files": [
         {
           "path": "lib/utils.ts",
@@ -1653,9 +1893,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -1668,10 +1908,20 @@
           "target": "app/globals.css"
         },
         {
+          "path": "components/ui/button-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/button-group.tsx"
+        },
+        {
           "path": "components/ui/glass/button-group.tsx",
           "type": "registry:component",
           "target": "components/ui/glass/button-group.tsx"
         }
+      ],
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ]
     },
     {
@@ -1679,9 +1929,6 @@
       "type": "registry:component",
       "title": "Input Group",
       "description": "A group of inputs with glassy variants.",
-      "registryDependencies": [
-        "input-group"
-      ],
       "files": [
         {
           "path": "lib/utils.ts",
@@ -1689,9 +1936,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -1704,10 +1951,20 @@
           "target": "app/globals.css"
         },
         {
+          "path": "components/ui/input-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/input-group.tsx"
+        },
+        {
           "path": "components/ui/glass/input-group.tsx",
           "type": "registry:component",
           "target": "components/ui/glass/input-group.tsx"
         }
+      ],
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ]
     },
     {
@@ -1715,9 +1972,6 @@
       "type": "registry:component",
       "title": "Empty State",
       "description": "An empty state component with glassy variants.",
-      "registryDependencies": [
-        "empty-state"
-      ],
       "files": [
         {
           "path": "lib/utils.ts",
@@ -1725,9 +1979,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -1740,10 +1994,20 @@
           "target": "app/globals.css"
         },
         {
+          "path": "components/ui/empty-state.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/empty-state.tsx"
+        },
+        {
           "path": "components/ui/glass/empty-state.tsx",
           "type": "registry:component",
           "target": "components/ui/glass/empty-state.tsx"
         }
+      ],
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ]
     },
     {
@@ -1752,8 +2016,7 @@
       "title": "Menu Bar",
       "description": "A menu bar component with glassy variants.",
       "registryDependencies": [
-        "button",
-        "menu-bar"
+        "@glass-ui/button"
       ],
       "files": [
         {
@@ -1762,9 +2025,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -1777,10 +2040,20 @@
           "target": "app/globals.css"
         },
         {
+          "path": "components/ui/menu-bar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/menu-bar.tsx"
+        },
+        {
           "path": "components/ui/glass/menu-bar.tsx",
           "type": "registry:component",
           "target": "components/ui/glass/menu-bar.tsx"
         }
+      ],
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ]
     },
     {
@@ -1789,16 +2062,18 @@
       "title": "Date Picker Input",
       "description": "A date picker input component with glassy variants.",
       "dependencies": [
+        "class-variance-authority",
+        "clsx",
         "date-fns",
         "lucide-react",
-        "react-day-picker"
+        "react-day-picker",
+        "tailwind-merge"
       ],
       "registryDependencies": [
-        "button",
-        "calendar",
-        "popover",
-        "input",
-        "date-picker-input"
+        "@glass-ui/button",
+        "@glass-ui/calendar",
+        "@glass-ui/popover",
+        "@glass-ui/input"
       ],
       "files": [
         {
@@ -1807,9 +2082,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -1820,6 +2095,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/date-picker-input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/date-picker-input.tsx"
         },
         {
           "path": "components/ui/glass/date-picker-input.tsx",
@@ -1835,10 +2115,10 @@
       "description": "A context menu component with glassy variants.",
       "dependencies": [
         "@radix-ui/react-context-menu",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "context-menu"
+        "class-variance-authority",
+        "clsx",
+        "lucide-react",
+        "tailwind-merge"
       ],
       "files": [
         {
@@ -1847,9 +2127,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -1860,6 +2140,11 @@
           "path": "app/globals.css",
           "type": "registry:style",
           "target": "app/globals.css"
+        },
+        {
+          "path": "components/ui/context-menu.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/context-menu.tsx"
         },
         {
           "path": "components/ui/glass/context-menu.tsx",
@@ -1874,11 +2159,13 @@
       "title": "Carousel",
       "description": "A carousel component with glassy variants.",
       "dependencies": [
-        "lucide-react"
+        "class-variance-authority",
+        "clsx",
+        "lucide-react",
+        "tailwind-merge"
       ],
       "registryDependencies": [
-        "button",
-        "carousel"
+        "@glass-ui/button"
       ],
       "files": [
         {
@@ -1887,9 +2174,9 @@
           "target": "lib/utils.ts"
         },
         {
-          "path": "lib/glass-utils.ts",
+          "path": "lib/liquid-glass/material.ts",
           "type": "registry:lib",
-          "target": "lib/glass-utils.ts"
+          "target": "lib/liquid-glass/material.ts"
         },
         {
           "path": "lib/hover-effects.ts",
@@ -1902,9 +2189,71 @@
           "target": "app/globals.css"
         },
         {
+          "path": "components/ui/carousel.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/carousel.tsx"
+        },
+        {
           "path": "components/ui/glass/carousel.tsx",
           "type": "registry:component",
           "target": "components/ui/glass/carousel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "liquid-glass",
+      "type": "registry:ui",
+      "title": "Liquid Glass",
+      "description": "WebGL refractive glass close to Apple's Liquid Glass: provider, engine and components (button, bar, card, search, switch, slider, tabs, dialog).",
+      "dependencies": [
+        "@radix-ui/react-dialog",
+        "@radix-ui/react-slider",
+        "@radix-ui/react-switch",
+        "@radix-ui/react-tabs",
+        "clsx",
+        "next-themes",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "lib/utils.ts"
+        },
+        {
+          "path": "lib/liquid-glass/engine.ts",
+          "type": "registry:lib",
+          "target": "lib/liquid-glass/engine.ts"
+        },
+        {
+          "path": "lib/liquid-glass/budget.ts",
+          "type": "registry:lib",
+          "target": "lib/liquid-glass/budget.ts"
+        },
+        {
+          "path": "lib/liquid-glass/occlusion.ts",
+          "type": "registry:lib",
+          "target": "lib/liquid-glass/occlusion.ts"
+        },
+        {
+          "path": "lib/liquid-glass/backdrop-stack.ts",
+          "type": "registry:lib",
+          "target": "lib/liquid-glass/backdrop-stack.ts"
+        },
+        {
+          "path": "lib/liquid-glass/material.ts",
+          "type": "registry:lib",
+          "target": "lib/liquid-glass/material.ts"
+        },
+        {
+          "path": "components/ui/liquid/liquid-glass-provider.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/liquid/liquid-glass-provider.tsx"
+        },
+        {
+          "path": "components/ui/liquid/liquid-filters.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/liquid/liquid-filters.tsx"
         }
       ]
     }

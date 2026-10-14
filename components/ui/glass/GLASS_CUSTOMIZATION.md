@@ -1,217 +1,85 @@
-# Glassmorphism Customization Guide
+# Glass Customization
 
-Glass UI components support full customization of glassmorphism effects. You can override color, transparency, blur, and outline to create custom glass-like effects.
+Every Glass UI component renders liquid glass by default. You choose how it looks with three props, and restyle the whole library through a handful of CSS variables.
 
-## GlassCustomization Interface
+## Materials
 
-```typescript
-interface GlassCustomization {
-  /**
-   * Background color for the glass effect (e.g., "rgba(255, 255, 255, 0.1)" or "#ffffff")
-   * Default: uses CSS variable --glass-bg
-   */
-  color?: string
-  
-  /**
-   * Transparency/opacity for the background (0-1)
-   * If provided, will override the alpha channel in color
-   */
-  transparency?: number
-  
-  /**
-   * Blur amount in pixels
-   * Default: uses CSS variable --blur (20px)
-   */
-  blur?: number | string
-  
-  /**
-   * Border/outline color (e.g., "rgba(255, 255, 255, 0.25)" or "#ffffff")
-   * Default: uses CSS variable --glass-border
-   */
-  outline?: string
-  
-  /**
-   * Border/outline width in pixels
-   * Default: 1px
-   */
-  outlineWidth?: number | string
-  
-  /**
-   * Shadow for the glass effect
-   * Default: uses CSS variable --glass-shadow
-   */
-  shadow?: string
+| Material | Look | When to use |
+|---|---|---|
+| `regular` (default) | Frosted, adaptive wash | Most surfaces and controls |
+| `clear` | Barely frosted, the most refraction | Over rich imagery, media controls |
+| `tinted` | Washed with a colour (the primary colour by default) | Emphasis, selected states, calls to action |
+
+```tsx
+<Card>Regular glass</Card>
+<Card material="clear">Clear glass</Card>
+<Button material="tinted">Primary colour tint</Button>
+<Button material="tinted" tint="#3b82f6">Blue tint</Button>
+```
+
+## Per-instance override
+
+`glass` overrides the tint colour and frost (0–1) of one component:
+
+```tsx
+<Card glass={{ tint: "rgba(139, 92, 246, 0.6)", frost: 0.5 }}>Violet, lightly frosted</Card>
+```
+
+`tint` alone adds a light colour wash to `regular` or `clear` glass:
+
+```tsx
+<Badge tint="oklch(0.7 0.2 150)">Online</Badge>
+```
+
+## Plain styling
+
+Components that had a non-glass look keep it as `variant="default"` (and Button keeps `destructive`, `outline`, `secondary`, `ghost` and `link`). `variant="liquid"` is the default and the only variant that applies `material`.
+
+## Global CSS variables
+
+The CSS look lives in the `.lg` layer of `app/globals.css`. Override these to restyle every component:
+
+```css
+:root {
+  --lg-rim-hi: rgba(255, 255, 255, 0.8);    /* bright edge of the rim */
+  --lg-rim-lo: rgba(255, 255, 255, 0.18);   /* dim edge of the rim */
+  --lg-highlight: rgba(255, 255, 255, 0.6); /* inner top highlight */
+  --lg-drop: rgba(15, 23, 42, 0.14);        /* drop shadow */
 }
+.dark {
+  --lg-rim-hi: rgba(255, 255, 255, 0.34);
+  --lg-rim-lo: rgba(255, 255, 255, 0.06);
+  --lg-highlight: rgba(255, 255, 255, 0.16);
+  --lg-drop: rgba(0, 0, 0, 0.45);
+}
+
+/* Each material sets its wash, blur and saturation */
+.lg-regular { --lg-base: rgba(255, 255, 255, 0.42); --lg-blur: 16px; --lg-sat: 180%; }
+.dark .lg-regular { --lg-base: rgba(255, 255, 255, 0.07); }
 ```
 
-## Usage Examples
+The Themes page generates these variables for you.
 
-### Basic Card with Custom Glass Effect
+## Roles
 
-```tsx
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/glass"
+Each component gives its glass a role, which sets its shape and whether WebGL may draw it:
 
-<Card 
-  glass={{
-    color: "rgba(139, 92, 246, 0.2)",  // Purple tint
-    blur: 30,                           // 30px blur
-    transparency: 0.3,                  // 30% opacity
-    outline: "rgba(139, 92, 246, 0.5)", // Purple border
-    outlineWidth: 2                    // 2px border
-  }}
->
-  <CardHeader>
-    <CardTitle>Custom Glass Card</CardTitle>
-  </CardHeader>
-  <CardContent>
-    This card has a custom purple glass effect!
-  </CardContent>
-</Card>
-```
+| Role | Shape | WebGL | Components |
+|---|---|---|---|
+| surface | 28px radius | yes | Card, Alert, EmptyState, Sidebar, Table, Calendar, ChartContainer, Carousel |
+| sheet | 34px radius | opt-in (`webgl`) | Dialog, AlertDialog, Sheet, Drawer |
+| bar | capsule | yes | TabsList, MenuBar, NavigationMenuList, ButtonGroup, ToggleGroup, Pagination, Breadcrumb, InputGroup |
+| control | capsule | yes | Button, Toggle, Input, Textarea, SelectTrigger |
+| knob | capsule | yes | Switch and Slider thumbs |
+| inline | capsule | never | Checkbox, Radio, Badge, InputOTP slot, Avatar fallback |
+| overlay | 20px radius | never | Popover, menus, Select content, HoverCard, Tooltip, Command, toasts |
 
-### Button with Blue Glass Effect
+## WebGL refraction
 
-```tsx
-import { Button } from "@/components/ui/glass"
+Inside a `LiquidGlassProvider` (see `components/ui/liquid/README.md`), glass that rests directly on the backdrop is drawn by a shader with real refraction. Pass `webgl={false}` to keep a component on the CSS look, for example when it floats over other content; a sheet can opt in with `webgl` when nothing else covers the backdrop.
 
-<Button 
-  glass={{
-    color: "rgba(59, 130, 246, 0.2)",   // Blue tint
-    blur: 25,                           // 25px blur
-    outline: "rgba(59, 130, 246, 0.4)", // Blue border
-    shadow: "0 8px 32px rgba(59, 130, 246, 0.3)" // Custom shadow
-  }}
->
-  Click Me
-</Button>
-```
+## Accessibility
 
-### Input with Subtle Glass Effect
-
-```tsx
-import { Input } from "@/components/ui/glass"
-
-<Input 
-  glass={{
-    color: "rgba(255, 255, 255, 0.15)", // Light white
-    blur: 15,                           // Subtle blur
-    outline: "rgba(255, 255, 255, 0.3)", // Light border
-    transparency: 0.2                    // 20% opacity
-  }}
-  placeholder="Enter your email..."
-/>
-```
-
-### Dialog with Strong Glass Effect
-
-```tsx
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/glass"
-
-<Dialog>
-  <DialogTrigger>Open Dialog</DialogTrigger>
-  <DialogContent 
-    glass={{
-      color: "rgba(139, 92, 246, 0.15)", // Purple tint
-      blur: 40,                           // Strong blur
-      outline: "rgba(139, 92, 246, 0.3)", // Purple border
-      shadow: "0 12px 48px rgba(139, 92, 246, 0.4)" // Custom shadow
-    }}
-  >
-    <DialogHeader>
-      <DialogTitle>Custom Glass Dialog</DialogTitle>
-    </DialogHeader>
-    <p>This dialog has a custom glass effect!</p>
-  </DialogContent>
-</Dialog>
-```
-
-### Using Hex Colors
-
-```tsx
-<Card 
-  glass={{
-    color: "#ffffff",      // White in hex
-    transparency: 0.1,    // Will convert to rgba(255, 255, 255, 0.1)
-    blur: 20,
-    outline: "#3b82f6"     // Blue in hex
-  }}
->
-  Content
-</Card>
-```
-
-### Using Base Components
-
-You can also use the `glass` prop directly on base components:
-
-```tsx
-import { Card, Button, Input } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-
-<Card 
-  variant="glass"
-  glass={{
-    color: "rgba(255, 255, 255, 0.1)",
-    blur: 25,
-    outline: "rgba(255, 255, 255, 0.25)"
-  }}
->
-  Content
-</Card>
-
-<Button 
-  variant="glass"
-  glass={{
-    blur: 30,
-    transparency: 0.2
-  }}
->
-  Button
-</Button>
-
-<Input 
-  variant="glass"
-  glass={{
-    color: "#ffffff",
-    transparency: 0.15,
-    blur: 15
-  }}
-/>
-```
-
-## Color Formats Supported
-
-- **RGBA**: `"rgba(255, 255, 255, 0.1)"`
-- **RGB**: `"rgb(255, 255, 255)"` (use with `transparency` prop)
-- **Hex**: `"#ffffff"` (use with `transparency` prop)
-- **Named colors**: `"white"` (use with `transparency` prop)
-
-## Blur Values
-
-- **Number**: `blur: 20` (converted to `20px`)
-- **String**: `blur: "20px"` or `blur: "1rem"`
-
-## Best Practices
-
-1. **Transparency**: Keep transparency between 0.1-0.3 for best visibility
-2. **Blur**: Use 15-30px for subtle effects, 30-50px for stronger effects
-3. **Color**: Match glass color to your theme for cohesive design
-4. **Outline**: Use slightly more opaque outline than background for definition
-5. **Shadow**: Custom shadows can add depth and make glass effect more pronounced
-
-## Component Support
-
-The following components support glass customization:
-
-- ✅ Card (base & glass-ui)
-- ✅ Button (base & glass-ui)
-- ✅ Input (base & glass-ui)
-- ✅ Dialog (base & glass-ui)
-- ✅ Textarea
-- ✅ Badge
-- ✅ Alert
-- ✅ And more...
-
-All components with `variant="glass"` support the `glass` prop for customization.
-
+- `prefers-reduced-transparency`: the glass becomes near-opaque and WebGL is off.
+- `prefers-reduced-motion`: no press squash or stretch.
+- Text keeps `text-foreground` contrast in both themes; tinted glass uses `--primary-foreground`.

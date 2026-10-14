@@ -5,7 +5,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import { getGlassStyles, type GlassCustomization } from "@/lib/glass-utils"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
 const Dialog = DialogPrimitive.Root
 
@@ -32,45 +32,20 @@ DialogOverlay.displayName = DialogPrimitive.Overlay.displayName
 
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
-    variant?: "default" | "glass" | "glassSubtle" | "frosted" | "fluted" | "crystal"
-    glass?: GlassCustomization
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & LiquidProps & {
+    variant?: "liquid" | "default"
   }
->(({ className, variant = "glass", children, glass, style, ...props }, ref) => {
-  const hasCustomGlass = glass !== undefined
-  
-  const getVariantClass = () => {
-    if (variant === "default") return "bg-background border"
-    if (hasCustomGlass) return "glass-bg backdrop-blur-[var(--blur-lg)] border border-[var(--glass-border)] text-foreground shadow-[var(--glass-shadow-lg)]"
-    
-    const variants = {
-      glass: "glass-bg backdrop-blur-[var(--blur-lg)] border border-[var(--glass-border)] text-foreground shadow-[var(--glass-shadow-lg)]",
-      glassSubtle: "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] text-foreground shadow-[var(--glass-shadow-lg)] opacity-50",
-      frosted: "glass-frosted backdrop-blur-[var(--blur-frosted)] border border-[var(--glass-frosted-border)] text-foreground shadow-[var(--glass-frosted-shadow)]",
-      fluted: "glass-fluted backdrop-blur-[var(--blur)] border border-[var(--glass-border)] text-foreground shadow-[var(--glass-shadow-lg)]",
-      crystal: "glass-crystal backdrop-blur-[var(--blur-crystal)] border border-[var(--glass-crystal-border)] text-foreground shadow-[var(--glass-crystal-shadow)]",
-    }
-    return variants[variant] || variants.glass
-  }
-  
-  const glassStyles = variant !== "default" ? getGlassStyles(glass) : {}
-  
+>(({ className, variant, material, tint, glass, webgl, children, style, ...props }, ref) => {
+  const v = resolveVariant<"liquid" | "default">(variant, material)
+  const base = "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 p-6 duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]"
+  const own = v.variant === "liquid"
+    ? liquidProps({ role: "sheet", material: v.material, tint, glass, webgl }, { className: cn(base, className), style })
+    : { className: cn(base, "rounded-lg border bg-background shadow-lg", className), style }
+
   return (
     <DialogPortal>
       <DialogOverlay />
-      <DialogPrimitive.Content
-        ref={ref}
-        className={cn(
-          "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]",
-          getVariantClass(),
-          className
-        )}
-        style={{
-          ...glassStyles,
-          ...style,
-        }}
-        {...props}
-      >
+      <DialogPrimitive.Content ref={ref} {...own} {...props}>
         {children}
         <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
           <X className="h-4 w-4" />

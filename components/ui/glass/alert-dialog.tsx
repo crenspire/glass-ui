@@ -15,6 +15,7 @@ import {
 import { cn } from "@/lib/utils"
 
 export interface AlertDialogContentProps extends React.ComponentProps<typeof BaseAlertDialogContent> {
+  /** @deprecated No effect: the liquid material carries its own blur. */
   animated?: boolean
 }
 
@@ -24,13 +25,11 @@ export interface AlertDialogContentProps extends React.ComponentProps<typeof Bas
 export const AlertDialogContent = React.forwardRef<
   React.ElementRef<typeof BaseAlertDialogContent>,
   AlertDialogContentProps
->(({ className, variant = "glass", animated = true, ...props }, ref) => {
+>(({ className, animated: _animated, ...props }, ref) => {
   return (
     <BaseAlertDialogContent
       ref={ref}
-      variant={variant}
       className={cn(
-        animated && "backdrop-blur-[var(--blur-lg)]",
         className
       )}
       {...props}

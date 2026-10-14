@@ -2,6 +2,7 @@ import * as React from "react"
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { liquidProps, resolveVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 import { buttonVariants } from "@/components/ui/button"
 
 const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
@@ -16,19 +17,19 @@ Pagination.displayName = "Pagination"
 
 const PaginationContent = React.forwardRef<
   HTMLUListElement,
-  React.ComponentProps<"ul"> & {
-    variant?: "default" | "glass"
+  React.ComponentProps<"ul"> & LiquidProps & {
+    variant?: "liquid" | "default"
   }
->(({ className, variant = "glass", ...props }, ref) => {
-  const variants = {
-    default: "",
-    glass: "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] rounded-lg px-2 py-1 shadow-[var(--glass-shadow-sm)]",
-  }
+>(({ className, variant, material, tint, glass, webgl, style, ...props }, ref) => {
+  const v = resolveVariant<"liquid" | "default">(variant, material)
+  const lg = v.variant === "liquid" ? liquidProps({ role: "bar", material: v.material, tint, glass, webgl }, { className: "px-2 py-1" }) : null
   
   return (
     <ul
       ref={ref}
-      className={cn("flex flex-row items-center gap-1", variants[variant], className)}
+      {...lg}
+      style={{ ...lg?.style, ...style }}
+      className={cn("flex flex-row items-center gap-1", lg ? lg.className : "", className)}
       {...props}
     />
   )
@@ -46,30 +47,30 @@ PaginationItem.displayName = "PaginationItem"
 type PaginationLinkProps = {
   isActive?: boolean
 } & React.ComponentProps<"a"> & {
-    variant?: "default" | "glass"
+    variant?: "liquid" | "default"
   }
 
 const PaginationLink = ({
   className,
   isActive,
-  variant = "glass",
+  variant,
+  style,
   ...props
 }: PaginationLinkProps) => {
-  const variants = {
-    default: isActive ? "bg-background text-foreground" : "",
-    glass: isActive ? "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] shadow-[var(--glass-shadow-sm)]" : "",
-  }
-  
+  const v = resolveVariant<"liquid" | "default">(variant, undefined)
+  const lg = isActive && v.variant === "liquid" ? liquidProps({ role: "inline" }) : null
+
   return (
     <a
       aria-current={isActive ? "page" : undefined}
+      {...lg}
       className={cn(
-        buttonVariants({
-          variant: isActive ? "outline" : "ghost",
-        }),
-        variants[variant],
+        buttonVariants({ variant: lg ? "liquid" : isActive ? "outline" : "ghost" }),
+        lg?.className,
+        isActive && !lg && "bg-background text-foreground",
         className
       )}
+      style={{ ...lg?.style, ...style }}
       {...props}
     />
   )
