@@ -19,12 +19,12 @@ Redesign every existing Glass UI component in the liquid-glass language introduc
 
 ```ts
 type Material = "regular" | "clear" | "tinted"
-type Role = "surface" | "bar" | "control" | "knob" | "overlay"
+type Role = "surface" | "sheet" | "bar" | "control" | "knob" | "inline" | "overlay"
 
 interface LiquidProps {
   material?: Material          // default "regular"
   tint?: string                // any CSS colour; used by "tinted", optional on others
-  glass?: { tint?: string; frost?: number; refraction?: number } // per-instance override
+  glass?: { tint?: string; frost?: number } // per-instance override (refraction stays global: it is a shader uniform)
 }
 
 liquidGlass({ material, role, tint, glass }): {
@@ -37,10 +37,10 @@ liquidGlass({ material, role, tint, glass }): {
 - `regular`: frosted, adaptive tint (light: white wash, dark: near-black wash).
 - `clear`: minimal frost, strongest refraction, thin wash.
 - `tinted`: wash coloured by `tint` (default `var(--primary)`).
-- Role → WebGL preset: `surface`→`card` (dialogs/sheets→`sheet`), `bar`→`bar`, `control`→`button`, `knob`→`knob`, `overlay`→ none.
+- Role → WebGL preset: `surface`→`card`, `sheet`→`sheet` (dialogs, sheets, drawers), `bar`→`bar`, `control`→`button`, `knob`→`knob`, `inline`/`overlay`→ none (CSS only). `inline` is for small, numerous items (checkbox, radio, badge, OTP slot, avatar fallback, active pagination link) that would exhaust the shape budget.
 - Material → WebGL params: `regular` frost 1/tint 0.2, `clear` frost 0.1/tint 0, `tinted` frost 0.6 + tint colour.
 
-`variant` remains only on components that have solid variants (`default`, `destructive`, `outline`, `secondary`, `ghost`, `link`), and its default becomes `"liquid"`. `variant="liquid"` is the only variant that applies `liquidGlass()`; solid variants never do, and ignore `material`. Components without solid variants drop `variant` entirely and are always liquid.
+On every glass-capable component, the glass variant names are replaced by a single `"liquid"` value, which becomes the default; existing non-glass variants (`default`, `destructive`, `outline`, `secondary`, `ghost`, `link`) are kept. Only `variant="liquid"` applies `liquidGlass()`; other variants ignore `material`. ScrollArea, Separator, Skeleton and Spinner drop `variant` (their glass variants were cosmetic or unused). During migration the old names stay accepted as deprecated aliases (`glass`/`glassSubtle`/`frosted` → liquid regular, `crystal`/`fluted` → liquid clear, `glassSolid` → liquid tinted) so the build stays green; the final cleanup removes them after the codemod.
 
 ### CSS layer — `app/globals.css`
 
@@ -74,12 +74,14 @@ Old classes `.glass-bg`, `.glass-frosted`, `.glass-fluted`, `.glass-crystal` and
 
 | Role | WebGL | Components |
 |---|---|---|
-| surface | yes | Card, Alert, EmptyState, Dialog, AlertDialog, Sheet, Drawer, Sidebar, Table container, Calendar, Chart container, Carousel item, Accordion item |
+| surface | yes | Card, Alert, EmptyState, Sidebar, Table, Calendar, ChartContainer, Carousel (root; its nav buttons are liquid Buttons) |
+| sheet | yes | DialogContent, AlertDialogContent, SheetContent, DrawerContent |
 | bar | yes | Tabs list, Menubar, NavigationMenu (list), ButtonGroup, ToggleGroup, Pagination, Breadcrumb, InputGroup |
-| control | yes | Button, Toggle, Badge, Input, Textarea, Select trigger, InputOTP slot, DatePickerInput, ModeToggle |
-| knob | yes | Switch, Slider, Checkbox, RadioGroup (painted track/box as `data-glass-solid` on a dedicated `aria-hidden` span, glass knob/indicator) |
-| overlay | no | Popover, DropdownMenu, ContextMenu, Select content, HoverCard, Tooltip, Command, Sonner toast, NavigationMenu viewport |
-| none | – | Label, Separator, Skeleton, Spinner, ScrollArea, Cropper (token updates only) |
+| control | yes | Button, Toggle, Input, Textarea, SelectTrigger, DatePickerInput (via Button), ModeToggle (via Button) |
+| knob | yes | Switch, Slider (painted track as `data-glass-solid` on a dedicated `aria-hidden` span, glass knob) |
+| inline | no | Checkbox, RadioGroupItem, Badge, InputOTPSlot, AvatarFallback, PaginationLink (active) |
+| overlay | no | PopoverContent, DropdownMenu(Sub)Content, ContextMenu(Sub)Content, SelectContent, HoverCardContent, TooltipContent, Command, ChartTooltipContent, NavigationMenuContent/Viewport, Sonner toasts |
+| none | – | Label, Collapsible, Separator, Skeleton, Spinner, ScrollArea, Cropper, ChartLegendContent (token updates only); AccordionTrigger gets a soft hover wash, not a glass shape |
 
 Shape/spacing: controls become capsules (heights sm 36 / default 44 / lg 52); surfaces 24–32px radius. `components/ui/glass/*` wrappers keep `effect`, default changes from `glow` to `none`; `glow` is restyled as a soft white rim bloom instead of purple.
 
@@ -92,7 +94,7 @@ Shape/spacing: controls become capsules (heights sm 36 / default 44 / lg 52); su
    - `variant="crystal" | "fluted"` → `material="clear"`
    - `variant="glassSolid"` → `material="tinted"`
 4. Site: provider in root layout, canvas `GridBackground`, `/liquid` rebuilt.
-5. Remove dead CSS/tokens; rebuild registry. Every component's registry item adds `lib/liquid-glass/material.ts`; `liquid-glass` item becomes provider + engine only. READMEs (`components/ui/glass/README.md`, `GLASS_CUSTOMIZATION.md`, `components/ui/liquid/README.md`, root `README.md`) updated for the `material` API.
+5. Remove dead CSS/tokens; rebuild registry. Today each item ships only the `glass/` wrapper and resolves the base component from stock shadcn (`registryDependencies: ["<name>"]`), which has no glass variants — so installs lose the look. Each item now ships its base `components/ui/<name>.tsx` and `lib/liquid-glass/material.ts` instead of `lib/glass-utils.ts`; `liquid-glass` item becomes provider + engine + filters. READMEs (`components/ui/glass/README.md`, `GLASS_CUSTOMIZATION.md`, `components/ui/liquid/README.md`, root `README.md`) updated for the `material` API.
 
 ## Error handling / fallbacks
 
