@@ -41,6 +41,10 @@ function PhotoPage() {
 }
 ```
 
+## A DOM copy of the backdrop
+
+If you also show the backdrop in the DOM (for example a `<canvas>` wallpaper, which is what you see when WebGL is unavailable), mark it `data-glass-backdrop`. It sits above the shader canvas, so the provider hides it once the canvas shows the backdrop (`html.lg-ready`). The Glass UI site does exactly this with its animated wallpaper (`components/wallpaper.tsx`): one canvas is both the shader's backdrop and the fallback.
+
 ## What gets WebGL glass
 
 The shader draws behind the page, so it only shows where nothing else paints over the backdrop. The engine therefore draws an element only when:
@@ -48,6 +52,7 @@ The shader draws behind the page, so it only shows where nothing else paints ove
 - its role allows it (surfaces, bars, controls, knobs; sheets only with `webgl`; never overlays or inline items),
 - no ancestor other than another drawn glass element has a background or backdrop filter,
 - it is at most one level of glass-on-glass deep (deeper glass keeps the CSS look),
+- it is wholly inside every scroll container that clips it (partly scrolled glass keeps its CSS look, which the DOM clips),
 - it is among the 32 largest visible candidates.
 
 Drawn elements get a `data-glass-live` attribute and drop their CSS glass; everything else keeps the CSS look, so nothing ever disappears. Use `webgl={false}` on a component that floats over other content (a sticky header, buttons over an image), and `webgl` on a sheet that sits directly over the backdrop.

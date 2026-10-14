@@ -35,7 +35,7 @@ export default function LiquidDemo() {
   }, [engine, options])
 
   return (
-    <main className="min-h-screen p-7 text-foreground">
+    <div className="h-full overflow-y-auto p-4 text-foreground">
       <header className="flex items-center justify-between gap-4">
         <Button size="icon" className="size-[52px]" aria-label="Back"><ChevronLeft className="size-6" /></Button>
         <InputGroup className="h-[52px] w-[440px] max-w-full gap-2.5 px-5">
@@ -90,7 +90,7 @@ export default function LiquidDemo() {
         </Dialog>
       </div>
 
-      <nav className="fixed bottom-7 left-7">
+      <nav className="mt-8">
         <Tabs defaultValue="home">
           <TabsList className="h-[60px] p-1.5">
             {TABS.map(({ value, label, icon: Icon }) => (
@@ -101,6 +101,6 @@ export default function LiquidDemo() {
           </TabsList>
         </Tabs>
       </nav>
-    </main>
+    </div>
   )
 }
