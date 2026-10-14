@@ -22,7 +22,7 @@ export interface AlertProps extends React.ComponentProps<typeof BaseAlert> {
  * ```
  */
 export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
-  ({ className, variant = "glass", glow = false, hover = "none", ...props }, ref) => {
+  ({ className, variant, glow = false, hover = "none", ...props }, ref) => {
     return (
       <BaseAlert
         ref={ref}

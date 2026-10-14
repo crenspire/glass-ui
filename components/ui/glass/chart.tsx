@@ -29,7 +29,7 @@ export interface ChartLegendContentProps extends React.ComponentProps<typeof Bas
 export const ChartContainer = React.forwardRef<
   HTMLDivElement,
   ChartContainerProps
->(({ className, variant = "glass", glow = false, ...props }, ref) => {
+>(({ className, variant, glow = false, ...props }, ref) => {
   return (
     <BaseChartContainer
       ref={ref}
@@ -47,7 +47,7 @@ ChartContainer.displayName = "ChartContainer"
 export const ChartTooltipContent = React.forwardRef<
   HTMLDivElement,
   ChartTooltipContentProps
->(({ className, variant = "glass", glow = false, ...props }, ref) => {
+>(({ className, variant, glow = false, ...props }, ref) => {
   return (
     <BaseChartTooltipContent
       ref={ref}
@@ -65,7 +65,7 @@ ChartTooltipContent.displayName = "ChartTooltipContent"
 export const ChartLegendContent = React.forwardRef<
   HTMLDivElement,
   ChartLegendContentProps
->(({ className, variant = "glass", glow = false, ...props }, ref) => {
+>(({ className, variant, glow = false, ...props }, ref) => {
   return (
     <BaseChartLegendContent
       ref={ref}

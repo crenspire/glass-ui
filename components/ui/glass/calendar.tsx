@@ -11,7 +11,7 @@ export type CalendarProps = BaseCalendarProps & {
 /**
  * Glass UI Calendar - Enhanced calendar with glassy effects
  */
-export function Calendar({ className, variant = "glass", glow = false, ...props }: CalendarProps) {
+export function Calendar({ className, variant, glow = false, ...props }: CalendarProps) {
   return (
     <div
       className={cn(

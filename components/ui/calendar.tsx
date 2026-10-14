@@ -5,28 +5,34 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 import { DayPicker } from "react-day-picker"
 
 import { cn } from "@/lib/utils"
+import { liquidProps, resolveVariant, type LegacyGlassVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 import { buttonVariants } from "@/components/ui/button"
 
-export type CalendarProps = React.ComponentProps<typeof DayPicker> & {
-  variant?: "default" | "glass"
+export type CalendarProps = React.ComponentProps<typeof DayPicker> & LiquidProps & {
+  variant?: "liquid" | "default" | LegacyGlassVariant
 }
 
 function Calendar({
   className,
   classNames,
   showOutsideDays = true,
-  variant = "glass",
+  variant,
+  material,
+  tint,
+  glass,
+  webgl,
+  style,
   ...props
 }: CalendarProps) {
-  const variants = {
-    default: "",
-    glass: "glass-bg rounded-lg p-4 w-fit",
-  }
-  
+  const v = resolveVariant<"liquid" | "default">(variant, material)
+  const lg = v.variant === "liquid" ? liquidProps({ role: "surface", material: v.material, tint, glass, webgl }, { className: "p-4 w-fit" }) : null
+
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
-      className={cn(variants[variant], className)}
+      {...lg}
+      className={cn(lg?.className, className)}
+      style={{ ...lg?.style, ...style }}
       classNames={{
         months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
         month: "space-y-4",

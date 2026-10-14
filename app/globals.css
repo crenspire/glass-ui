@@ -382,16 +382,16 @@ body {
     background-position: 100% 100% !important;
   }
 
-  /* Ensure react-day-picker doesn't override glass effect */
-  .glass-bg[class*="rdp"] {
+  /* Ensure react-day-picker doesn't override the liquid glass */
+  .lg[class*="rdp"] {
     background-color: transparent !important;
   }
   
-  .glass-bg .rdp {
+  .lg .rdp {
     background-color: transparent !important;
   }
   
-  .glass-bg .rdp-month {
+  .lg .rdp-month {
     background-color: transparent !important;
   }
 }
@@ -426,7 +426,7 @@ body {
   }
 
   .lg-regular { --lg-base: rgba(255, 255, 255, 0.42); --lg-blur: 16px; --lg-sat: 180%; }
-  .dark .lg-regular { --lg-base: rgba(30, 32, 40, 0.45); }
+  .dark .lg-regular { --lg-base: rgba(255, 255, 255, 0.07); }
   .lg-clear { --lg-base: rgba(255, 255, 255, 0.1); --lg-blur: 2px; --lg-sat: 150%; }
   .dark .lg-clear { --lg-base: rgba(255, 255, 255, 0.04); }
   .lg-tinted { --lg-tint: var(--primary); --lg-tint-amt: 55%; --lg-base: rgba(255, 255, 255, 0.3); --lg-blur: 12px; --lg-sat: 180%; color: var(--primary-foreground); }

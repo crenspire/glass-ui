@@ -4,6 +4,7 @@ import * as React from "react"
 import * as RechartsPrimitive from "recharts"
 
 import { cn } from "@/lib/utils"
+import { liquidProps, resolveVariant, type LegacyGlassVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: "", dark: ".dark" } as const
@@ -41,26 +42,25 @@ const ChartContainer = React.forwardRef<
   children: React.ComponentProps<
     typeof RechartsPrimitive.ResponsiveContainer
   >["children"]
-} & {
-  variant?: "default" | "glass"
+} & LiquidProps & {
+  variant?: "liquid" | "default" | LegacyGlassVariant
 }
->(({ id, className, children, config, variant = "glass", ...props }, ref) => {
+>(({ id, className, children, config, variant, material, tint, glass, webgl, style, ...props }, ref) => {
   const uniqueId = React.useId()
   const chartId = `chart-${id || uniqueId.replace(/:/g, "")}`
-
-  const variants = {
-    default: "",
-    glass: "glass-bg backdrop-blur-[var(--blur)] border border-[var(--glass-border)] rounded-lg p-4 shadow-[var(--glass-shadow)]",
-  }
+  const v = resolveVariant<"liquid" | "default">(variant, material)
+  const lg = v.variant === "liquid" ? liquidProps({ role: "surface", material: v.material, tint, glass, webgl }, { className: "p-4" }) : null
 
   return (
     <ChartContext.Provider value={{ config }}>
       <div
         data-chart={chartId}
         ref={ref}
+        {...lg}
+        style={{ ...lg?.style, ...style }}
         className={cn(
           "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line-line]:stroke-border [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none",
-          variants[variant],
+          lg?.className,
           className
         )}
         {...props}
@@ -236,16 +236,13 @@ const ChartLegendContent = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"div"> &
     LegendProps & {
-      variant?: "default" | "glass"
+      /** Kept for API compatibility; the legend renders without its own glass. */
+      variant?: "liquid" | "default" | LegacyGlassVariant
     }
 >(
-  ({ className, payload, verticalAlign = "bottom", variant = "glass", ...props }, ref) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  ({ className, payload, verticalAlign = "bottom", variant, ...props }, ref) => {
     const { config } = useChart()
-
-    const variants = {
-      default: "",
-      glass: "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] rounded-lg px-2 py-1 shadow-[var(--glass-shadow-sm)]",
-    }
 
     if (!payload?.length) {
       return null
@@ -257,7 +254,6 @@ const ChartLegendContent = React.forwardRef<
         className={cn(
           "flex items-center justify-center gap-4",
           verticalAlign === "top" ? "pb-2" : "pt-2",
-          variants[variant],
           className
         )}
         {...props}
