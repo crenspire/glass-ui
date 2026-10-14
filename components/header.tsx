@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { liquidProps } from "@/lib/liquid-glass/material"
 
 const navigation = [
   { name: "Docs", href: "/docs" },
@@ -48,13 +49,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full bg-transparent">
       <div className="container mx-auto px-4 pt-4">
-        <div 
-          className="flex h-16 items-center justify-between px-4 md:px-6 rounded-xl border border-[var(--glass-border)] backdrop-blur-[var(--blur)] shadow-[var(--glass-shadow)]"
-          style={{
-            backgroundColor: "transparent",
-            boxShadow: "var(--glass-shadow)",
-          }}
-        >
+        <div {...liquidProps({ role: "bar" }, { className: "flex h-16 items-center justify-between px-4 md:px-6" })}>
           <div className="flex items-center gap-4 md:gap-8">
             <Link href="/" className="flex items-center gap-2">
               {mounted && (

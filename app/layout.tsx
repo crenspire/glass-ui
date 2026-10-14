@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { GridBackground } from "@/components/grid-background";
+import { LiquidFilters } from "@/components/ui/liquid/liquid-filters";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -37,6 +38,7 @@ export default function RootLayout({
           defaultTheme="dark"
           disableTransitionOnChange
         >
+          <LiquidFilters />
           <GridBackground />
           {/* <div className="flex min-h-screen flex-col"> */}
             <Header />

@@ -1,15 +1,14 @@
 import Link from "next/link"
 import { Github, Heart } from "lucide-react"
 import { Button } from "@/components/ui/glass/button"
+import { liquidProps } from "@/lib/liquid-glass/material"
 
 export function Footer() {
 
   return (
     <footer className="w-full pb-4 bg-transparent mt-16">
       <div className="container mx-auto px-4">
-        <div
-          className="rounded-xl glass-bg px-4 py-6 md:px-6 md:py-8"
-        >
+        <div {...liquidProps({ role: "surface" }, { className: "px-4 py-6 md:px-6 md:py-8" })}>
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex flex-col items-center text-center md:items-start md:text-left gap-1 text-xs sm:text-sm text-muted-foreground">
               <div className="flex items-center gap-2 flex-wrap justify-center md:justify-start">
