@@ -20,4 +20,11 @@ describe("backdrop stack", () => {
     s = pushBackdrop(s, { id: 1, src: "a2" })
     expect(s).toEqual([{ id: 1, src: "a2" }])
   })
+  it("keeps a base backdrop below page backdrops pushed before it", () => {
+    let s = pushBackdrop([], { id: 2, src: "photo" })
+    s = pushBackdrop(s, { id: 1, src: "site", base: true })
+    expect(s.at(-1)?.src).toBe("photo")
+    s = popBackdrop(s, 2)
+    expect(s.at(-1)?.src).toBe("site")
+  })
 })

@@ -92,10 +92,11 @@ export function GridBackground() {
     return () => window.removeEventListener("resize", onResize)
   }, [canvas, engine])
 
-  useLiquidBackdrop(canvas)
+  useLiquidBackdrop(canvas, { base: true })
 
   return (
     <div
+      data-glass-backdrop
       className="fixed inset-0 -z-10 pointer-events-none overflow-hidden transition-colors duration-500"
       style={{ background: `linear-gradient(160deg, ${GRADIENT[theme].map(([o, c]) => `${c} ${o * 100}%`).join(", ")})` }}
     >

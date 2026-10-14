@@ -20,3 +20,13 @@ export function paintsOverBackdrop(s: PaintStyle) {
     || (s.backgroundImage !== "" && s.backgroundImage !== "none")
     || alpha(s.backgroundColor) > MIN_ALPHA
 }
+
+/** Opacity as rendered: the element's own times every ancestor's (fades on a parent fade the glass too). */
+export function effectiveOpacity(el: Element) {
+  let o = 1
+  for (let p: Element | null = el; p && p !== document.body && o > 0; p = p.parentElement) {
+    const v = parseFloat(getComputedStyle(p).opacity)
+    if (!Number.isNaN(v)) o *= v
+  }
+  return o
+}

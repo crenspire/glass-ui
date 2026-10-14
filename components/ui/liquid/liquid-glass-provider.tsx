@@ -11,7 +11,8 @@ export type Backdrop = string | HTMLImageElement | HTMLVideoElement | HTMLCanvas
 /* While the engine runs, <html> has .lg-on. Elements the engine actually draws carry
    data-glass-live and lose their CSS glass so only the shader glass shows; everything else
    (overlays, shapes over the cap, deep nesting) keeps the CSS look. The app shell goes
-   transparent so the canvas shows through. Shipped with the provider so installing it needs
+   transparent so the canvas shows through, and once the canvas shows the backdrop (.lg-ready) any
+   DOM copy of it marked data-glass-backdrop is hidden. Shipped with the provider so installing it needs
    no stylesheet edits. */
 const LIQUID_GLASS_CSS = `
 html.lg-on [data-glass-live] {
@@ -22,6 +23,7 @@ html.lg-on [data-glass-live] {
   box-shadow: none !important;
 }
 html.lg-on .lg-control[data-glass-live]:active { scale: none; }
+html.lg-ready [data-glass-backdrop] { visibility: hidden; }
 html.lg-on body { background: transparent; }
 `
 
@@ -34,16 +36,17 @@ const BackdropContext = React.createContext<{
 export const useLiquidGlass = () => React.useContext(LiquidGlassContext)
 
 let nextBackdropId = 1
-/** Makes `src` the refracted backdrop while the calling component is mounted. */
-export function useLiquidBackdrop(src: Backdrop | null, { live }: { live?: boolean } = {}) {
+/** Makes `src` the refracted backdrop while the calling component is mounted. A `base` backdrop
+    (the site wallpaper) stays below any page backdrop. */
+export function useLiquidBackdrop(src: Backdrop | null, { live, base }: { live?: boolean; base?: boolean } = {}) {
   const ctx = React.useContext(BackdropContext)
   const id = React.useRef(0)
   if (!id.current) id.current = nextBackdropId++
   React.useEffect(() => {
     if (!ctx || !src) return
-    ctx.push({ id: id.current, src, live })
+    ctx.push({ id: id.current, src, live, base })
     return () => ctx.pop(id.current)
-  }, [ctx, src, live])
+  }, [ctx, src, live, base])
 }
 
 export interface LiquidGlassProviderProps {

@@ -1,5 +1,5 @@
 import { selectShapes, type ShapeCandidate } from "./budget"
-import { paintsOverBackdrop } from "./occlusion"
+import { effectiveOpacity, paintsOverBackdrop } from "./occlusion"
 
 /* WebGL liquid-glass renderer. A canvas sits behind the UI; every [data-glass] element gets
    refracting glass drawn beneath it (live position/size/radius/opacity). [data-glass-solid]
@@ -185,6 +185,7 @@ export class LiquidGlass {
   private dirty = false
   private ready = false
   private raf = 0
+  private frames = 0
   private nextId = 1
   private bG = new Float32Array(MAXG * 4); private bGP = new Float32Array(MAXG * 4); private bGT = new Float32Array(MAXG * 4)
   private bS = new Float32Array(MAXS * 4); private bSC = new Float32Array(MAXS * 4); private bSP = new Float32Array(MAXS * 4)
@@ -256,13 +257,21 @@ export class LiquidGlass {
   invalidate() { this.dirty = true }
 
   scan(rootEl: ParentNode) {
-    this.items.filter(i => !i.el.isConnected).forEach(i => this._detach(i))
-    this.items = this.items.filter(i => i.el.isConnected)
-    this.solids = this.solids.filter(s => s.el.isConnected)
+    // Drop elements that left the page or no longer ask for glass (a variant or webgl change).
+    const keep = (el: HTMLElement, attr: string) => el.isConnected && el.hasAttribute(attr)
+    this.items.filter(i => !keep(i.el, "data-glass")).forEach(i => this._detach(i))
+    this.items = this.items.filter(i => keep(i.el, "data-glass"))
+    this.solids.filter(s => s.live && !keep(s.el, "data-glass-solid")).forEach(s => { s.el.style.opacity = s.opacity })
+    this.solids = this.solids.filter(s => keep(s.el, "data-glass-solid"))
     rootEl.querySelectorAll<HTMLElement>("[data-glass]").forEach(el => this.add(el))
     rootEl.querySelectorAll<HTMLElement>("[data-glass-solid]").forEach(el => this.addSolid(el))
-    // Link each item to its closest glass ancestor (nested glass is drawn on the top layer), and
-    // block items under any other ancestor that paints: the canvas is behind it.
+    this.refreshOcclusion()
+  }
+
+  /** Links each item to its closest glass ancestor (nested glass is drawn on the top layer) and
+      blocks items under any other ancestor that paints: the canvas is behind it. Backgrounds
+      change with state and theme, so the frame loop calls this periodically too. */
+  refreshOcclusion() {
     const byEl = new Map(this.items.map(i => [i.el as Element, i]))
     const link = (x: { el: HTMLElement; parent: GlassItem | null; blocked: boolean }) => {
       x.parent = null
@@ -318,6 +327,7 @@ export class LiquidGlass {
       (React strict mode, HMR) can create a new engine on the same element. */
   destroy() {
     cancelAnimationFrame(this.raf)
+    document.documentElement.classList.remove("lg-ready")
     window.removeEventListener("pointermove", this._onPtr); window.removeEventListener("pointerup", this._onUp)
     window.removeEventListener("pointercancel", this._onUp); window.removeEventListener("deviceorientation", this._onTilt)
     this.items.forEach(i => this._detach(i))
@@ -366,6 +376,9 @@ export class LiquidGlass {
       gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, this.blurTex)
       gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, bc)
       this.ready = true
+      // The canvas now shows the backdrop (drawn later this same frame), so DOM copies of it marked
+      // data-glass-backdrop can step aside: they sit above the canvas and would hide the glass.
+      document.documentElement.classList.add("lg-ready")
     } catch (e) { console.warn("LiquidGlass: source not usable (CORS?)", e) }
     this.dirty = false
   }
@@ -382,6 +395,7 @@ export class LiquidGlass {
     if (W !== this.size.w || H !== this.size.h) { this.size = { w: W, h: H }; this.dirty = true }
     if (this.src && (this.dirty || this.live)) this._upload(W, H)
     if (!this.ready) return
+    if (++this.frames % 30 === 0) this.refreshOcclusion()
     let tx = -W * 0.2, ty = -H * 0.6
     if (this.ptr) { tx = (this.ptr.x - cr.left) * k; ty = (this.ptr.y - cr.top) * k }
     else if (this.tilt) { tx = W / 2 + this.tilt.g / 30 * W; ty = H / 2 + (this.tilt.b - 45) / 30 * H }
@@ -407,7 +421,7 @@ export class LiquidGlass {
     for (const [id, depth] of chosen) {
       const { it, r, cs } = vis.get(id)!
       const el = it.el
-      const op = parseFloat(cs.opacity)
+      const op = effectiveOpacity(el)
       const cx = (r.left + r.width / 2 - cr.left) * k, cy = (r.top + r.height / 2 - cr.top) * k
       const hx = r.width / 2 * k / it.sx, hy = r.height / 2 * k / it.sy
       if (it.last) { it.v.x = it.v.x * 0.6 + (cx - it.last.x) * 0.4; it.v.y = it.v.y * 0.6 + (cy - it.last.y) * 0.4 }
