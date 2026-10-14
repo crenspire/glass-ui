@@ -1907,6 +1907,41 @@
           "target": "components/ui/glass/carousel.tsx"
         }
       ]
+    },
+    {
+      "name": "liquid-glass",
+      "type": "registry:ui",
+      "title": "Liquid Glass",
+      "description": "WebGL refractive glass close to Apple's Liquid Glass: provider, engine and components (button, bar, card, search, switch, slider, tabs, dialog).",
+      "dependencies": [
+        "@radix-ui/react-switch",
+        "@radix-ui/react-slider",
+        "@radix-ui/react-tabs",
+        "@radix-ui/react-dialog",
+        "next-themes"
+      ],
+      "files": [
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib",
+          "target": "lib/utils.ts"
+        },
+        {
+          "path": "lib/liquid-glass/engine.ts",
+          "type": "registry:lib",
+          "target": "lib/liquid-glass/engine.ts"
+        },
+        {
+          "path": "components/ui/liquid/liquid-glass-provider.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/liquid/liquid-glass-provider.tsx"
+        },
+        {
+          "path": "components/ui/liquid/index.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/liquid/index.tsx"
+        }
+      ]
     }
   ]
 }

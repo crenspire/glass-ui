@@ -17,6 +17,7 @@ const navigation = [
   { name: "Components", href: "/components" },
   { name: "Blocks", href: "/blocks" },
   { name: "Themes", href: "/themes" },
+  { name: "Liquid", href: "/liquid" },
 ]
 
 export function Header() {
