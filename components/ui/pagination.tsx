@@ -47,30 +47,30 @@ PaginationItem.displayName = "PaginationItem"
 type PaginationLinkProps = {
   isActive?: boolean
 } & React.ComponentProps<"a"> & {
-    variant?: "default" | "glass"
+    variant?: "liquid" | "default" | LegacyGlassVariant
   }
 
 const PaginationLink = ({
   className,
   isActive,
-  variant = "glass",
+  variant,
+  style,
   ...props
 }: PaginationLinkProps) => {
-  const variants = {
-    default: isActive ? "bg-background text-foreground" : "",
-    glass: isActive ? "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] shadow-[var(--glass-shadow-sm)]" : "",
-  }
-  
+  const v = resolveVariant<"liquid" | "default">(variant, undefined)
+  const lg = isActive && v.variant === "liquid" ? liquidProps({ role: "inline" }) : null
+
   return (
     <a
       aria-current={isActive ? "page" : undefined}
+      {...lg}
       className={cn(
-        buttonVariants({
-          variant: isActive ? "outline" : "ghost",
-        }),
-        variants[variant],
+        buttonVariants({ variant: lg ? "liquid" : isActive ? "outline" : "ghost" }),
+        lg?.className,
+        isActive && !lg && "bg-background text-foreground",
         className
       )}
+      style={{ ...lg?.style, ...style }}
       {...props}
     />
   )

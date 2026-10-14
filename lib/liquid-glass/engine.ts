@@ -49,7 +49,10 @@ interface GlassItem extends GlassShape {
   live: boolean
 }
 
-interface Solid { el: HTMLElement; layer: number; opacity: string; live: boolean }
+interface Solid {
+  el: HTMLElement; layer: number; opacity: string; live: boolean
+  parent: GlassItem | null; blocked: boolean
+}
 
 type Source = HTMLImageElement | HTMLVideoElement | HTMLCanvasElement
 
@@ -261,15 +264,17 @@ export class LiquidGlass {
     // Link each item to its closest glass ancestor (nested glass is drawn on the top layer), and
     // block items under any other ancestor that paints: the canvas is behind it.
     const byEl = new Map(this.items.map(i => [i.el as Element, i]))
-    for (const it of this.items) {
-      it.parent = null
-      it.blocked = false
-      for (let p = it.el.parentElement; p && p !== document.body; p = p.parentElement) {
+    const link = (x: { el: HTMLElement; parent: GlassItem | null; blocked: boolean }) => {
+      x.parent = null
+      x.blocked = false
+      for (let p = x.el.parentElement; p && p !== document.body; p = p.parentElement) {
         const g = byEl.get(p)
-        if (g) { it.parent ??= g; continue }
-        if (paintsOverBackdrop(getComputedStyle(p))) { it.blocked = true; break }
+        if (g) { x.parent ??= g; continue }
+        if (paintsOverBackdrop(getComputedStyle(p))) { x.blocked = true; break }
       }
     }
+    this.items.forEach(link)
+    this.solids.forEach(link)
   }
 
   add(el: HTMLElement, opts: Partial<GlassShape> & { preset?: GlassPreset } = {}) {
@@ -292,7 +297,7 @@ export class LiquidGlass {
 
   addSolid(el: HTMLElement) {
     if (this.solids.some(s => s.el === el)) return
-    this.solids.push({ el, layer: parseFloat(el.dataset.layer || "0"), opacity: el.style.opacity, live: false })
+    this.solids.push({ el, layer: parseFloat(el.dataset.layer || "0"), opacity: el.style.opacity, live: false, parent: null, blocked: false })
   }
 
   press(el: HTMLElement, on: boolean) {
@@ -432,7 +437,8 @@ export class LiquidGlass {
     for (const s of this.solids) {
       const el = s.el
       const r = el.isConnected ? el.getBoundingClientRect() : null
-      const draw = m < MAXS && !!r && r.width >= 1 && r.height >= 1
+      // Only paint a solid into the scene where the canvas is visible, as for glass.
+      const draw = m < MAXS && !s.blocked && (!s.parent || s.parent.live) && !!r && r.width >= 1 && r.height >= 1
       if (draw !== s.live) { s.live = draw; el.style.opacity = draw ? "0" : s.opacity }
       if (!draw) continue
       const cs = getComputedStyle(el), hx = r!.width / 2 * k, hy = r!.height / 2 * k, ow = el.offsetWidth || r!.width

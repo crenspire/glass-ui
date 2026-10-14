@@ -3,12 +3,10 @@
 import * as React from "react"
 import { Spinner as BaseSpinner } from "@/components/ui/spinner"
 import { cn } from "@/lib/utils"
-import type { GlassCustomization } from "@/lib/glass-utils"
 import { hoverEffects, type HoverEffect } from "@/lib/hover-effects"
 
 export interface SpinnerProps extends React.ComponentProps<typeof BaseSpinner> {
   effect?: HoverEffect
-  glass?: GlassCustomization
 }
 
 /**
@@ -16,12 +14,10 @@ export interface SpinnerProps extends React.ComponentProps<typeof BaseSpinner> {
  * Built on top of the base Spinner component with enhanced visual styling
  */
 export const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
-  ({ className, variant = "glass", effect = "none", glass, ...props }, ref) => {
+  ({ className, effect = "none", ...props }, ref) => {
     return (
       <BaseSpinner
         ref={ref}
-        variant={variant}
-        glass={glass}
         className={cn(
           hoverEffects({ hover: effect }),
           className

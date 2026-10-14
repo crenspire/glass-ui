@@ -811,9 +811,9 @@ export function Example() {
 export function Example() {
   return (
     <div className="flex items-center gap-4">
-      <Spinner variant="glass" size="sm" />
-      <Spinner variant="glass" size="md" />
-      <Spinner variant="glass" size="lg" />
+      <Spinner size="sm" />
+      <Spinner size="md" />
+      <Spinner size="lg" />
     </div>
   )
 }`

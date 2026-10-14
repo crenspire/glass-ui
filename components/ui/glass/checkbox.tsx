@@ -14,11 +14,10 @@ export interface CheckboxProps extends React.ComponentProps<typeof BaseCheckbox>
 export const Checkbox = React.forwardRef<
   React.ElementRef<typeof BaseCheckbox>,
   CheckboxProps
->(({ className, variant = "glass", glow = false, ...props }, ref) => {
+>(({ className, glow = false, ...props }, ref) => {
   return (
     <BaseCheckbox
       ref={ref}
-      variant={variant}
       className={cn(
         glow && "data-[state=checked]:shadow-lg data-[state=checked]:shadow-purple-500/30",
         "transition-all duration-200",

@@ -14,11 +14,10 @@ export interface SliderProps extends React.ComponentProps<typeof BaseSlider> {
 export const Slider = React.forwardRef<
   React.ElementRef<typeof BaseSlider>,
   SliderProps
->(({ className, variant = "glass", glow = false, ...props }, ref) => {
+>(({ className, glow = false, ...props }, ref) => {
   return (
     <BaseSlider
       ref={ref}
-      variant={variant}
       className={cn(
         glow && "shadow-md shadow-purple-500/20",
         className

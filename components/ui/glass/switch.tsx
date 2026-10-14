@@ -14,11 +14,10 @@ export interface SwitchProps extends React.ComponentProps<typeof BaseSwitch> {
 export const Switch = React.forwardRef<
   React.ElementRef<typeof BaseSwitch>,
   SwitchProps
->(({ className, variant = "glass", glow = false, ...props }, ref) => {
+>(({ className, glow = false, ...props }, ref) => {
   return (
     <BaseSwitch
       ref={ref}
-      variant={variant}
       className={cn(
         glow && "data-[state=checked]:shadow-lg data-[state=checked]:shadow-purple-500/30",
         "transition-all duration-200",

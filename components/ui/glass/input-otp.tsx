@@ -27,11 +27,10 @@ export interface InputOTPSlotProps extends React.ComponentProps<typeof BaseInput
 export const InputOTP = React.forwardRef<
   React.ElementRef<typeof BaseInputOTP>,
   InputOTPProps
->(({ className, variant = "glass", glow = false, ...props }, ref) => {
+>(({ className, glow = false, ...props }, ref) => {
   return (
     <BaseInputOTP
       ref={ref}
-      variant={variant}
       className={cn(
         glow && "shadow-md shadow-purple-500/20",
         className
@@ -45,11 +44,10 @@ InputOTP.displayName = "InputOTP"
 export const InputOTPGroup = React.forwardRef<
   HTMLDivElement,
   InputOTPGroupProps
->(({ className, variant = "glass", glow = false, ...props }, ref) => {
+>(({ className, glow = false, ...props }, ref) => {
   return (
     <BaseInputOTPGroup
       ref={ref}
-      variant={variant}
       className={cn(
         glow && "shadow-md shadow-purple-500/20",
         className
@@ -63,11 +61,10 @@ InputOTPGroup.displayName = "InputOTPGroup"
 export const InputOTPSlot = React.forwardRef<
   HTMLDivElement,
   InputOTPSlotProps
->(({ className, variant = "glass", glow = false, ...props }, ref) => {
+>(({ className, glow = false, ...props }, ref) => {
   return (
     <BaseInputOTPSlot
       ref={ref}
-      variant={variant}
       className={cn(
         glow && "ring-1 ring-purple-500/20",
         className

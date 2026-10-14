@@ -195,12 +195,12 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
             <h4 className="text-sm font-medium">Radix Primitives</h4>
             <p className="text-sm text-muted-foreground">An open-source UI component library.</p>
           </div>
-          <Separator variant="glass" className="my-4" />
+          <Separator className="my-4" />
           <div className="flex h-5 items-center space-x-4 text-sm">
             <div>Blog</div>
-            <Separator orientation="vertical" variant="glass" />
+            <Separator orientation="vertical" />
             <div>Docs</div>
-            <Separator orientation="vertical" variant="glass" />
+            <Separator orientation="vertical" />
             <div>Source</div>
           </div>
         </div>
@@ -457,7 +457,7 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
 
     case "scroll-area":
       return (
-        <ScrollArea className="h-[200px] w-full rounded-md border p-4" variant="glass">
+        <ScrollArea className="h-[200px] w-full rounded-md border p-4">
           <div className="space-y-2">
             {Array.from({ length: 20 }).map((_, i) => (
               <p key={i} className="text-sm">Item {i + 1}</p>
@@ -723,11 +723,11 @@ export function ComponentPreview({ componentName }: { componentName: string }) {
     case "spinner":
       return (
         <div className="flex items-center gap-4 p-6 glass-bg rounded-lg bg-white/10 dark:bg-white/5">
-          <Spinner variant="glass" size="sm" />
-          <Spinner variant="glass" size="md" />
-          <Spinner variant="glass" size="lg" />
-          <Spinner variant="frosted" size="md" />
-          <Spinner variant="crystal" size="md" />
+          <Spinner size="sm" />
+          <Spinner size="md" />
+          <Spinner size="lg" />
+          <Spinner size="md" />
+          <Spinner size="md" />
         </div>
       )
 

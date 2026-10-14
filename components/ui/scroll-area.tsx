@@ -7,19 +7,12 @@ import { cn } from "@/lib/utils"
 
 const ScrollArea = React.forwardRef<
   React.ElementRef<typeof ScrollAreaPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root> & {
-    variant?: "default" | "glass"
-  }
->(({ className, variant = "glass", children, ...props }, ref) => {
-  const variants = {
-    default: "relative overflow-hidden",
-    glass: "relative overflow-hidden glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] rounded-lg shadow-[var(--glass-shadow-sm)]",
-  }
-  
+  React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root>
+>(({ className, children, ...props }, ref) => {
   return (
     <ScrollAreaPrimitive.Root
       ref={ref}
-      className={cn(variants[variant], className)}
+      className={cn("relative overflow-hidden", className)}
       {...props}
     >
       <ScrollAreaPrimitive.Viewport className="h-full w-full rounded-[inherit]">
