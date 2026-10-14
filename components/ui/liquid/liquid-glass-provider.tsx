@@ -98,7 +98,13 @@ export function LiquidGlassProvider({ backdrop, live, options, children }: Liqui
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  React.useEffect(() => { engine?.set({ mode }) }, [engine, mode])
+  React.useEffect(() => {
+    if (!engine) return
+    engine.set({ mode })
+    // Backgrounds change with the theme; re-check which glass the canvas can show.
+    const raf = requestAnimationFrame(() => engine.scan(document.body))
+    return () => cancelAnimationFrame(raf)
+  }, [engine, mode])
   React.useEffect(() => { if (engine && options) engine.set(options) }, [engine, options])
 
   const top = stack.at(-1) ?? (backdrop ? { id: 0, src: backdrop, live } : null)

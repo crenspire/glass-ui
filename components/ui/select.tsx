@@ -5,6 +5,7 @@ import * as SelectPrimitive from "@radix-ui/react-select"
 import { Check, ChevronDown, ChevronUp } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { liquidProps, resolveVariant, type LegacyGlassVariant, type LiquidProps } from "@/lib/liquid-glass/material"
 
 const Select = SelectPrimitive.Root
 
@@ -14,33 +15,18 @@ const SelectValue = SelectPrimitive.Value
 
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> & {
-    variant?: "default" | "glass" | "glassSubtle" | "frosted" | "fluted" | "crystal"
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> & LiquidProps & {
+    variant?: "liquid" | "default" | LegacyGlassVariant
   }
->(({ className, children, variant = "glass", ...props }, ref) => {
-  const getVariantClass = () => {
-    if (variant === "default") return "border-input bg-background"
-    
-    const variants = {
-      glass: "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] shadow-[var(--glass-shadow-sm)]",
-      glassSubtle: "glass-bg backdrop-blur-[var(--blur-sm)] border border-[var(--glass-border)] shadow-[var(--glass-shadow-sm)] opacity-50",
-      frosted: "glass-frosted backdrop-blur-[var(--blur-frosted)] border border-[var(--glass-frosted-border)] shadow-[var(--glass-frosted-shadow)]",
-      fluted: "glass-fluted backdrop-blur-[var(--blur)] border border-[var(--glass-border)] shadow-[var(--glass-shadow-sm)]",
-      crystal: "glass-crystal backdrop-blur-[var(--blur-crystal)] border border-[var(--glass-crystal-border)] shadow-[var(--glass-crystal-shadow)]",
-    }
-    return variants[variant] || variants.glass
-  }
-  
+>(({ className, children, variant, material, tint, glass, webgl, style, ...props }, ref) => {
+  const v = resolveVariant<"liquid" | "default">(variant, material)
+  const base = "flex w-full items-center justify-between whitespace-nowrap text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
+  const own = v.variant === "liquid"
+    ? liquidProps({ role: "control", material: v.material, tint, glass, webgl }, { className: cn(base, "h-11 px-4", className), style })
+    : { className: cn(base, "h-9 rounded-md border px-3 py-2 shadow-sm border-input bg-background", className), style }
+
   return (
-    <SelectPrimitive.Trigger
-      ref={ref}
-      className={cn(
-        "flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
-        getVariantClass(),
-        className
-      )}
-      {...props}
-    >
+    <SelectPrimitive.Trigger ref={ref} {...own} {...props}>
       {children}
       <SelectPrimitive.Icon asChild>
         <ChevronDown className="h-4 w-4 opacity-50" />

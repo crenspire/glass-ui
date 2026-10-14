@@ -1,4 +1,5 @@
 import { selectShapes, type ShapeCandidate } from "./budget"
+import { paintsOverBackdrop } from "./occlusion"
 
 /* WebGL liquid-glass renderer. A canvas sits behind the UI; every [data-glass] element gets
    refracting glass drawn beneath it (live position/size/radius/opacity). [data-glass-solid]
@@ -43,6 +44,8 @@ interface GlassItem extends GlassShape {
   down: () => void
   id: number
   parent: GlassItem | null
+  /** A non-glass ancestor paints over the canvas, so shader glass would be hidden. */
+  blocked: boolean
   live: boolean
 }
 
@@ -255,12 +258,17 @@ export class LiquidGlass {
     this.solids = this.solids.filter(s => s.el.isConnected)
     rootEl.querySelectorAll<HTMLElement>("[data-glass]").forEach(el => this.add(el))
     rootEl.querySelectorAll<HTMLElement>("[data-glass-solid]").forEach(el => this.addSolid(el))
-    // Link each item to its closest glass ancestor: nested glass is drawn on the top layer.
+    // Link each item to its closest glass ancestor (nested glass is drawn on the top layer), and
+    // block items under any other ancestor that paints: the canvas is behind it.
     const byEl = new Map(this.items.map(i => [i.el as Element, i]))
     for (const it of this.items) {
-      let p = it.el.parentElement, parent: GlassItem | null = null
-      while (p && !parent) { parent = byEl.get(p) ?? null; p = p.parentElement }
-      it.parent = parent
+      it.parent = null
+      it.blocked = false
+      for (let p = it.el.parentElement; p && p !== document.body; p = p.parentElement) {
+        const g = byEl.get(p)
+        if (g) { it.parent ??= g; continue }
+        if (paintsOverBackdrop(getComputedStyle(p))) { it.blocked = true; break }
+      }
     }
   }
 
@@ -273,7 +281,7 @@ export class LiquidGlass {
     const it = {
       ...pre, ...ov, ...opts,
       el, sx: 1, sy: 1, vx: 0, vy: 0, v: { x: 0, y: 0 }, last: null, pressed: false, held: false, scs: "", t: 0,
-      id: this.nextId++, parent: null, live: false,
+      id: this.nextId++, parent: null, blocked: false, live: false,
       down: () => { it.pressed = true },
     } as GlassItem
     it.t = it.tint
@@ -379,7 +387,7 @@ export class LiquidGlass {
     const cands: ShapeCandidate[] = []
     for (const it of this.items) {
       const el = it.el
-      if (!el.isConnected) continue
+      if (!el.isConnected || it.blocked) continue
       const r = el.getBoundingClientRect()
       if (r.width < 1 || r.height < 1) continue
       if (r.bottom < cr.top - 40 || r.top > cr.bottom + 40 || r.right < cr.left - 40 || r.left > cr.right + 40) continue

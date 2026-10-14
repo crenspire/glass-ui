@@ -14,7 +14,7 @@ export interface TextareaProps extends React.ComponentProps<typeof BaseTextarea>
  * Built on top of the base Textarea component with enhanced visual styling
  */
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ className, variant = "glass", icon, error, ...props }, ref) => {
+  ({ className, variant, icon, error, ...props }, ref) => {
     return (
       <div className="relative">
         {icon && (

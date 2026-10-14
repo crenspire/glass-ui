@@ -3,12 +3,10 @@
 import * as React from "react"
 import { DatePickerInput as BaseDatePickerInput } from "@/components/ui/date-picker-input"
 import { cn } from "@/lib/utils"
-import type { GlassCustomization } from "@/lib/glass-utils"
 import { hoverEffects, type HoverEffect } from "@/lib/hover-effects"
 
 export interface DatePickerInputProps extends React.ComponentProps<typeof BaseDatePickerInput> {
   effect?: HoverEffect
-  glass?: GlassCustomization
 }
 
 /**
@@ -16,11 +14,10 @@ export interface DatePickerInputProps extends React.ComponentProps<typeof BaseDa
  * Built on top of the base DatePickerInput component with enhanced visual styling
  */
 export const DatePickerInput = React.forwardRef<HTMLInputElement, DatePickerInputProps>(
-  ({ className, variant = "glass", effect = "none", glass, ...props }, ref) => {
+  ({ className, effect = "none", ...props }, ref) => {
     return (
       <BaseDatePickerInput
         ref={ref}
-        variant={variant}
         className={cn(
           hoverEffects({ hover: effect }),
           className

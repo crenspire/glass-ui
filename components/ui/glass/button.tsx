@@ -3,41 +3,30 @@
 import * as React from "react"
 import { Button as BaseButton } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import type { GlassCustomization } from "@/lib/glass-utils"
 import { hoverEffects, type HoverEffect } from "@/lib/hover-effects"
 
-export interface ButtonProps
-  extends Omit<React.ComponentProps<typeof BaseButton>, "glass"> {
+export interface ButtonProps extends React.ComponentProps<typeof BaseButton> {
   effect?: HoverEffect
-  glass?: GlassCustomization
 }
 
 /**
- * Glass UI Button - A beautifully designed button component with glassy effects
- * Built on top of the base Button component with enhanced visual effects
- * 
+ * Glass UI Button - a liquid glass capsule by default.
+ *
  * @example
  * ```tsx
- * <Button 
- *   glass={{
- *     color: "rgba(59, 130, 246, 0.2)",
- *     blur: 25,
- *     outline: "rgba(59, 130, 246, 0.4)"
- *   }}
- * >
- *   Click me
- * </Button>
+ * <Button>Continue</Button>
+ * <Button material="clear">Clear glass</Button>
+ * <Button material="tinted" tint="#3b82f6">Tinted</Button>
+ * <Button glass={{ tint: "rgba(59, 130, 246, 0.6)", frost: 0.4 }}>Custom</Button>
  * ```
  */
 export const Button = React.forwardRef<
   HTMLButtonElement,
   ButtonProps
->(({ className, effect = "glow", variant = "glass", glass, ...props }, ref) => {
+>(({ className, effect = "none", ...props }, ref) => {
   return (
     <BaseButton
       ref={ref}
-      variant={variant}
-      glass={glass}
       className={cn(
         "relative overflow-hidden",
         hoverEffects({ hover: effect }),
@@ -48,4 +37,3 @@ export const Button = React.forwardRef<
   )
 })
 Button.displayName = "Button"
-

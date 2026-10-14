@@ -8,16 +8,17 @@ import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Input } from "@/components/ui/input"
+import type { LegacyGlassVariant } from "@/lib/liquid-glass/material"
 
 export interface DatePickerInputProps extends Omit<React.ComponentProps<typeof Input>, "value" | "onChange"> {
   value?: Date
   onChange?: (date: Date | undefined) => void
   placeholder?: string
-  variant?: "default" | "glass" | "glassSubtle" | "frosted" | "fluted" | "crystal"
+  variant?: "liquid" | "default" | LegacyGlassVariant
 }
 
 const DatePickerInput = React.forwardRef<HTMLInputElement, DatePickerInputProps>(
-  ({ className, value, onChange, placeholder = "Pick a date", variant = "glass", ...props }, ref) => {
+  ({ className, value, onChange, placeholder = "Pick a date", variant, material, tint, glass, webgl }, ref) => {
     const [open, setOpen] = React.useState(false)
     
     return (
@@ -25,6 +26,10 @@ const DatePickerInput = React.forwardRef<HTMLInputElement, DatePickerInputProps>
         <PopoverTrigger asChild>
           <Button
             variant={variant}
+            material={material}
+            tint={tint}
+            glass={glass}
+            webgl={webgl}
             className={cn(
               "w-full justify-start text-left font-normal",
               !value && "text-muted-foreground",
@@ -35,7 +40,7 @@ const DatePickerInput = React.forwardRef<HTMLInputElement, DatePickerInputProps>
             {value ? format(value, "PPP") : <span>{placeholder}</span>}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" variant={variant}>
+        <PopoverContent className="w-auto p-0" variant={variant === "default" ? "default" : undefined}>
           <Calendar
             mode="single"
             selected={value}

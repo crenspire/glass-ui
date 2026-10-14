@@ -24,7 +24,7 @@ export interface SelectContentProps extends React.ComponentProps<typeof BaseSele
 export const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof BaseSelectTrigger>,
   SelectTriggerProps
->(({ className, variant = "glass", glow = false, ...props }, ref) => {
+>(({ className, variant, glow = false, ...props }, ref) => {
   return (
     <BaseSelectTrigger
       ref={ref}
@@ -43,7 +43,7 @@ SelectTrigger.displayName = "SelectTrigger"
 export const SelectContent = React.forwardRef<
   React.ElementRef<typeof BaseSelectContent>,
   SelectContentProps
->(({ className, variant = "glass", glow = false, ...props }, ref) => {
+>(({ className, variant, glow = false, ...props }, ref) => {
   return (
     <BaseSelectContent
       ref={ref}

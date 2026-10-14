@@ -3,14 +3,12 @@
 import * as React from "react"
 import { Input as BaseInput } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
-import type { GlassCustomization } from "@/lib/glass-utils"
 import { hoverEffects, type HoverEffect } from "@/lib/hover-effects"
 
-export interface InputProps extends Omit<React.ComponentProps<typeof BaseInput>, "glass"> {
+export interface InputProps extends React.ComponentProps<typeof BaseInput> {
   icon?: React.ReactNode
   error?: boolean
   hover?: HoverEffect
-  glass?: GlassCustomization
 }
 
 /**
@@ -19,18 +17,12 @@ export interface InputProps extends Omit<React.ComponentProps<typeof BaseInput>,
  * 
  * @example
  * ```tsx
- * <Input 
- *   glass={{
- *     color: "rgba(255, 255, 255, 0.15)",
- *     blur: 15,
- *     outline: "rgba(255, 255, 255, 0.3)"
- *   }}
- *   placeholder="Enter text..."
- * />
+ * <Input placeholder="Enter text..." />
+ * <Input material="clear" glass={{ tint: "rgba(255, 255, 255, 0.3)", frost: 0.4 }} />
  * ```
  */
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, variant = "glass", icon, error, hover = "none", glass, ...props }, ref) => {
+  ({ className, icon, error, hover = "none", ...props }, ref) => {
     return (
       <div className="relative">
         {icon && (
@@ -40,8 +32,6 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         )}
         <BaseInput
           ref={ref}
-          variant={variant}
-          glass={glass}
           className={cn(
             "relative overflow-hidden",
             icon && "pl-10",
