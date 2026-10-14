@@ -1,3 +1,5 @@
+import { selectShapes, type ShapeCandidate } from "./budget"
+
 /* WebGL liquid-glass renderer. A canvas sits behind the UI; every [data-glass] element gets
    refracting glass drawn beneath it (live position/size/radius/opacity). [data-glass-solid]
    elements are painted into the scene so glass can refract them. */
@@ -39,13 +41,16 @@ interface GlassItem extends GlassShape {
   pressed: boolean; held: boolean
   scs: string; t: number
   down: () => void
+  id: number
+  parent: GlassItem | null
+  live: boolean
 }
 
-interface Solid { el: HTMLElement; layer: number; opacity: string }
+interface Solid { el: HTMLElement; layer: number; opacity: string; live: boolean }
 
 type Source = HTMLImageElement | HTMLVideoElement | HTMLCanvasElement
 
-const MAXG = 20, MAXS = 8
+const MAXG = 32, MAXS = 8
 const PRESETS: Record<GlassPreset, GlassShape> = {
   button: { grow: 0.14, squash: 1, frost: 0.15, tint: 0, merge: 0, layer: 0 },
   bar:    { grow: 0.03, squash: 0.4, frost: 0.45, tint: 0, merge: 0, layer: 0 },
@@ -174,6 +179,7 @@ export class LiquidGlass {
   private dirty = false
   private ready = false
   private raf = 0
+  private nextId = 1
   private bG = new Float32Array(MAXG * 4); private bGP = new Float32Array(MAXG * 4); private bGT = new Float32Array(MAXG * 4)
   private bS = new Float32Array(MAXS * 4); private bSC = new Float32Array(MAXS * 4); private bSP = new Float32Array(MAXS * 4)
 
@@ -249,6 +255,13 @@ export class LiquidGlass {
     this.solids = this.solids.filter(s => s.el.isConnected)
     rootEl.querySelectorAll<HTMLElement>("[data-glass]").forEach(el => this.add(el))
     rootEl.querySelectorAll<HTMLElement>("[data-glass-solid]").forEach(el => this.addSolid(el))
+    // Link each item to its closest glass ancestor: nested glass is drawn on the top layer.
+    const byEl = new Map(this.items.map(i => [i.el as Element, i]))
+    for (const it of this.items) {
+      let p = it.el.parentElement, parent: GlassItem | null = null
+      while (p && !parent) { parent = byEl.get(p) ?? null; p = p.parentElement }
+      it.parent = parent
+    }
   }
 
   add(el: HTMLElement, opts: Partial<GlassShape> & { preset?: GlassPreset } = {}) {
@@ -260,6 +273,7 @@ export class LiquidGlass {
     const it = {
       ...pre, ...ov, ...opts,
       el, sx: 1, sy: 1, vx: 0, vy: 0, v: { x: 0, y: 0 }, last: null, pressed: false, held: false, scs: "", t: 0,
+      id: this.nextId++, parent: null, live: false,
       down: () => { it.pressed = true },
     } as GlassItem
     it.t = it.tint
@@ -270,8 +284,7 @@ export class LiquidGlass {
 
   addSolid(el: HTMLElement) {
     if (this.solids.some(s => s.el === el)) return
-    this.solids.push({ el, layer: parseFloat(el.dataset.layer || "0"), opacity: el.style.opacity })
-    el.style.opacity = "0"
+    this.solids.push({ el, layer: parseFloat(el.dataset.layer || "0"), opacity: el.style.opacity, live: false })
   }
 
   press(el: HTMLElement, on: boolean) {
@@ -283,7 +296,7 @@ export class LiquidGlass {
     const it = this.items.find(i => i.el === el)
     if (it) this._detach(it)
     const s = this.solids.find(s => s.el === el)
-    if (s) el.style.opacity = s.opacity
+    if (s?.live) el.style.opacity = s.opacity
     this.items = this.items.filter(i => i.el !== el)
     this.solids = this.solids.filter(s => s.el !== el)
   }
@@ -295,7 +308,7 @@ export class LiquidGlass {
     window.removeEventListener("pointermove", this._onPtr); window.removeEventListener("pointerup", this._onUp)
     window.removeEventListener("pointercancel", this._onUp); window.removeEventListener("deviceorientation", this._onTilt)
     this.items.forEach(i => this._detach(i))
-    this.solids.forEach(s => { s.el.style.opacity = s.opacity })
+    this.solids.forEach(s => { if (s.live) s.el.style.opacity = s.opacity })
     this.items = []; this.solids = []
     const gl = this.gl
     if (gl && !this.failed) {
@@ -307,7 +320,15 @@ export class LiquidGlass {
 
   private _detach(it: GlassItem) {
     it.el.removeEventListener("pointerdown", it.down)
-    it.el.style.scale = ""
+    this._setLive(it, false)
+  }
+
+  /* data-glass-live marks elements the shader draws this frame; only those drop their CSS glass. */
+  private _setLive(it: GlassItem, live: boolean) {
+    if (it.live === live) return
+    it.live = live
+    if (live) it.el.setAttribute("data-glass-live", "")
+    else { it.el.removeAttribute("data-glass-live"); it.el.style.scale = ""; it.scs = ""; it.sx = it.sy = 1; it.vx = it.vy = 0 }
   }
 
   private _upload(W: number, H: number) {
@@ -353,13 +374,26 @@ export class LiquidGlass {
     else if (this.tilt) { tx = W / 2 + this.tilt.g / 30 * W; ty = H / 2 + (this.tilt.b - 45) / 30 * H }
     this.light.x += (tx - this.light.x) * 0.12; this.light.y += (ty - this.light.y) * 0.12
     const dark = this.o.mode === "dark", liquid = this.o.liquid
-    let n = 0
+    type Vis = { it: GlassItem; r: DOMRect; cs: CSSStyleDeclaration }
+    const vis = new Map<number, Vis>()
+    const cands: ShapeCandidate[] = []
     for (const it of this.items) {
-      if (n >= MAXG) break
-      const el = it.el; if (!el.isConnected) continue
-      const r = el.getBoundingClientRect(); if (r.width < 1 || r.height < 1) continue
+      const el = it.el
+      if (!el.isConnected) continue
+      const r = el.getBoundingClientRect()
+      if (r.width < 1 || r.height < 1) continue
       if (r.bottom < cr.top - 40 || r.top > cr.bottom + 40 || r.right < cr.left - 40 || r.left > cr.right + 40) continue
-      const cs = getComputedStyle(el); if (cs.visibility === "hidden") continue
+      const cs = getComputedStyle(el)
+      if (cs.visibility === "hidden") continue
+      vis.set(it.id, { it, r, cs })
+      cands.push({ id: it.id, parent: it.parent?.id ?? null, area: r.width * r.height })
+    }
+    const chosen = selectShapes(cands, MAXG)
+    for (const it of this.items) this._setLive(it, chosen.has(it.id))
+    let n = 0
+    for (const [id, depth] of chosen) {
+      const { it, r, cs } = vis.get(id)!
+      const el = it.el
       const op = parseFloat(cs.opacity)
       const cx = (r.left + r.width / 2 - cr.left) * k, cy = (r.top + r.height / 2 - cr.top) * k
       const hx = r.width / 2 * k / it.sx, hy = r.height / 2 * k / it.sy
@@ -377,19 +411,24 @@ export class LiquidGlass {
       const rad = Math.min(len(cs.borderTopLeftRadius, ow) * (hx * 2 / ow) * Math.min(it.sx, it.sy), Hx, Hy)
       const tt = it.pressed && it.tintPressed !== undefined ? it.tintPressed : it.tint
       it.t += (tt - it.t) * 0.2
-      const tc: [number, number, number] = it.tintColor || (dark ? [0.07, 0.07, 0.09] : [1, 1, 1])
+      const tv = cs.getPropertyValue("--lg-tint").trim()
+      const custom = tv && tv !== "transparent" ? parseColor(tv) : null
+      const tc: [number, number, number] = it.tintColor || (custom ? [custom[0], custom[1], custom[2]] : dark ? [0.07, 0.07, 0.09] : [1, 1, 1])
+      const layer = Math.max(depth, it.layer >= 1 ? 1 : 0)
       this.bG.set([cx, cy, Hx, Hy], n * 4)
-      this.bGP.set([rad, it.layer >= 1 ? 2 : (it.merge ? 1 : 0), it.t, it.frost], n * 4)
+      this.bGP.set([rad, layer >= 1 ? 2 : (it.merge ? 1 : 0), it.t, it.frost], n * 4)
       this.bGT.set([tc[0], tc[1], tc[2], op], n * 4)
       n++
     }
     let m = 0
     for (const s of this.solids) {
-      if (m >= MAXS) break
-      const el = s.el; if (!el.isConnected) continue
-      const r = el.getBoundingClientRect(); if (r.width < 1 || r.height < 1) continue
-      const cs = getComputedStyle(el), hx = r.width / 2 * k, hy = r.height / 2 * k, ow = el.offsetWidth || r.width
-      this.bS.set([(r.left + r.width / 2 - cr.left) * k, (r.top + r.height / 2 - cr.top) * k, hx, hy], m * 4)
+      const el = s.el
+      const r = el.isConnected ? el.getBoundingClientRect() : null
+      const draw = m < MAXS && !!r && r.width >= 1 && r.height >= 1
+      if (draw !== s.live) { s.live = draw; el.style.opacity = draw ? "0" : s.opacity }
+      if (!draw) continue
+      const cs = getComputedStyle(el), hx = r!.width / 2 * k, hy = r!.height / 2 * k, ow = el.offsetWidth || r!.width
+      this.bS.set([(r!.left + r!.width / 2 - cr.left) * k, (r!.top + r!.height / 2 - cr.top) * k, hx, hy], m * 4)
       this.bSC.set(parseColor(cs.backgroundColor), m * 4)
       this.bSP.set([Math.min(len(cs.borderTopLeftRadius, ow) * (hx * 2 / ow), hx, hy), s.layer, 0, 0], m * 4)
       m++
