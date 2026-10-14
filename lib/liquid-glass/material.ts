@@ -14,6 +14,10 @@ export interface LiquidProps {
   tint?: string
   /** Per-instance override. */
   glass?: GlassOverride
+  /** Draw with the WebGL engine when a LiquidGlassProvider is present. WebGL glass sits behind
+      the page, so only elements resting directly on the backdrop should use it. Defaults to
+      true for in-flow roles and false for sheets; overlays and inline items never use it. */
+  webgl?: boolean
 }
 
 /** `data-*` attributes for the WebGL engine. */
@@ -25,6 +29,10 @@ export type LegacyGlassVariant = "glass" | "glassSubtle" | "glassSolid" | "frost
 const PRESET: Record<GlassRole, string | null> = {
   surface: "card", sheet: "sheet", bar: "bar", control: "button", knob: "knob", inline: null, overlay: null,
 }
+// Roles whose elements usually float over page content default to CSS-only.
+const WEBGL_DEFAULT: Record<GlassRole, boolean> = {
+  surface: true, sheet: false, bar: true, control: true, knob: true, inline: false, overlay: false,
+}
 const PARAMS: Record<Material, { frost: number; tint: number }> = {
   regular: { frost: 1, tint: 0.2 },
   clear: { frost: 0.1, tint: 0 },
@@ -34,7 +42,7 @@ const LEGACY: Record<LegacyGlassVariant, Material> = {
   glass: "regular", glassSubtle: "regular", frosted: "regular", crystal: "clear", fluted: "clear", glassSolid: "tinted",
 }
 
-export function liquidGlass({ role, material = "regular", tint, glass }: LiquidProps & { role: GlassRole }): {
+export function liquidGlass({ role, material = "regular", tint, glass, webgl = WEBGL_DEFAULT[role] }: LiquidProps & { role: GlassRole }): {
   className: string; style: React.CSSProperties; attrs: DataAttrs
 } {
   const p = PARAMS[material]
@@ -45,7 +53,7 @@ export function liquidGlass({ role, material = "regular", tint, glass }: LiquidP
     style["--lg-tint"] = color
     if (material !== "tinted") style["--lg-tint-amt"] = "18%"
   }
-  const preset = PRESET[role]
+  const preset = webgl ? PRESET[role] : null
   const attrs: DataAttrs = preset
     ? { "data-glass": preset, "data-frost": String(frost), "data-tint": String(p.tint) }
     : {}

@@ -10,7 +10,6 @@ describe("liquidGlass", () => {
   })
 
   it("maps roles to engine presets", () => {
-    expect(liquidGlass({ role: "sheet" }).attrs["data-glass"]).toBe("sheet")
     expect(liquidGlass({ role: "bar" }).attrs["data-glass"]).toBe("bar")
     expect(liquidGlass({ role: "control" }).attrs["data-glass"]).toBe("button")
     expect(liquidGlass({ role: "knob" }).attrs["data-glass"]).toBe("knob")
@@ -19,6 +18,20 @@ describe("liquidGlass", () => {
   it("never hands inline or overlay glass to WebGL", () => {
     expect(liquidGlass({ role: "inline" }).attrs).toEqual({})
     expect(liquidGlass({ role: "overlay" }).attrs).toEqual({})
+  })
+
+  it("keeps floating sheets CSS-only unless WebGL is requested", () => {
+    expect(liquidGlass({ role: "sheet" }).attrs).toEqual({})
+    expect(liquidGlass({ role: "sheet", webgl: true }).attrs["data-glass"]).toBe("sheet")
+  })
+
+  it("lets in-flow roles opt out of WebGL", () => {
+    expect(liquidGlass({ role: "bar", webgl: false }).attrs).toEqual({})
+    expect(liquidGlass({ role: "bar", webgl: false }).className).toBe("lg lg-regular lg-bar")
+  })
+
+  it("never upgrades overlays, even when asked", () => {
+    expect(liquidGlass({ role: "overlay", webgl: true }).attrs).toEqual({})
   })
 
   it("uses clear and tinted material parameters", () => {
