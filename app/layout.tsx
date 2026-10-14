@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/sonner";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
+import { AppFrame } from "@/components/shell/app-frame";
 import { Wallpaper, WallpaperProvider } from "@/components/wallpaper";
 import { LiquidGlassProvider } from "@/components/ui/liquid/liquid-glass-provider";
 import "./globals.css";
@@ -41,9 +40,7 @@ export default function RootLayout({
           <LiquidGlassProvider>
             <WallpaperProvider>
               <Wallpaper />
-              <Header />
-              <main className="flex-1">{children}</main>
-              <Footer />
+              <AppFrame>{children}</AppFrame>
               <Toaster />
             </WallpaperProvider>
           </LiquidGlassProvider>
