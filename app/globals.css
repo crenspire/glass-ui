@@ -1,9 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* Specs and plans quote class names; they are not UI source. */
-@source not "../docs";
-@source not "../.superpowers";
+/* Design specs and plans quote class names; they are not UI source. */
+@source not "../docs/superpowers";
 
 @custom-variant dark (&:is(.dark *));
 
